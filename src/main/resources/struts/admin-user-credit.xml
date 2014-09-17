@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+<package name="admin-credit" namespace="/admin/credit" extends="wzd-default">
+        <action name="showUserCredit"  class="manageUserCreditAction" method="showUserCredit">
+            <result name="success" type="ftl">/admin/userCredit/userCredit.html</result>
+        </action>
+        
+        <action name="showUserCreditLog"  class="manageUserCreditAction" method="showUserCreditLog">
+            <result name="success" type="ftl">/admin/userCredit/userCreditLog.html</result>
+        </action>
+    </package>
+</struts>

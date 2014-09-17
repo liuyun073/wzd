@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<bean id="accountDao"
+        class="com.rd.dao.jdbc.AccountDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    <bean id="rechargeDao"
+        class="com.rd.dao.jdbc.RechargeDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    <bean id="cashDao"
+        class="com.rd.dao.jdbc.CashDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+     <bean id="accountLogDao"
+        class="com.rd.dao.jdbc.AccountLogDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    <bean id="hongBaoDao"
+        class="com.rd.dao.jdbc.HongBaoDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    <bean id="operationLogDao"
+        class="com.rd.dao.jdbc.OperationLogDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+     <bean id="protocolDao"
+        class="com.rd.dao.jdbc.ProtocolDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+     <bean id="repaymentDao"
+        class="com.rd.dao.jdbc.RepaymentDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+	<bean id="accountService"
+	        class="com.rd.service.impl.AccountServiceImpl">
+	        <property name="accountDao">
+	            <ref bean="accountDao" />
+	        </property>
+	        <property name="rechargeDao">
+	            <ref bean="rechargeDao" />
+	        </property>
+	        <property name="tenderDao">
+	            <ref bean="tenderDao" />
+	        </property>
+	        <property name="cashDao">
+	            <ref bean="cashDao" />
+	        </property>
+	         <property name="accountLogDao">
+	            <ref bean="accountLogDao" />
+	        </property>
+	         <property name="collectionDao">
+	            <ref bean="collectionDao" />
+	        </property>
+	         <property name="userDao">
+	            <ref bean="userDao" />
+	        </property>
+	         <property name="hongBaoDao">
+	            <ref bean="hongBaoDao" />
+	        </property>
+	        <property name="operationLogDao">
+	            <ref bean="operationLogDao" />
+	        </property>
+	        <property name="protocolDao">
+	            <ref bean="protocolDao" />
+	        </property>
+	        <property name="repaymentDao">
+	            <ref bean="repaymentDao" />
+	        </property>
+	  </bean>
+	  
+</beans>

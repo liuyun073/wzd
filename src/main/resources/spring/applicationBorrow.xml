@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<bean id="borrowDao"
+        class="com.rd.dao.jdbc.BorrowDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    <bean id="tenderDao"
+        class="com.rd.dao.jdbc.TenderDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    <bean id="borrowAutoDao"
+        class="com.rd.dao.jdbc.BorrowAutoDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    <bean id="collectionDao"
+        class="com.rd.dao.jdbc.CollectionDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    <bean id="bonusDao"
+        class="com.rd.dao.jdbc.BonusDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+     <bean id="borrowConfigDao"
+        class="com.rd.dao.jdbc.BorrowConfigDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    <bean id="borrowFlowDao"
+        class="com.rd.dao.jdbc.BorrowFlowDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+	<bean id="lateBorrowLogDao"
+        class="com.rd.dao.jdbc.LateBorrowLogDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    <bean id="lotteryDao"
+        class="com.rd.dao.jdbc.LotteryDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+	
+
+  <bean id="borrowService"
+        class="com.rd.service.impl.BorrowServiceImpl">
+        <property name="borrowDao">
+            <ref bean="borrowDao" />
+        </property>
+        <property name="tenderDao">
+            <ref bean="tenderDao" />
+        </property>
+        <property name="collectionDao">
+            <ref bean="collectionDao" />
+        </property>
+         <property name="borrowAutoDao">
+            <ref bean="borrowAutoDao" />
+        </property>
+        <property name="accountDao">
+            <ref bean="accountDao" />
+        </property>
+        <property name="accountLogDao">
+            <ref bean="accountLogDao" />
+        </property>
+        <property name="userAmountDao">
+            <ref bean="userAmountDao" />
+        </property>
+        <property name="bonusDao">
+            <ref bean="bonusDao" />
+        </property>
+        <property name="repaymentDao">
+            <ref bean="repaymentDao" />
+        </property>
+         <property name="borrowFlowDao">
+            <ref bean="borrowFlowDao" />
+        </property>
+        <property name="messageDao">
+            <ref bean="messageDao" />
+        </property>
+         <property name="cashDao">
+            <ref bean="cashDao" />
+        </property>
+         <property name="userDao">
+            <ref bean="userDao" />
+        </property>
+          <property name="operationLogDao">
+            <ref bean="operationLogDao" />
+        </property>
+         <property name="protocolDao">
+            <ref bean="protocolDao" />
+        </property>
+        <property name="lateBorrowLogDao">
+        	<ref bean="lateBorrowLogDao"/>
+        </property>
+        <property name="lotteryDao">
+        	<ref bean="lotteryDao"/>
+        </property>
+        <property name="userCreditDao">
+            <ref bean="userCreditDao" />
+        </property>
+        <property name="ruleDao">
+            <ref bean="ruleDao" />
+        </property>
+    </bean>
+     
+      <bean id="autoBorrowService"
+        class="com.rd.service.impl.AutoBorrowServiceImpl">
+        <property name="borrowDao">
+            <ref bean="borrowDao" />
+        </property>
+        <property name="tenderDao">
+            <ref bean="tenderDao" />
+        </property>
+        <property name="collectionDao">
+            <ref bean="collectionDao" />
+        </property>
+        <property name="accountDao">
+            <ref bean="accountDao" />
+        </property>
+        <property name="accountLogDao">
+            <ref bean="accountLogDao" />
+        </property>
+        <property name="repaymentDao">
+            <ref bean="repaymentDao" />
+        </property>
+        <property name="userDao">
+            <ref bean="userDao" />
+        </property>
+        <property name="userCacheDao">
+            <ref bean="userCacheDao" />
+        </property>
+        <property name="messageDao">
+            <ref bean="messageDao" />
+        </property>
+         <property name="userAmountDao">
+            <ref bean="userAmountDao" />
+        </property>
+           <property name="protocolDao">
+            <ref bean="protocolDao" />
+        </property>
+           <property name="borrowAutoDao">
+            <ref bean="borrowAutoDao" />
+        </property>
+        <property name="userCreditDao">
+            <ref bean="userCreditDao" />
+        </property>
+         <property name="ruleDao">
+            <ref bean="ruleDao" />
+        </property>
+         <property name="rewardStatisticsDao">
+            <ref bean="rewardStatisticsDao" />
+        </property>
+    </bean>
+
+</beans>

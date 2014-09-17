@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="manageCash" namespace="/admin/cash"
+		extends="wzd-admin">
+
+		<action name="showAllAccount" class="manageCashAction" method="showAllAccount">
+			<result name="success" type="ftl">/admin/cash/allaccount.html
+			</result>
+		</action>
+		
+		<action name="showOneDayAccount" class="manageCashAction" method="showOneDayAccount">
+			<result name="success" type="ftl">/admin/cash/onedayaccount.html
+			</result>
+		</action>
+		<action name="addbank" class="manageCashAction" method="addbank">
+			<result name="success" type="ftl">/admin/cash/addbank.html
+			</result>
+		</action>
+		<action name="showTiChengAccount" class="manageCashAction" method="showTiChengAccount">
+			<result name="success" type="ftl">/admin/cash/ticheng.html
+			</result>
+		</action>
+		<action name="showFriendTiChengAccount" class="manageCashAction" method="showFriendTiChengAccount">
+			<result name="success" type="ftl">/admin/cash/ticheng.html
+			</result>
+		</action>
+		
+		<action name="showCash" class="manageCashAction" method="showCash">
+			<result name="success" type="ftl">/admin/cash/cash.html
+			</result>
+		</action>
+		
+		<action name="viewCash" class="manageCashAction" method="viewCash">
+			<result name="success" type="ftl">/admin/cash/viewcash.html
+			</result>
+		</action>
+		
+		<action name="verifyCash" class="manageCashAction" method="verifyCash">
+			<result name="success" type="ftl">/admin/cash/verifycash.html
+			</result>
+		</action>
+		
+		<action name="recharge" class="manageCashAction" method="recharge">
+			<result name="success" type="ftl">/admin/cash/recharge.html
+			</result>
+		</action>
+		
+		<action name="rechargelist" class="manageCashAction" method="rechargelist">
+			<result name="success" type="ftl">/admin/cash/rechargelist.html
+			</result>
+		</action>
+		
+		<action name="viewRecharge" class="manageCashAction" method="viewRecharge">
+			<result name="success" type="ftl">/admin/cash/viewrecharge.html
+			</result>
+		</action>
+		
+		<action name="verifyRecharge" class="manageCashAction" method="verifyRecharge">
+			<result name="success" type="ftl">/admin/cash/viewrecharge.html
+			</result>
+		</action>
+		
+		<action name="log" class="manageCashAction" method="log">
+			<result name="success" type="ftl">/admin/cash/log.html
+			</result>
+		</action>
+		
+		<action name="tenderLog" class="manageCashAction" method="tenderLog">
+			<result name="success" type="ftl">/admin/cash/tenderLog.html
+			</result>
+		</action>
+		
+		<action name="viptc" class="manageCashAction" method="viptc">
+			<result name="success" type="ftl">/admin/cash/viptc.html
+			</result>
+		</action>
+		
+		<action name="vipstatistic" class="manageCashAction" method="vipstatistic">
+			<result name="success" type="ftl">/admin/cash/vipstatistic.html
+			</result>
+		</action>
+		
+		<action name="back" class="manageCashAction" method="back">
+			<result name="success" type="ftl">/admin/cash/back.html
+			</result>
+		</action>
+		
+		<action name="viewBack" class="manageCashAction" method="viewBack">
+			<result name="success" type="ftl">/admin/cash/viewback.html
+			</result>
+		</action>
+		
+		<action name="verifyBack" class="manageCashAction" method="verifyBack">
+			<result name="success" type="ftl">/admin/cash/viewback.html
+			</result>
+		</action>
+		
+				
+		<action name="cashbank" class="manageCashAction" method="manageUserCashBank">
+			<result name="success" type="ftl">/admin/cash/allbank.html</result>
+			<result name="show" type="ftl">/admin/cash/cashbank.html</result>
+		</action>
+		<action name="showAllHuikuan" class="manageCashAction" method="showAllHuikuan">
+			<result name="success" type="ftl">/admin/cash/allhuikuan.html
+			</result>
+		</action>
+		<action name="viewHuikuan" class="manageCashAction" method="viewHuikuan">
+			<result name="success" type="ftl">/admin/cash/viewhuikuan.html
+			</result>
+		</action>
+		<action name="verifyHuikuan" class="manageCashAction" method="verifyHuikuan">
+			<result name="success" type="ftl">/admin/cash/viewhuikuan.html
+			</result>
+		</action>
+		<action name="excelRecharge" class="manageCashAction" method="excelRecharge">
+			<result name="success" type="ftl">/admin/cash/excelRecharge.html</result>
+		</action>
+		<action name="backlist" class="manageCashAction" method="backlist">
+			<result name="success" type="ftl">/admin/cash/backlist.html
+			</result>
+		</action>
+			<action name="hongBaoList" class="manageCashAction" method="hongBaoList">
+			<result name="success" type="ftl">/admin/cash/hongBaoList.html
+			</result>
+		</action>
+			<action name="accountReconciliationList" class="manageCashAction" method="accountReconciliationList">
+			<result name="success" type="ftl">/admin/cash/account_reconciliation.html
+			</result>
+		</action>
+			<action name="advanced_account" class="manageCashAction" method="advanced_account">
+			<result name="success" type="ftl">/admin/cash/advanced_account.html
+			</result>
+		</action>
+		<action name="operationLog" class="manageCashAction" method="operationLog">
+			<result name="success" type="ftl">/admin/cash/operationLog.html
+			</result>
+		</action>
+		
+		<action name="showAllCreditCard" class="manageCashAction" method="showAllCreditCard">
+			<result name="success" type="ftl">/admin/cash/showAllCreditCard.html
+			</result>
+		</action>
+		
+		<action name="addCreditCard" class="manageCashAction" method="addCreditCard">
+			<result name="success" type="ftl">/admin/cash/addCreditCard.html
+			</result>
+		</action>
+		
+		<action name="modifyCreditCard" class="manageCashAction" method="modifyCreditCard">
+			<result name="success" type="ftl">/admin/cash/modifyCreditCard.html
+			</result>
+		</action>
+		
+		<action name="delCreditCard" class="manageCashAction" method="delCreditCard">
+			<result name="success" type="ftl">/admin/cash/delCreditCard.html
+			</result>
+		</action>
+		<action name="cashStatistic" class="manageCashAction" method="cashStatistic">
+			<result name="success" type="ftl">/admin/cash/cashCount.html
+			</result>
+		</action>
+		<action name="downLineBank" class="manageCashAction" method="rechargeDownLineBank">
+			<result name="success" type="ftl">/admin/cash/downLineBank.html
+			</result>
+		</action>
+		<!-- <action name="addPayInterface" class="manageCashAction" method="addPayInterface">
+			<result name="success" type="ftl">/admin/cash/addPayInterface.html
+			</result>
+		</action> -->
+		<action name="payInterface" class="manageCashAction" method="payInterfaceList">
+			<result name="success" type="ftl">/admin/cash/payInterface.html
+			</result>
+		</action>
+		<action name="onlineBank" class="manageCashAction" method="onlineBank">
+			<result name="success" type="ftl">/admin/cash/onlineBank.html
+			</result>
+		</action>
+		<action name="exportTenderRank" class="manageCashAction" method="exportTenderRank">
+			<result name="success" type="ftl">/admin/cash/allaccount.html
+			</result>
+		</action>
+	</package>
+</struts>

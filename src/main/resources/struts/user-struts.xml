@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="user" namespace="/user" extends="wzd-default">
+
+		<action name="login" class="userAction" method="login">
+			<result name="login" type="ftl">/login.html</result>
+			<result name="fail" type="ftl">/msg.html</result>
+			<result name="success" type="ftl">/msg.html</result>
+			<result name="member" type="redirect">
+				/member/index.html
+			</result>
+			<!-- <interceptor-ref name="manageAuthStack" />-->
+		</action>
+		<action name="logout" class="userAction" method="logout">
+			<result name="success" type="ftl">/login.html</result>
+			<result name="login" type="ftl">/login.html</result>
+		</action>
+
+		<action name="register" class="userAction" method="register">
+			<result name="success" type="ftl">/msg.html</result>
+			<result name="fail" type="ftl">/msg.html</result>
+			<result name="register" type="ftl">/register.html</result>
+			<result name="member" type="redirect">
+				/member/index.html
+			</result>
+		</action>
+
+		<action name="checkUsername" class="userAction"
+			method="checkUsername">
+			<result name="input" type="ftl">/login.html</result>
+		</action>
+
+		<action name="checkEmail" class="userAction"
+			method="checkEmail">
+			<result name="input" type="ftl">/login.html</result>
+		</action>
+
+		<action name="show" class="userAction" method="show">
+			<result name="success" type="ftl">/user/show.html</result>
+		</action>
+
+		<action name="active" class="userAction" method="active">
+			<result name="success" type="ftl">/member/main.html</result>
+		</action>
+
+		<action name="getpwd" class="userAction" method="getpwd">
+			<result name="success" type="ftl">/getpwd.html</result>
+			<result name="fail" type="ftl">/msg.html</result>
+			<result name="pwd" type="ftl">/ptbyname.html</result>
+		</action>
+
+		<action name="getpaypwd" class="userAction"
+			method="getpaypwd">
+			<result name="success" type="ftl">/getpwd.html</result>
+			<result name="fail" type="ftl">/msg.html</result>
+			<result name="paypwd" type="ftl">/ptbyname.html</result>
+		</action>
+
+		<action name="setpwd" class="userAction" method="setpwd">
+			<result name="fail" type="ftl">/msg.html</result>
+			<result name="success" type="ftl">/setpwd.html</result>
+			<result name="ok" type="ftl">/msg.html</result>
+		</action>
+		<action name="setpaypwd" class="userAction"
+			method="setpaypwd">
+			<result name="fail" type="ftl">/msg.html</result>
+			<result name="success" type="ftl">/setpwd.html</result>
+			<result name="ok" type="ftl">/msg.html</result>
+		</action>
+
+		<action name="updateuser" class="userAction"
+			method="updateuser">
+			<result name="success" type="ftl">/msg.html</result>
+		</action>
+		<action name="regInvite" class="userAction"
+			method="regInvite">
+			<result name="success" type="ftl">/register.html</result>
+		</action>
+
+		<action name="getpaypwdByEmail" class="userAction"
+			method="getpaypwdByEmail">
+			<result name="success" type="ftl">/ptbyname.html</result>
+			<result name="fail" type="ftl">/msg.html</result>
+		</action>
+
+		<action name="getpwdByEmail" class="userAction"
+			method="getpwdByEmail">
+			<result name="success" type="ftl">/ptbyname.html</result>
+			<result name="fail" type="ftl">/msg.html</result>
+		</action>
+
+	</package>
+
+	<package name="regInvite" namespace="/" extends="wzd-default">
+		<action name="regInvite" class="userAction"
+			method="regInvite">
+			<result name="success" type="ftl">/register.html</result>
+		</action>
+	</package>
+
+</struts>

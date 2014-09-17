@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<bean id="userDao"
+        class="com.rd.dao.jdbc.UserDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    
+    <bean id="userTrackDao"
+        class="com.rd.dao.jdbc.UserTrackDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    
+    <bean id="userCacheDao"
+        class="com.rd.dao.jdbc.UserCacheDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    
+  <bean id="userService"
+        class="com.rd.service.impl.UserServiceImpl">
+        <property name="userDao">
+            <ref bean="userDao" />
+        </property>
+        <property name="userTrackDao">
+            <ref bean="userTrackDao" />
+        </property>
+         <property name="userCacheDao">
+            <ref bean="userCacheDao" />
+        </property>
+        <property name="userCreditDao">
+            <ref bean="userCreditDao" />
+        </property>
+        <property name="accountDao">
+            <ref bean="accountDao" />
+        </property>
+         <property name="userAmountDao">
+            <ref bean="userAmountDao" />
+        </property>
+        <property name="accountLogDao">
+            <ref bean="accountLogDao" />
+        </property>
+    </bean>
+  	
+	 <bean id="userLogDao"
+        class="com.rd.dao.jdbc.UserLogDaoImpl">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    
+    <bean id="userLogService"
+        class="com.rd.service.impl.UserLogServiceImpl">
+        <property name="userLogDao">
+            <ref bean="userLogDao" />
+        </property>
+    </bean>
+    
+</beans>

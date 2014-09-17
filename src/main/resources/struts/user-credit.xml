@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+<package name="credit" namespace="/credit" extends="wzd-default">
+        <action name="userlog"  class="userCreditAction" method="creditLog">
+            <result name="success" type="ftl">/member/userCredit/log.html</result>
+            <result name="error">/user/login.html</result>
+        </action>
+    </package>
+</struts>

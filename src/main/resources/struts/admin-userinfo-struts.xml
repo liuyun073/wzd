@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="adminuserinfo" namespace="/admin/userinfo"
+		extends="wzd-admin">
+		<action name="index" class="adminUserInfoAction" method="index">
+			<result name="success" type="ftl">/admin/userinfo/index.html
+			</result>
+		</action>
+
+		<action name="userinfolist" class="adminUserInfoAction" method="userinfolist">
+			<result name="success" type="ftl">/admin/userinfo/userinfolist.html
+			</result>
+		</action>
+		<action name="user" class="adminUserInfoAction" method="user">
+			<result name="success" type="ftl">/admin/userinfo/user.html
+			</result>
+		</action>
+
+		<action name="edituserinfo" class="adminUserInfoAction" method="edituserinfo">
+			<result name="success" type="ftl">/admin/userinfo/edituserinfo.html
+			</result>
+		</action>
+
+		<action name="updateuser" class="adminUserInfoAction" method="updateuser">
+			<result name="success" type="ftl">/admin/userinfo/edituserinfo.html
+			</result>
+		</action>
+
+		<action name="adduser" class="adminUserInfoAction" method="adduser">
+			<result name="success" type="ftl">/admin/userinfo/adduser.html
+			</result>
+		</action>
+		<action name="edituser" class="adminUserInfoAction" method="edituser">
+			<result name="success" type="ftl">/admin/userinfo/adduser.html
+			</result>
+		</action>
+			<action name="manageuser" class="userAction" method="updateuser">
+			<result name="success" type="ftl">/admin/userinfo/user.html
+			</result>
+		</action>
+		<action name="userCredit" class="adminUserInfoAction" method="userCredit">
+			<result name="success" type="ftl">/admin/userinfo/userCredit.html
+			</result>
+		</action>
+		<action name="viewUserCreditDetail" class="adminUserInfoAction" method="viewUserCreditDetail">
+			<result name="success" type="ftl">/admin/userinfo/viewCreditDetail.html
+			</result>
+		</action>
+		<action name="editUserCredit" class="adminUserInfoAction" method="editUserCredit">
+			<result name="success" type="ftl">/admin/userinfo/editUserCredit.html
+			</result>
+		</action>
+		
+		<action name="manageuser" class="userAction" method="updateuser">
+			<result name="success" type="ftl">/admin/userinfo/user.html
+			</result>
+		</action>
+		
+		<action name="viewTenderValue" class="adminUserInfoAction" method="viewTenderValue">
+			<result name="success" type="ftl">/admin/userinfo/viewCreditTenderValue.html</result>
+		</action>
+		
+		<action name="editTenderValue" class="adminUserInfoAction" method="editTenderValue">
+			<result name="success" type="ftl">/admin/userinfo/user.html</result>
+		</action>
+	</package>
+
+</struts>

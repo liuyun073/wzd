@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+<package name="public" namespace="/public" extends="wzd-default">
+
+        <action name="gopay"  class="publicAction" method="gopay">
+        </action>
+        <action name="ipspay"  class="publicAction" method="ipspay">
+        </action>
+        <action name="xspay"  class="publicAction" method="xspay">
+        </action>
+         <action name="ybpay"  class="publicAction" method="ybpay">
+        </action>
+         <action name="baofoopay"  class="publicAction" method="baoFoopay">
+        </action>
+        <action name="allinpay"  class="publicAction" method="allinpay">
+        </action>
+        <action name="dinpay"  class="publicAction" method="dinpay">
+        </action>
+         <action name="ecpsspay"  class="publicAction" method="ecpsspay">
+        </action>
+        <action name="tenpay"  class="publicAction" method="tenpay">
+        </action>
+        <action name="shengpay" class="publicAction" method="shengpay">
+        </action>
+        <action name="cbpPay"  class="publicAction" method="cbpPay">
+        </action>
+         <action name="rongpay"  class="publicAction" method="rongpay">
+        </action>
+         <action name="ecpsspayfast"  class="publicAction" method="ecpsspayFast">
+        </action>
+     </package>
+
+</struts>

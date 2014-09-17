@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<bean id="quartzJob" class="com.rd.quartz.QuartzJob">
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="noticePayBorrowService">
+			<ref bean="noticePayBorrowService" />
+		</property>
+	</bean>
+	<bean id="doAutoQueue"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartzJob" />
+		</property>
+		<property name="targetMethod">
+			<value>doAutoQueue</value>
+		</property>
+	</bean>
+	<bean id="noticeQuartzJob"
+		class="com.rd.quartz.notice.NoticeQuartzJob">
+		<property name="noticeService">
+			<ref bean="noticeService" />
+		</property>
+	</bean>
+
+	<bean id="doAutoQueueTime"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="doAutoQueue" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>*/5 * * * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 还款通知  一周为期 -->
+	<bean id="doAutoNoticePayBorrow"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartzJob" />
+		</property>
+		<property name="targetMethod">
+			<value>doAutoNoticePayBorrow</value>
+		</property>
+	</bean>
+	<bean id="doAutoNoticePayBorrowTime"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="doAutoNoticePayBorrow" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 03 * * ?</value><!-- 每天凌晨三点轮询发送7天到期提醒0 31 15 * * ? -->
+		</property>
+	</bean>
+
+	<!-- 定时计算逾期的天数和利息。 -->
+	<bean id="doAutoCalcuLateInterest"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartzJob" />
+		</property>
+		<property name="targetMethod">
+			<value>doAutoCalcuLateInterest</value>
+		</property>
+	</bean>
+	<bean id="doAutoCalcuLateInterestTime"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="doAutoCalcuLateInterest" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 01 * * ?</value><!-- 定时凌晨1点计算逾期的天数和利息。 -->
+		</property>
+	</bean>
+
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->
+	<bean id="startQuertz" lazy-init="false" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="doAutoQueueTime" />
+				<ref bean="doAutoNoticePayBorrowTime" />
+				<ref bean="doAutoCalcuLateInterestTime" />
+			</list>
+		</property>
+	</bean>
+	
+
+</beans>

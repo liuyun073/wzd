@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<!-- 首页 -->
+	<bean id="indexAction" class="com.rd.web.action.IndexAction"
+		scope="prototype">
+		<property name="articleService">
+			<ref bean="articleService" />
+		</property>
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="creditCardService">
+			<ref bean="creditCardService" />
+		</property>
+		<property name="quickenLoansService">
+			<ref bean="quickenLoansService" />
+		</property>
+		<property name="autoBorrowService">
+			<ref bean="autoBorrowService" />
+		</property>
+		<property name="lotteryService">
+			<ref bean="lotteryService" />
+		</property>
+	</bean>
+
+	<!-- 文章管理 -->
+	<bean id="articleAction" class="com.rd.web.action.ArticleAction"
+		scope="prototype">
+		<property name="articleService">
+			<ref bean="articleService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+	</bean>
+
+	<!-- 图片输出Action -->
+	<bean id="imageAction" class="com.rd.web.action.ToolAction" scope="prototype">
+	</bean>
+
+	<!-- 评论Action -->
+	<bean id="commentAction" class="com.rd.web.action.CommentAction"
+		scope="prototype">
+		<property name="commentservice">
+			<ref bean="commentService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<!--用户注册登录模块Action -->
+	<bean id="userAction" class="com.rd.web.action.UserAction" scope="prototype">
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="userinfoService">
+			<ref bean="userinfoService" />
+		</property>
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+		<property name="memberBorrowService">
+			<ref bean="memberBorrowService"/>
+		</property>
+		<property name="passwordTokenService">
+			<ref bean="passwordTokenService"/>
+		</property>
+		<property name="cooperationLoginService">
+			<ref bean="cooperationLoginService" />
+		</property>
+		<property name="rewardStatisticsService">
+			<ref bean="rewardStatisticsService" />
+		</property>
+		<property name="userCreditService">
+			<ref bean="userCreditService" />
+		</property>
+	</bean>
+
+
+	<!--投资模块Action -->
+	<bean id="investAction" class="com.rd.web.action.InvestAction"
+		scope="prototype">
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="userinfoService">
+			<ref bean="userinfoService"></ref>
+		</property>
+		<property name="commentService">
+			<ref bean="commentService" />
+		</property>
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+		<property name="memberBorrowService">
+			<ref bean="memberBorrowService" />
+		</property>
+		<property name="friendService">
+			<ref bean="friendService" />
+		</property>
+	</bean>
+	<!--贷款模块Action -->
+	<bean id="borrowAction" class="com.rd.web.action.BorrowAction"
+		scope="prototype">
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="userAmountService">
+			<ref bean="userAmountService" />
+		</property>
+		<property name="articleService">
+			<ref bean="articleService" />
+		</property>
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+	</bean>
+
+	<!-- 用户管理模块 -->
+	<bean id="memberAction" class="com.rd.web.action.MemberAction"
+		scope="prototype">
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="userinfoService">
+			<ref bean="userinfoService" />
+		</property>
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+		<property name="articleService">
+			<ref bean="articleService" />
+		</property>
+		<property name="friendService">
+			<ref bean="friendService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="autoBorrowService">
+			<ref bean="autoBorrowService" />
+		</property>
+		<property name="userCreditService">
+			<ref bean="userCreditService"/>
+		</property>
+	</bean>
+	<bean id="memberFriendAction" class="com.rd.web.action.member.FriendAction"
+		scope="prototype">
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="friendService">
+			<ref bean="friendService" />
+		</property>
+	</bean>
+	<bean id="memberSecurityAction" class="com.rd.web.action.member.SecurityAction"
+		scope="prototype">
+		<property name="userinfoService">
+			<ref bean="userinfoService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="friendService">
+			<ref bean="friendService" />
+		</property>
+	</bean>
+	<bean id="memberIdentifyAction" class="com.rd.web.action.member.IdentifyAction"
+		scope="prototype">
+		<property name="userinfoService">
+			<ref bean="userinfoService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<!-- 用户管理-我的借款 -->
+	<bean id="memberBorrowAction" class="com.rd.web.action.member.MemberBorrowAction"
+		scope="prototype">
+		<property name="memberBorrowService">
+			<ref bean="memberBorrowService" />
+		</property>
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="userAmountService">
+			<ref bean="userAmountService" />
+		</property>
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+	</bean>
+	<!-- 用户管理-我的投资 -->
+	<bean id="memberInvestAction" class="com.rd.web.action.member.MemberInvestAction"
+		scope="prototype">
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+	</bean>
+	<bean id="borrowAutoAction" class="com.rd.web.action.member.BorrowAutoAction"
+		scope="prototype">
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+	</bean>
+	<bean id="memberAccountAction" class="com.rd.web.action.member.AccountAction"
+		scope="prototype">
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean id="memberMessageAction" class="com.rd.web.action.member.MessageAction"
+		scope="prototype">
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+	</bean>
+
+	<!-- Tool模块 -->
+	<bean id="interestAction" class="com.rd.web.action.ToolAction"
+		scope="prototype">
+	</bean>
+	<bean id="pluginAction" class="com.rd.web.action.ToolAction"
+		scope="prototype">
+	</bean>
+
+	<!-- 对外公开模块，主要支付回调 -->
+	<bean id="publicAction" class="com.rd.web.action.PublicAction"
+		scope="prototype">
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+	</bean>
+
+	<!-- 管理后台部分 -->
+	<bean id="adminAuthAction" class="com.rd.web.action.admin.AuthAction"
+		scope="prototype">
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="manageAuthService">
+			<ref bean="manageAuthService" />
+		</property>
+	</bean>
+	
+	<!-- 后台客户管理 -->
+	<bean id="adminUserInfoAction" class="com.rd.web.action.admin.UserInfoAction"
+		scope="prototype">
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="userInfoService">
+			<ref bean="userinfoService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+		<property name="userCreditService">
+			<ref bean="userCreditService" />
+		</property>
+	</bean>
+	
+	<!-- 系统设置 -->
+	<bean id="SystemConfigAction" class="com.rd.web.action.admin.SystemConfigAction"
+		scope="prototype">
+		<property name="systemService">
+			<ref bean="systemService" />
+		</property>
+	</bean>
+	
+	<!-- 证件管理 -->
+	<bean id="attestationAction" class="com.rd.web.action.admin.AttestationAction"
+		scope="prototype">
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="userinfoService">
+			<ref bean="userinfoService" />
+		</property>
+		<property name="attestationService">
+			<ref bean="attestationService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+		<property name="rewardStatisticsService">
+			<ref bean="rewardStatisticsService" />
+		</property>
+		<property name="userCreditService">
+			<ref bean="userCreditService" />
+		</property>
+	</bean>
+	
+	<bean id="manageBorrowAction" class="com.rd.web.action.admin.ManageBorrowAction"
+		scope="prototype">
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="memberBorrowService">
+			<ref bean="memberBorrowService" />
+		</property>
+		<property name="userAmountService">
+			<ref bean="userAmountService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+	    <property name="accountService">
+			<ref bean="accountService" />
+		</property>
+		 <property name="quickenLoansService">
+			<ref bean="quickenLoansService" />
+		</property>
+	</bean>
+	<bean id="manageCashAction" class="com.rd.web.action.admin.ManageCashAction"
+		scope="prototype">
+		<property name="manageCashService">
+			<ref bean="manageCashService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+		<property name="messageService">
+			<ref bean="messageService" />
+		</property>
+		<property name="userAmountService">
+			<ref bean="userAmountService" />
+		</property>
+		<property name="creditCardService">
+			<ref bean="creditCardService" />
+		</property>
+			<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+	</bean>
+	
+	<bean id="manageSiteAction" class="com.rd.web.action.admin.ManageSiteAction"
+		scope="prototype">
+		<property name="articleService">
+			<ref bean="articleService" />
+		</property>
+	</bean>
+	
+	<bean id="manageArticleAction" class="com.rd.web.action.admin.ManageArticleAction"
+		scope="prototype">
+		<property name="articleService">
+			<ref bean="articleService" />
+		</property>
+	</bean>
+	
+	<bean id="managePurviewAction" class="com.rd.web.action.admin.ManagePurviewAction"
+		scope="prototype">
+		<property name="manageAuthService">
+			<ref bean="manageAuthService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="userinfoService">
+			<ref bean="userinfoService" />
+		</property>
+	</bean>
+<bean id="manageCommentAction" class="com.rd.web.action.admin.ManageCommentAction" scope="prototype">
+			<property name="commentService" >
+				<ref bean="commentService"/>
+			</property>
+	</bean>
+	
+	<!--积分模块Action -->
+	<bean id="pointsAction" class="com.rd.web.action.PointsAction"
+		scope="prototype">
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="userinfoService">
+			<ref bean="userinfoService"></ref>
+		</property>
+		<property name="commentService">
+			<ref bean="commentService" />
+		</property>
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+		<property name="memberBorrowService">
+			<ref bean="memberBorrowService" />
+		</property>
+		<property name="friendService">
+			<ref bean="friendService" />
+		</property>
+	</bean>
+	
+	<!--爱心捐助模块Action -->
+	<bean id="donationAction" class="com.rd.web.action.DonationAction"
+		scope="prototype">
+		<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="userinfoService">
+			<ref bean="userinfoService"></ref>
+		</property>
+		<property name="commentService">
+			<ref bean="commentService" />
+		</property>
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+		<property name="memberBorrowService">
+			<ref bean="memberBorrowService" />
+		</property>
+		<property name="friendService">
+			<ref bean="friendService" />
+		</property>
+	</bean>
+	<!-- 及时雨协议 -->
+	<bean id="protocolAction" class="com.rd.web.action.member.ProtocolAction"
+		scope="prototype">
+	<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+	</bean>
+	<bean id="managerProtocolAction" class="com.rd.web.action.admin.ManagerProtocolAction"
+		scope="prototype">
+	<property name="borrowService">
+			<ref bean="borrowService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="accountService">
+			<ref bean="accountService" />
+		</property>
+	</bean>
+	<bean id="noticeConfigAction" class="com.rd.web.action.admin.NoticeConfigAction"
+		scope="prototype">
+	    <property name="noticeConfigService">
+			<ref bean="noticeConfigService" />
+		</property>
+		 <property name="linkageService">
+			<ref bean="linkageService" />
+		</property>
+	</bean>
+	<!-- 密保设置 -->
+	<bean id="passwordTokenAction" class="com.rd.web.action.PasswordTokenAction"
+		scope="prototype">
+		<property name="passwordTokenService">
+			<ref bean="passwordTokenService" />
+		</property>
+	</bean>
+
+	<!-- 抽奖规则配置 -->
+	<bean id="manageLotteryAction" class="com.rd.web.action.admin.ManageLotteryAction"
+			scope="prototype">
+			
+			<property name="lotteryService">
+			<ref bean="lotteryService" />
+		</property>
+   </bean>
+
+	<bean id="cooperationQQLoginAction" class="com.rd.web.action.cooperation.CooperationQQLoginAction" scope="prototype">
+		<property name="cooperationLoginService"><ref bean="cooperationLoginService" /></property>
+		<property name="userService"><ref bean="userService" /></property>
+	</bean>
+	
+	<!-- 奖励统计 -->
+	<bean id="manageRewardAction" class="com.rd.web.action.admin.ManageRewardAction"
+		scope="prototype">
+		<property name="rewardStatisticsService">
+			<ref bean="rewardStatisticsService" />
+		</property>
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+		<property name="ruleService">
+			<ref bean="ruleService" />
+		</property>
+   </bean>
+   <!-- 急难基金 -->
+  <bean id="manageTroubleFundAction" class="com.rd.web.action.admin.ManageTroubleFundAction"
+		scope="prototype">
+	 <property name="articleService">
+			<ref bean="articleService" />
+		</property>
+		<property name="troubleFundService">
+			<ref bean="troubleFundService" />
+		</property>
+ 
+   </bean>
+   <bean id="troubleFundAction" class="com.rd.web.action.member.TroubleFundAction"
+		scope="prototype">
+	 <property name="troubleFundService">
+			<ref bean="troubleFundService" />
+		</property>
+		<property name="awardService">
+			<ref bean="awardService" />
+		</property>
+ 
+   </bean>
+  <!-- 抽奖 -->
+   <bean id="AwardAction" class="com.rd.web.action.award.AwardAction"
+		scope="prototype">
+		<property name="awardService">
+			<ref bean="awardService" />
+		</property>
+		<property name="userCreditService">
+			<ref bean="userCreditService" />
+		</property>
+   </bean>
+   	<bean id="ManageAwardAction" class="com.rd.web.action.admin.ManageAwardAction"
+			scope="prototype">
+			
+			<property name="awardService">
+			<ref bean="awardService" />
+		</property>
+   </bean>
+   
+   <!-- 奖励统计 -->
+	<bean id="userCreditAction" class="com.rd.web.action.UserCreditAction" scope="prototype">
+		<property name="userCreditService">
+			<ref bean="userCreditService" />
+		</property>
+   </bean>
+   
+   <bean id="manageUserCreditAction" class="com.rd.web.action.admin.ManageUserCreditAction" scope="prototype">
+		<property name="userCreditService">
+			<ref bean="userCreditService" />
+		</property>
+   </bean>
+   
+</beans>
