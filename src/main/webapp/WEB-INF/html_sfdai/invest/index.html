@@ -1,0 +1,238 @@
+<#macro trunct name>
+	<#assign length=name?length>
+	<#if length&gt;15>
+		${name[0..15]}
+	<#else>
+		${name}
+	</#if>
+</#macro>
+
+<!DOCTYPE html>
+<html>
+<#include "../include/resource.html"> 
+<body>
+	<#assign nid="invest">
+	<#include "../include/header.html">
+	<#include "../common/function.html"> 
+	<#include "../common/macro_zr.html"> 
+	<!--子栏目 开始-->
+
+	<!--子栏目 结束-->
+
+	<!--header-end-->
+	
+
+    <div class="mains investstyle clearfix">
+        
+	    <div id="main" class="clearfix">
+			<form action="" method="get">
+				<div class="box">
+					<div class="box-title">详细搜索</div>
+					<div class="box-con">
+						<ul class="select-A clearfix">
+							<li>贷款类型：
+								<#if map??&&map.type??>
+									<@linkage name="type" id="type" default=map.type type="value" nid="loan_type"  noselect="没有限制"/>
+								<#else>
+									<@linkage name="type" id="type" type="value" nid="loan_type" noselect="没有限制"/>
+								</#if>
+							</li>
+							<li>期限：
+								<#if map??&&map.time_limit??>
+									<@linkage name="time_limit" id="time_limit" default=map.time_limit type="value" nid="borrow_time_limit"  noselect="没有限制"/>
+								<#else>
+									<@linkage name="time_limit" id="time_limit" type="value" nid="borrow_time_limit" noselect="没有限制"/>
+								</#if>
+							</li>
+							<li>关键字：<input type="text" name="keywords" size="20" 
+								value="${(param.keywords)!}" />
+							</li>
+							<li>
+							<input type="submit" class="btn-action" id="search_btn" value="搜索" />
+							<input type="hidden" name="status" value="${searchstatus!1}"> 
+							<input type="hidden" name="search" value="select"> 
+							</li>
+						</ul>
+					</div>
+				</div>
+			</form>
+			<ul id="tab" class="list-tab clearfix">
+				<li class="active"><a href="#tb" data-toggle="tab">所有</a>
+				</li>
+				<!--<li><a href="#glb" data-toggle="tab">给力标</a></li>
+				<li><a href="#jzb" data-toggle="tab">净值标</a></li>
+				<li><a href="#dbb" data-toggle="tab">担保标</a></li>
+				<li><a href="#mb" data-toggle="tab">秒标</a></li>
+				<li><a href="#xyb" data-toggle="tab">信用标</a></li>
+				<li class="list-tab-sel"><input type="checkbox" value="2" name="sel"> 只显示有奖励</li>-->
+			</ul>
+			<div class="list-select clearfix">
+				<div class="list-select-l">
+					排序：${orderstr!}
+				</div>
+				<div class="list-select-r2">
+				
+				</div>
+			</div>
+	
+	
+	
+	         <#if borrowList?exists>
+	         	<#list borrowList as item>
+	         		<@indexListItem item=item />
+	         	</#list>
+	
+			 	<br/>
+	   		 	<div align="center">
+	   	
+					<#import "../common/page.html" as pager>  
+		   			<@pager.pagination page=p url="/invest/index.html?search=select&status="+status! map=map style="style1" />
+		   		</div>
+		   	<#else>
+		  		<div align="center" >没有信息</div>
+		  	</#if>
+	    </div>
+	    
+	    <div class="invest-main-right float_right" style="display: none">
+	    	<div class="invest-lx" style="margin-top:10px;">
+	        	<span style="height:35px; line-height:35px; padding-left:13px; font-size:14px; color:#333; font-weight:bold">持续创新</span>
+	            <ul>
+	            	<li>
+	                	<a href="${webroot}/article/list.html?catalog=123"><img src="${webroot}${theme_dir}/media/bg/jian.jpg" class="float_left"></a>
+	                    <dl class="float_left">
+	                    	<dt>
+	                        	意见与建议
+	                        </dt>
+	                        <dd>
+	                        	欢迎会员针对自己投资和融资的过程中出现的相关问题，跟网站工作人员进行及时的沟通。
+	                        </dd>
+	                    </dl>
+	                </li>
+	                <li>
+	                	<a href="${webroot}/article/list.html?catalog=124"><img src="${webroot}${theme_dir}/media/bg/jin.jpg" class="float_left"></a>
+	                    <dl class="float_left">
+	                    	<dt>
+	                        	每天进步
+	                        </dt>
+	                        <dd>
+	                        	我们会及时公布网站的实时进展，哪怕是微小的事物，坚持每天进步一点。
+	                        </dd>
+	                    </dl>
+	                </li>
+	                <li>
+	                	<a href="${webroot}/article/list.html?catalog=123"><img src="${webroot}${theme_dir}/media/bg/gen.jpg" class="float_left"></a>
+	                    <dl class="float_left">
+	                    	<dt>
+	                        	项目跟踪
+	                        </dt>
+	                        <dd>
+	                        	实时跟踪项目的情况，向投资人汇报项目的进展，关注每一个项目。
+	                        </dd>
+	                    </dl>
+	                </li>
+	            </ul>
+	        </div>
+	        <!--贷款类型-->  
+	    </div>
+    
+	</div>
+    
+	<!--main end-->
+	<!--	
+	<script type="text/javascript">
+		jQuery(function() {
+			jQuery("[rel='tooltip']").tooltip();
+		});
+	</script>-->
+
+	<script type="text/javascript">
+		jQuery(function(){
+			jQuery('#invest_dialog').click(function(){
+				jQuery('#modal_dialog').dialog('destroy');
+				jQuery('#modal_dialog').dialog({ modal: true ,height: 410,width:760 });
+			});
+		});
+		
+		function check_form(lowest,most,use_money){
+			var frm = document.forms['form1'];
+			var account = frm.elements['money'].value;
+			var valicode = frm.elements['valicode'].value;
+			if (account==""){
+				alert("投标金额不能为空");
+				return false;
+			}else if (account>use_money ){
+			 	alert("您的可用余额小于您的投标额，要投标请先充值。");
+				return false;
+			}else if (account>most && most>0){
+			 	alert("投标金额不能大于最大限额"+most+"元");
+				return false;
+			}else if(account<lowest && lowest>0){
+				alert("投标金额不能低于最小限额"+lowest+"元");
+				return false;
+			}
+			/* if (valicode==""){
+				alert("验证码不能为空");
+				return false;
+			}*/
+			if(confirm('确定要投标'+account+'元，确定了将不能取消')){
+				return true;
+			}else{
+				return false;
+			}
+		}
+        
+        function inputAll(lowest,most,use_money){
+       
+            if(most==0){
+                jQuery("#money").val(use_money);
+            }else if(use_money>most){
+                jQuery("#money").val(most);
+            }else{
+                jQuery("#money").val(use_money);
+            } 
+        }  
+		
+		function showRemainTime(){
+			var endtimes=$(".endtime");
+			endtimes.each(function(){
+				RemainTime($(this));
+			});
+		}
+		showRemainTime();
+		setInterval("showRemainTime()",1000);
+
+		function RemainTime(t){
+			var iDay,iHour,iMinute,iSecond,account;
+			var sDay="",sTime="";
+			var at="data-time"
+			var iTime=t.attr(at);
+		    if (iTime >= 0){
+				iDay = parseInt(iTime/24/3600);
+				   	iHour = parseInt((iTime/3600)%24);
+				   	iMinute = parseInt((iTime/60)%60);
+				   	iSecond = parseInt(iTime%60);
+				if (iDay > 0){ 
+					sDay = iDay + "天"; 
+				}
+			   sTime =sDay + iHour + "小时" + iMinute + "分钟" + iSecond + "秒";
+			   	if(iTime==0){
+		    		sTime="<span style='color:green'>时间到了！</span>";
+		      	}
+				t.attr(at,iTime-1);
+		    }else{
+			    sTime="<span style='color:red'>此标已过期！</span>";
+			}
+			t.html(sTime);
+		}
+	</script>
+
+	<script src="${request.getContextPath()}${theme_dir}/media/js/tab.js"></script>
+	<script src="${request.getContextPath()}${theme_dir}/media/js/transition.js"></script>
+
+	<script src="${request.getContextPath()}${theme_dir}/media/js/tooltip.js"></script>
+	<script src="${request.getContextPath()}${theme_dir}/media/js/popover.js"></script>
+
+
+	<#include "../include/footer.html"> 
+</body>
+</html>

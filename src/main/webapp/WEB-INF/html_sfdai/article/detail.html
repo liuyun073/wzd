@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<#include "../include/resource.html"> 
+<body>
+<#assign nid="index">
+<#include "../include/header.html">
+<link href="${request.getContextPath()}${theme_dir}/media/css/modal.css" rel="stylesheet" type="text/css" /> 
+<link href="${request.getContextPath()}${theme_dir}/media/css/about.css" rel="stylesheet" type="text/css" /> 
+ <div id="main" class="clearfix">
+<div class="cor_divtop" >
+	<div id="left" class="left">
+
+		<div class="NavLinkHeader"><span>网站栏目</span></div>
+
+		<div class="NavLinkContent">
+		<#list sublist as item>
+		<a id="item${item_index+1}" class="page" onClick="showsubmenu( ${item_index+1}, 8)" href="${webroot}/article/list.html?catalog=${item.site_id}">${item.name}</a>
+		</#list>
+		</div>
+
+		<div class="navlinkline"></div>
+		<div style="margin-top: 20px !important" class="displayimg"><!--<a 
+			href="/linekefu/index.html"><img border=0 
+			src="{$tempdir}/media/bg/cs_info.gif" width="184px" height="85px"></a>-->
+		</div>
+			<script defer>onInit();</script>
+	</div><!--left-->
+
+	<div id="right" class="right">
+		<div style="border-botton: #cccccc 1px solid; border-left: #cccccc 1px solid; line-height: 28px; background-color: #f1f1f1; width: 778px; height: 28px; color: #696969; border-top: #cccccc 1px solid; border-right: #cccccc 1px solid"
+			id="NavigationLinkdiv">&nbsp; &nbsp;当前位置：&nbsp; 
+			<a id="ctl00_content_NavigationLink1_main" href="${webroot}" style="color:#333; text-decoration:none;">${webname}</a> 
+			&gt; 网站栏目&gt;
+			<a href="${request.getContextPath()}/article/list.html?catalog=${catalog}" style="color:#333; text-decoration:none;">${site.name}</a>
+		</div>
+
+
+		<div style="clear: both"></div>
+		<div id="myTabContent" class="content">
+			<div class="info" id="lxjs">
+				<div class="content_h3"><h3>${article.name}</h3></div>
+				<div class="content_div" align="center"> 来源：<#if !article.source?exists||article.source=="">${webname}<#else>${article.source}</#if> &nbsp;&nbsp;  
+					发布时间：${article.publish} &nbsp;&nbsp;  
+					
+				</div>
+						<!--内容开始-->
+						<div class="content_ro2">
+						<table width="90%">
+						<tr><td><TABLE style="WIDOWS: 2; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; WIDTH: 705px; BORDER-COLLAPSE: collapse; FONT: 12px/15px Tahoma, 'Microsoft Yahei', Simsun; WORD-WRAP: break-word; WHITE-SPACE: normal; ORPHANS: 2; EMPTY-CELLS: show; TABLE-LAYOUT: fixed; LETTER-SPACING: normal; COLOR: rgb(68,68,68); WORD-SPACING: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px" cellSpacing=0 cellPadding=0>
+						<TBODY style="WORD-WRAP: break-word">
+						<TR style="WORD-WRAP: break-word">
+						<TD style="WORD-WRAP: break-word; FONT-SIZE: 14px" id=postmessage_6900 class=t_f>
+							${article.content}
+						</TD></TR></TBODY></TABLE></td>
+					</tr>
+					</table>
+						</div>
+						<!--内容结束-->
+						<div class="goodtips">本页面内容仅供参考，以网站的公告与具体规定为准。</div>
+			</div><!--info-->
+		</div><!--myTabContent-->
+	</div><!--right-->
+</div><!--cor_divtop-->
+</div><!--main-->
+<script src="${request.getContextPath()}${theme_dir}/media/js/modal.js"></script>
+<script src="${request.getContextPath()}${theme_dir}/media/js/tab.js"></script>
+<script src="${request.getContextPath()}${theme_dir}/media/js/alert.js"></script>
+<#include "../include/footer.html"> 

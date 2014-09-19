@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#assign moduleName="权限管理" >
+			<#include "banner.html">
+			<div class="main_content">  
+			  <!--模块列表 开始-->
+			<div class="module_add">	
+				<form name="form1" method="post" action="" onsubmit="return check_form();" enctype="multipart/form-data" >
+				<div class="module_title"><strong>新增权限</strong></div>
+				<div class="module_border">
+					<div class="l">权限名称：</div>
+					<div class="c">
+						<input type="text" name="name" />
+					</div>
+				</div>
+				<div class="module_border">
+					<div class="l">权限名字：</div>
+					<div class="c">
+						<input type="text" name="purview" />
+					</div>
+				</div>
+				
+				<div class="module_border">
+					<div class="l">路径：</div>
+					<div class="c">
+						<input type="text" name="url" />
+					</div>
+				</div>
+				<div class="module_border">
+					<div class="l">备注：</div>
+					<div class="c">
+						<input type="text" name="remark" />
+					</div>
+				</div>
+				<div class="module_border">
+					<div class="l">顺序：</div>
+					<div class="c">
+						<input type="text" name="order" />
+					</div>
+				</div>
+				<div class="module_submit" >
+					<input type="hidden"  name="actionType" value="addpurview" />
+					<input type="hidden"  name="pid" value="${pid}" />
+					<input type="submit"  name="reset" value="新增" />
+				</div>
+			</form>
+			</div>
+		 </div>
+				
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

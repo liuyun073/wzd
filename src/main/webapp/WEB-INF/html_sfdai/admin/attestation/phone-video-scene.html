@@ -1,0 +1,163 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+
+			<div class="main_site">
+				<ul>
+
+					<#include "bar.html">
+					<li class="title">证明材料 <span>/ 用户认证信息</span></li>
+
+				</ul>
+			</div>
+			<div class="main_content">
+
+
+				<!--模块列表 开始-->
+				<table width="100%" cellspacing="1" border="0" bgcolor="#CCCCCC">
+
+					<tbody>
+						<tr>
+
+							<td width="*" class="main_td">用户名称</td>
+							<td class="main_td">真实姓名</td>
+							<td class="main_td">实名认证</td>
+							<td class="main_td">邮箱认证</td>
+							<td width="220" class="main_td">手机认证</td>
+							<td class="main_td">视频认证</td>
+							<td class="main_td">现场认证</td>
+							<td class="main_td">操作</td>
+						</tr>
+						<#if list??> 
+						<#list list as obj>
+						<tr>
+							<td align="center" class="main_td1"><a
+								onclick='tipsWindown("用户详细信息查看","url:get?viewUserInfo.html?username=${obj.username}",500,230,"true","","true","text");'
+								href="javascript:void(0)">${obj.username!}</a></td>
+							<td align="center" class="main_td1">${obj.realname!}</td>
+							
+							<td align="center" class="main_td1">
+								<#if obj.real_status??&&obj.real_status=="1"> <font color="#009900">审核通过</font>
+								<#else> <a
+								onclick='tipsWindown("真实姓名审核","url:get?viewAudit.html?user_id=${obj.user_id?c}&type=realname",500,270,"true","","true","text");'
+									
+								href="javascript:void(0)"><font color="#FF0000"><#if
+										obj.realname?? >等待审核<#else>没有申请</#if></font></a> </#if>
+							</td>
+							
+							<td align="center" class="main_td1"><#if
+								obj.email_status??&&obj.email_status=="1"> <font color="#009900">审核通过</font>
+								<#else> <a
+								onclick='tipsWindown("邮箱认证审核","url:get?viewAudit.html?user_id=${obj.user_id?c}&type=email",500,270,"true","","true","text");'
+								href="javascript:void(0)"><font color="#FF0000">等待审核</font></a>
+								</#if>
+							</td>
+							
+							<td align="center" class="main_td1">
+								<#if obj.phone_status??&&obj.phone_status=="1"> <font color="#999999">[手机：${obj.phone!}]</font><font
+								color="#009900">审核通过</font> 
+								<#elseif obj.phone_status??&&obj.phone_status=="2">
+								<font color="#999999">[手机：${obj.phone!}]</font>
+								<a
+								onclick='tipsWindown("手机认证审核","url:get?viewAudit.html?user_id=${obj.user_id?c}&type=phone",500,270,"true","","true","text");'
+								href="javascript:void(0)"><font color="#FF0000">等待审核</font></a>
+								<#else>
+								 <font color="#cccccc">没有申请</font>
+								</#if>
+							</td>
+							
+							<td align="center" class="main_td1"><#if obj.video_status??>
+								<#if obj.video_status==1> <font color="#009900">审核通过</font>
+								<#else><a
+								onclick='tipsWindown("视频认证审核","url:get?viewAudit.html?user_id=${obj.user_id?c}&type=video",500,270,"true","","true","text");'
+								href="javascript:void(0)"><font color="#FF0000">等待审核</font></a>
+								</#if> <#else> <font color="#cccccc">没有申请</font> </#if>
+							</td>
+							
+							
+							<td align="center" class="main_td1"><#if obj.scene_status??>
+								<#if obj.scene_status==1> <font color="#009900">审核通过</font>
+								<#else><a
+								onclick='tipsWindown("现场审核","url:get?viewAudit.html?user_id=${obj.user_id?c}&type=scene",500,270,"true","","true","text");'
+								href="javascript:void(0)"><font color="#FF0000">等待审核</font></a>
+								</#if> <#else> <font color="#cccccc">没有申请</font> </#if>
+							</td>
+							
+							<td align="center" class="main_td1">-</a></td>
+						</tr>
+						</#list> 
+						</#if>
+						<tr>	
+							<td class="action" colspan="11">
+								<div class="floatl"></div>
+								<div class="floatr">
+									<form action="" method="post">
+										用户名：<input type="text" value="${param.username!}" id="username" name="username">
+											<input type="submit" value="搜索">
+									</form>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="page" colspan="11">
+								<#if !verifyType??>
+									<#assign url="/admin/attestation/verifyRealname.html" >
+								<#elseif verifyType=="phone">
+									<#assign url="/admin/attestation/verifyPhone.html" >
+								<#elseif verifyType=="scene">
+									<#assign url="/admin/attestation/verifyScene.html" >
+								<#elseif verifyType=="video">
+									<#assign url="/admin/attestation/verifyVideo.html" >
+								<#else>
+									<#assign url="/admin/attestation/verifyRealname.html" >
+								</#if>
+								<#import "../../common/page.html" as pager> 
+								<@pager.pagination page=page url=url map=param style="style1" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<script>
+var url = 'index.php?wzd888&amp;q=module/attestation/all&amp;site_id=26&amp;a=attestation';
+
+function sousuo(){
+	var sou = "";
+	var username = $("#username").val();
+	if (username!=""){
+		sou += "&amp;username="+username;
+	}
+	var realname = $("#realname").val();
+	if (realname!=""){
+		sou += "&amp;realname="+realname;
+	}
+	var type = $("#type").val();
+	if (type!=""){
+		sou += "&amp;type="+type;
+	}
+	var typeStatus = $("#typeStatus").val();
+	if (typeStatus!=""){
+		sou += "&amp;typeStatus="+typeStatus;
+	}
+	location.href=url+sou;
+	
+}
+</script>
+
+
+
+			</div>
+		</div>
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

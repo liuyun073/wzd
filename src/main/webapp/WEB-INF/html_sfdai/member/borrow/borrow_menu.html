@@ -1,0 +1,8 @@
+<ul class="list-tab clearfix">
+	<li <#if borrow_type?exists&&borrow_type=="publish">class="cur"</#if> ><a href="${request.getContextPath()}/member/borrow/borrow.html">正在招标的项目</a></li>
+	<li <#if borrow_type?exists&&borrow_type=="unpublish">class="cur"</#if> ><a href="${request.getContextPath()}/member/borrow/borrow.html?type=unpublish">尚未发布的项目</a></li>
+	<li <#if borrow_type?exists&&borrow_type=="repayment">class="cur"</#if> ><a href="${request.getContextPath()}/member/borrow/borrow.html?type=repayment">正在还款的项目</a></li>
+	<li <#if borrow_type?exists&&borrow_type=="repaymentyes">class="cur"</#if> ><a href="${request.getContextPath()}/member/borrow/borrow.html?type=repaymentyes">已还款的项目</a></li>
+	<li <#if borrow_type?exists&&borrow_type=="repaymentdetail">class="cur"</#if> ><a href="${request.getContextPath()}/member/borrow/repaymentdetail.html">还款明细账</a></li>
+	<li <#if borrow_type?exists&&borrow_type=="limitapp">class="cur"</#if> ><a href="${request.getContextPath()}/member/borrow/limitapp.html">额度申请</a></li>
+</ul>

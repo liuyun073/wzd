@@ -1,0 +1,40 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>${webname}管理后台</title>
+<link href="${request.getContextPath()}/themes/admin/admin.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="main top">
+		<div class="logo "> 
+		<div style=" height:90px;">
+        <b style=" font-size: 50px; font-family: 隶书; color:#fff; margin-left: 30px;">${webname}</b>
+        <b style="font-size: 25px; font-family: 隶书; color:#fff;">后台管理</b></div>
+	</div>
+	</div>
+	<br/>
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			
+			<div class="main_content">
+				 <div class="module_add">
+					<div class="module_border"  style="text-align:center">
+						<br /><strong>${rsmsg!"操作成功！"}</strong> <br /><br />
+					</div>
+					<div class="module_border" style="text-align:center" id="msg_content">
+						${backurl}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "foot.html">
+</body>
+</html>

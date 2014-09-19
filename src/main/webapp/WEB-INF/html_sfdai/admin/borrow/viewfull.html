@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#assign moduleName="审核满标" >
+			<#include "banner.html">
+			<div class="main_content">
+				
+				<div class="module_add">
+				<div class="module_title"><strong>已满额借款标审核</strong></div>
+				<div class="module_border">
+					<div class="l">标题：</div>
+					<div class="h">${b.name!}</div>
+					<div class="l">借款人：</div>
+					<div class="h">
+						<a href="javascript:void(0)" onclick='tipsWindown("用户详细信息查看","url:get?index.php?wzd888&q=module/user/view&user_id=2702&type=scene",500,230,"true","","true","text");'>${b.username!}</a>
+					</div>
+				</div>
+				
+				<div class="module_border">
+					<div class="l">借款金额：</div>
+					<div class="h">￥${b.account!}</div>
+					<div class="l">年利率：</div>
+					<div class="h">${b.apr} %</div>
+				</div>
+				<div class="module_border">
+					<div class="l">借款期限：</div>
+					<div class="h"><#if b.isday??&&b.isday==1><strong>${b.time_limit_day!0}</strong>天
+							<#elseif b.is_mb==1>满额到期自动还款
+							<#else><strong>${(b.time_limit)?default("0")}</strong>个月</#if></div>
+					<div class="l">借款用途：</div>
+					<div class="h"><@linkage plantext=true default=b.use></@linkage></div>
+				</div>
+				<div class="module_border">
+				<table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr >
+						<td width="" class="main_td">ID</td>
+						<td width="*" class="main_td" align="left">用户名称</td>
+						<td width="" class="main_td" align="left">投资金额</td>
+						<td width="" class="main_td" align="left">有效金额</td>
+						<td width="" class="main_td" align="left">状态</td>
+						<td width="" class="main_td" align="left">投标时间</td>
+					</tr>
+					<#list tenderlist as item>
+					<tr >
+						<td>${item.id!"-"}</td>
+						<td class="main_td1"  align="left"><a href="javascript:void(0)" onclick='tipsWindown("用户详细信息查看","url:get?index.php?wzd888&q=module/user/view&user_id=2703&type=scene",500,230,"true","","true","text");'>${item.username!}</a></td>
+						<td align="left">${item.money!0}元</td>
+						<td align="left"><font color="#FF0000">${item.account!0}元</font></td>
+						<td align="left"><#if (item.money!0)?number==(item.account!0)?number >全部通过<#else>部分通过 </#if></td>
+						<td align="left">${dateformat(item.addtime!)}</td>
+					</tr>
+					</#list>
+					<tr>
+						<td colspan="9" class="page">
+							<#import "../../common/page.html" as pager>  
+			         	 	<@pager.pagination page=page url="/admin/borrow/viewFullBorrow.html" map=param style="style1"  />
+						</td>
+					</tr>
+			</table>
+			
+				</div>
+				<div class="module_border">
+				<table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr>
+						<td width="" class="main_td">ID</td>
+						<td width="*" class="main_td" align="left">计划还款日</td>
+						<td width="*" class="main_td" align="left">预还金额</td>
+						<td width="" class="main_td" align="left">本金</td>
+						<td width="" class="main_td" align="left">利息</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td  align="left">${dateroll(b.addtime,"0",b.time_limit,"0","yyyy-MM-dd")}</td>
+						<#assign total=interest(b.account,b.apr/100,b.time_limit,"month")>
+						<td align="left">￥${total?c}</td>
+						<td align="left">￥${b.account}</td>
+						<td align="left">￥${total-b.account?number}元</td>
+					</tr>
+					</table>
+				</div>
+				<div class="module_title"><strong>审核此借款</strong></div>
+				<form name="form1" method="post" action="verifyFullBorrow.html" >
+				<div class="module_border">
+					<div class="l">状态:</div>
+					<div class="c">
+					<input type="radio" name="status" value="3"/>复审通过 <input type="radio" name="status" value="4"  checked="checked"/>复审不通过 </div>
+				</div>
+				
+				<div class="module_border" >
+					<div class="l">审核备注:</div>
+					<div class="c">
+						<textarea name="verify_remark" cols="45" rows="5"></textarea>
+					</div>
+				</div>
+				<!--  
+				<div class="module_border" >
+					<div class="l">验证码:</div>
+					<div class="c">
+						<input name="valicode" type="text" size="11" maxlength="4"  tabindex="3"/>&nbsp;<img src="/plugins/index.php?q=imgcode" alt="点击刷新" onClick="this.src='/plugins/index.php?q=imgcode&t=' + Math.random();" align="absmiddle" style="cursor:pointer" />
+					</div>
+				</div>
+				-->
+				<div class="module_submit" >
+					<input type="hidden" name="id" value="${b.id?c}" />
+					
+					<input type="submit"  name="reset" value="审核此借款标" />
+				</div>
+				
+			</form>
+					<div class="module_title"><strong>其他详细内容</strong></div>
+				<div class="module_border">
+					<div class="l">投标奖励：</div>
+					<div class="h"><#if b.award??&&b.award==1>有<#else>无</#if>奖励</div>
+					<div class="l">投标失败是否奖励：</div>
+					<div class="h"><#if b.is_false??&&b.is_false=="1">是<#else>否</#if></div>
+				</div>
+				
+				
+				<div class="module_border">
+					<div class="l">添加时间：</div>
+					<div class="h">${dateformat(b.addtime)}</div>
+					<div class="l">招标时间：</div>
+					<div class="h">${dateformat(b.addtime)}</div>
+				</div>
+				
+				
+				<div class="module_border">
+					<div class="l">内容：</div>
+					<div class="hb" >
+						<table>
+							<tr>
+								<td align="left">
+								${b.context!}
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+			<!---已还款--->
+			
+			
+			<script>
+			
+			var urls = 'index.php?wzd888&q=module/borrow';
+			
+			function sousuo(url){
+				var sou = "";
+				var username = $("#username").val();
+				if (username!=""){
+					sou += "&username="+username;
+				}
+				var keywords = $("#keywords").val();
+				if (keywords!=""){
+					sou += "&keywords="+keywords;
+				}
+				var status = $("#status").val();
+				if (status!=""){
+					sou += "&status="+status;
+				}
+				var is_vouch = $("#is_vouch").val();
+				if (is_vouch!=""){
+					sou += "&is_vouch="+is_vouch;
+				}
+				if (sou!=""){
+					
+					location.href=url+sou;
+				}
+			}
+			
+			function sousuoFull(url){
+				var sou = "";
+				var username = $("#username").val();
+				if (username!=""){
+					sou += "&username="+username;
+				}
+				var biaoType = $("#biaoType").val();
+				if (biaoType!=""){
+					sou += "&biaoType="+biaoType;
+				}
+				var is_vouch = $("#is_vouch").val();
+				if (is_vouch!=""){
+					sou += "&is_vouch="+is_vouch;
+				}
+				if (sou!=""){
+					location.href=url+sou;
+				}
+			}
+			</script>
+				
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

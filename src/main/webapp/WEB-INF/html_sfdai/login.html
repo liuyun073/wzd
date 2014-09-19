@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<#include "include/resource.html"> 
+<body>
+<#assign nid="member">
+<#include "include/header.html"> 
+	<form name="login" method="post" action="${request.getContextPath()}/user/login.html"
+		onkeydown="if(event.keyCode==13) this.submit(); " id="log_in">
+		<div id="main" class="clearfix login-bg">
+			<div class="box">
+				<div class="box-con clearfix">
+					<div class="reg-header">
+						<h3 style="font-size:16px; color:#1c5991; font-weight:bold;">登录商富贷</h3><span>尚未注册？<a href="${webroot}/user/register.html" class="login-a">免费注册>></a></span>
+						<!--<span>首页><a href="#">登录</a>
+						</span>-->
+					</div>
+					<ul class="login-table float_left">
+						<li>
+							<div class="reg-l-title">用户名：</div>
+							<div class="reg-l-input">
+								<input type="text" id="username" name="username" maxlength="64"
+									style="color:#999">
+							</div>
+<!--                        	<p style="clear:both; line-height:36px; padding-left:83px; color:#616161;">您可用绑定手机号、用户名、邮箱登录</p>-->     
+                       </li>
+						<li>
+							<div class="reg-l-title">密码：</div>
+							<div class="reg-l-input">
+								<input type="password" name="password" id="password"
+									maxlength="16" />
+							</div>
+                            <a href="${webroot}/user/getpwd.html" class="login-a">忘记密码</a>
+
+                        </li>
+           <!--         <li>
+                            <div class="reg-l-title">验证码：</div>
+                            <div class="reg-l-input">
+                                <input type="text" name="yzm">
+                            </div>
+                        </li>-->
+				        <li>
+                            <div class="reg-l-title">COOKIE：</div>
+                            <div class="reg-l-input">
+								<select name="login_cookie" id="">
+                                    <option value="15">保存15分钟</option>
+                                    <option value="30">保存30分钟</option>
+                                    <option value="60" selected="selected">保存1小时</option>
+                                    <option value="180">保存3小时</option>
+                                    <option value="360">保存6小时</option>
+                                    <option value="1440">保存1天</option>
+                                    <option value="4320">保存3天</option>
+                                    <option value="7200">保存5天</option>
+                                </select>
+                            </div>
+                        </li>
+		<!--			<li>
+							<div class="reg-l-title">动态口令：</div>
+							<div class="reg-l-input">
+								<input type="text" name="uchoncode" id="uchoncode" maxlength="6" />
+							</div>
+							<p style="color:#F84F00;">(可选)</p>
+							<div class="reg-l-tips">(可选)</div>
+                        </li> -->
+						<li style="text-align:left">
+							<input type="submit" value="立即登录" class="login-btn2" />
+							<input type="hidden" name="actionType"  value="login" />
+							<input type="hidden" name="redirectURL"  value="${redirectURL!}" />
+                        </li>
+                        <li style=" width:270px;">
+                        	
+                        </li>
+					</ul>
+                    <div class="login-table2 float_left">
+						<p style="color:#F84F00; line-height: 30px; font-size: 14px;">
+							　还没帐号？
+						<p>
+
+                        <p class="pt5">
+                        	　<a href="${webroot}/user/register.html"><img src="${webroot}${theme_dir}/media/bg/zr-zhuc.jpg"></a>
+                        </p>
+
+						<p style="line-height:28px; color:#F84F00;font-size:14px; padding-top: 5px;">
+                        	·帮助他人，快乐自己；<br>
+                            ·商富贷为您解决资金烦恼；<br>
+                            ·商富贷让您财富增值；<br>
+
+                        </p>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+<#include "include/footer.html"> 
+</body>
+</html>

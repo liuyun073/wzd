@@ -1,0 +1,83 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+
+			<div class="main_site">
+				<ul>
+					<#include "bar.html">
+					<li class="title">证明材料 <span>/ vip审核</span></li>
+				</ul>
+			</div>
+			<div class="main_content">
+
+				<!--模块列表 开始-->
+				<table width="100%" cellspacing="1" border="0" bgcolor="#CCCCCC">
+					<tbody>
+						<tr>
+							<td width="" class="main_td">ID</td>
+							<td width="*" class="main_td">用户名</td>
+							<td width="*" class="main_td">客服名称</td>
+							<th width="" class="main_td">添加时间</th>
+							<th width="" class="main_td">用户类型</th>
+							<th width="" class="main_td">登录次数</th>
+							<th width="" class="main_td">状态</th>
+							<th width="" class="main_td">是否缴费</th>
+							<td width="" class="main_td">操作</td>
+						</tr>
+						<#if vipinfo??> <#list vipinfo as obj>
+						<#assign vipStatus=obj.vip_status!(0)>
+						<tr class="tr2">
+							<td width="" class="main_td1">${obj.user_id!"-"}</td>
+							<td width="*" class="main_td1">${obj.username!"-"}</td>
+							<td width="*" class="main_td1">${obj.kefu_name!"-"}</td>
+							<td width="" class="main_td1">${dateformat(obj.kefu_addtime!0)}</td>
+							<td width="" class="main_td1"><#if
+								obj.type_id??>${Type(obj.type_id,"usertype")}<#else>-</#if></td>
+							<td width="" class="main_td1">-</td>
+							<td width="" class="main_td1"><#if vipStatus==2>VIP申请中</#if></td>
+							<td width="" class="main_td1">${obj.account_waitvip!"-"}</td>
+							<td width="" class="main_td1"><a
+								href="${request.getContextPath()}/admin/attestation/viewvip.html?user_id=${obj.user_id?c}">审核查看</a></td>
+						</tr>
+						</#list> </#if>
+						<tr>
+
+							<td class="action" colspan="10">
+								<div class="floatl">
+
+								</div>
+								<div class="floatr">
+									<form action="vip.html" method="post">
+										用户名：<input type="text" value="${params.username!}" id="username" name="username">
+										客服用户名：<input type="text" value="${params.kefu_name!}" id="kefu" name="kefu_name">
+										<input type="submit" value="搜索">
+									</form>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="page" colspan="10"><#import
+							"../../common/page.html" as pager> <@pager.pagination page=page
+							url="/admin/attestation/vip.html" map=params
+							style="style1" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

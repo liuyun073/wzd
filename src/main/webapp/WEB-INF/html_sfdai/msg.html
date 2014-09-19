@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<#include "include/resource.html">
+	<body>
+		<#include "include/header.html">
+
+		<div id="main" class="clearfix">
+			<div class="box">
+				<div class="box-con">
+					<p class="reg-pro">
+						系统提示信息
+					</p>
+					<div align="center">
+						<!--<br><br>${rsmsg!""} -->
+						<#if ((rsmsg!"ffff")?substring(0,4))=="登录成功">
+						<br>
+						<br>
+						<a>系统${(rsmsg!"")?substring(0,4)}，系统将3秒后跳转</a> <#else>
+						<br>
+						<br>
+						<a>${(rsmsg!"")}</a> </#if> <#if backurl?exists&&backurl=="
+						<a href='${request.getContextPath()}/member/index.html'>进入用户中心></a>">
+						<br>
+						<br>
+						<a href=${request.getContextPath()}/member/index.html>进入用户中心</a>
+						<br>
+						<br>
+						<#else>
+						<br>
+						<br>
+						${backurl!"/"}
+						<br>
+						<br>
+						</#if>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script> 
+			var url = '${request.getContextPath()}/login.html';
+			var content = '返回上一页';
+			//window.setInterval("location='${request.getContextPath()}/member/index.html'",3000); 
+			if (url == ""){
+				document.getElementById('msg_content').innerHTML = "<a href='javascript:history.go(-1)'>"+content+"</a>";
+			}else{
+				document.getElementById('msg_content').innerHTML = "<a href='"+url+"'>"+content+"</a>";
+			}
+			setInterval("testTime()",3000); 
+			function testTime() { 
+				if (url == ""){
+					history.go(-1);
+				}else{
+		        location.href = url; //#设定跳转的链接地址
+				}
+			} 
+		</script>
+		<#include "include/footer.html">
+	</body>
+</html>

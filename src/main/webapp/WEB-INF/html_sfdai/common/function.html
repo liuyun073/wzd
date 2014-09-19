@@ -1,0 +1,279 @@
+<#assign webroot=request.getContextPath()>
+
+<#macro displayUserType type_id>
+	<#if type_id==1>
+		超级管理员
+	<#elseif type_id==2>
+		普通用户
+	<#elseif type_id==3>
+		客服
+	<#elseif type_id==7>
+		兼职客服
+	<#elseif type_id==3>
+		信贷审核
+	<#elseif type_id==3>
+		白银会员
+	<#elseif type_id==3>
+		黄金会员
+	<#elseif type_id==15>
+		财务
+	<#else>
+		其他
+	</#if>
+</#macro>
+
+<#macro borrowTypeName item>
+	<#if item.is_mb==1>
+		秒标
+	<#elseif item.is_jin==1>
+		净值标
+	<#elseif item.is_fast==1>
+		抵押标
+	<#elseif item.is_art==1>
+		文化艺术区
+	<#elseif item.is_charity==1>
+		慈善标
+	<#elseif item.is_project==1>
+		项目标
+	<#elseif item.is_flow==1>
+		流转标
+	<#elseif item.is_student==1>
+		学信标
+	<#elseif item.is_xin==1>
+		信用标
+	<#elseif item.is_offvouch==1>
+		担保标
+	</#if>
+</#macro>
+
+<#macro statusTypeName status>
+	<#if status==-1>
+		已撤回
+	<#elseif status==0>
+		等待初审
+	<#elseif status==1>
+		初审通过
+	<#elseif status==2>
+		初审未通过
+	<#elseif status==3>
+		复审通过
+	<#elseif status==4||status==49>
+		复审未通过
+	<#elseif status==5||status==59>
+		用户取消
+	<#elseif status==6>
+		还款中
+	<#elseif status==7>
+		部分还款
+	<#elseif status==8>
+		还款成功
+	<#else>
+		错误状态
+	</#if>
+</#macro>
+
+<#function borrowStatusTypeName borrow>
+	<#if borrow.status??>
+	   <#return "等待初审"> 
+	<#elseif status==-1>
+		<#return "审核失败"> 
+	<#elseif status==0>
+		<#return "等待初审">
+	<#elseif status==1>
+		<#return "初审通过"> 
+	<#elseif status==2>
+		<#return "初审未通过"> 
+	<#elseif status==3>
+		<#return "复审通过"> 
+	<#elseif status==4||status==49>
+		<#return "复审未通过"> 
+	<#elseif status==5||status==59>
+		<#return "用户取消"> 
+	<#elseif status==6>
+		<#return "还款中"> 
+	<#elseif status==7>
+		<#return "部分还款"> 
+	<#elseif status==8>
+		<#return "还款成功"> 
+	<#else>
+		<#return "错误状态"> 
+	</#if>
+</#function>
+
+<#function borrowTenderText borrow>
+	<#if borrow.status??>
+	   <#if borrow.status==1>
+	   	<#return "立即投标"> 
+	   </#if>
+	   <#return borrowStatusTypeName(borrow)> 
+	<#else>
+	   <#return "">
+	</#if>
+</#function>
+
+<#macro showTenderButton borrow>
+    <#assign nowTime=dateformat("now") >
+	<#if borrow.status==0> 
+		<a class="btn-action">等待初审</a>
+	<#elseif borrow.status==1&&((borrow.account_yes)?number lt (borrow.account)?number) > 
+		<#if borrow.is_flow==1><a id="invest_dialog" class="btn-action" href="#">立即购买</a><#else><a id="invest_dialog"  class="btn-action" href="#">立即投标</a></#if>
+	<#elseif borrow.status==1&&((borrow.account_yes)?number gt (borrow.account)?number || (borrow.account_yes)?number==(borrow.account)?number) > 
+		<#if borrow.is_flow==1><a class="btn-action">流转中</a><#else><a class="btn-action">等待复审</a></#if>
+	<#elseif borrow.status==2> 
+		<a class="btn-action">初审失败</a>
+	<#elseif borrow.status==3> 
+		<a class="btn-action">复审通过</a>
+	<#elseif borrow.status==5||borrow.status==-1> 
+		<a class="btn-action">用户取消</a>
+	<#elseif borrow.status==4> 
+		<a class="btn-action">复审失败
+	<#elseif borrow.status==6> 
+		<a class="btn-action">还款中</a>
+	<#elseif borrow.status==7> 
+		<a class="btn-action">还款中</a>
+	<#elseif borrow.status==8> 
+		<a class="btn-action">已还款</a>
+	<#else> 
+		<a class="btn-action">用户取消</a> 
+	</#if> 
+	<#if borrow.isday??&&borrow.isday==1> 
+		<#assign time_limit=(borrow.time_limit_day!0)+"天" > 
+		<#assign income=interest(100,borrow.apr/100,borrow.time_limit_day,"end")-100> 
+	<#elseif borrow.style??&&borrow.style=="2"> 
+		<#assign time_limit=(borrow.time_limit!0)+"月" >
+		<#assign income=interest(100,borrow.apr/100,borrow.time_limit,"monthEnd")-100 >
+	<#elseif borrow.style??&&borrow.style=="3"> 
+		<#assign time_limit=(borrow.time_limit!0)+"月" >
+		<#assign income=interest(100,borrow.apr/100,borrow.time_limit,"monthInterest") >
+	<#else>
+ 		<#assign time_limit=(borrow.time_limit!0)+"月" >
+		<#assign income=interest(100,borrow.apr/100,borrow.time_limit,"month")-100 > 
+	</#if>
+	<p>投标100元,年利率${borrow.apr}%，期限${time_limit},可获得利息收益￥${income}元</p>
+</#macro>
+
+<#macro getInterest borrow >
+<#if borrow.isday??&&borrow.isday==1> 
+<#assign income=interest(borrow.account,borrow.apr/100,borrow.time_limit_day,"end")-borrow.account?number> 
+<#elseif borrow.style??&&borrow.style=="2"> 
+<#assign income=interest(borrow.account,borrow.apr/100,borrow.time_limit,"monthEnd")-borrow.account?number>
+<#elseif borrow.style??&&borrow.style=="3"> 
+<#assign income=interest(borrow.account,borrow.apr/100,borrow.time_limit,"monthInterest")-borrow.account?number>
+<#else>
+<#assign income=interest(borrow.account,borrow.apr/100,borrow.time_limit,"month")-borrow.account?number > 
+</#if>
+${income}
+</#macro>
+
+<#macro showBorrowIcon item>
+   <#if item.is_mb==1>	
+    <a href="${webroot}/article/detail.html?catalog=98&id=40" target="_blank" 
+        rel="tooltip" title="秒标满额系统自动还款">
+         <img src="${request.getContextPath()}${theme_dir}/images/mb.gif" border="0" /></a>
+     </#if>	
+        
+    <#if item.is_xin==1>
+      <a href="${webroot}/article/detail.html?catalog=98&id=40" target="_blank" 
+        rel="tooltip" title="网站给予的信用额度借款标">
+          <img src="${request.getContextPath()}${theme_dir}/images/xin.jpg" border="0" alt="点击查看详情" /></a>
+    </#if> 
+	<#if item.is_flow==1>
+        <a href="${webroot}/article/detail.html?catalog=98&id=40" target="_blank" 
+        rel="tooltip" title="网站内流转的借款标">
+         <img src="${request.getContextPath()}${theme_dir}/images/xiang.gif" border="0" alt="点击查看详情" /></a>
+       </#if>
+    <#if item.is_jin==1>
+        <a href="${webroot}/article/detail.html?catalog=98&id=40" target="_blank" 
+        rel="tooltip" title="借款者在网站内资产做保障的借款标">
+         <img src="${request.getContextPath()}${theme_dir}/images/jin.gif" border="0" alt="点击查看详情" /></a>
+        </#if> 
+    <#if item.is_fast==1>
+        <a href="${webroot}/article/detail.html?catalog=98&id=40" target="_blank" 
+        rel="tooltip" title="小微企业现场审核抵押标">
+         <img src="${request.getContextPath()}${theme_dir}/images/fast.gif" border="0" alt="点击查看详情" /></a>
+     </#if>
+
+	<#if item.is_offvouch==1>
+        <a href="${webroot}/article/detail.html?catalog=98&id=40" target="_blank" 
+        rel="tooltip" title="站内给予的担保额度内发布的借款">
+         <img src="${request.getContextPath()}${theme_dir}/images/dan.gif" border="0" alt="点击查看详情" /></a>
+        </#if>
+
+    <#if item.isday==1>
+        <a href="#" target="_blank" 
+        rel="tooltip" title="天标是按天借款标">
+         <img src="${request.getContextPath()}${theme_dir}/images/day.jpg" border="0" alt="点击查看详情" />
+        </a></#if>
+     <#if item.award??&&item.award!=0>
+        <a href="#" target="_blank" 
+        rel="tooltip" title="投资该借款标除利息外有额外的奖励">
+         <img src="${request.getContextPath()}${theme_dir}/images/jiangli.gif" border="0" alt="点击查看详情" />
+        </a></#if> 
+	 <#if item.pwd??&&item.pwd!="">
+        <a href="#" target="_blank" 
+        rel="tooltip" title="定向标需要密码">
+         <img src="${request.getContextPath()}${theme_dir}/images/lock.gif" border="0" alt="点击查看详情" />
+        </a>
+   </#if> 						
+</#macro>
+
+<#macro showRemainTime addtime valid_time>
+<span id="endtime" class="endtime" data-time="${getRemainTime(addtime,valid_time)!0}"></span>
+</#macro>
+
+<#function getRemainTime addtime valid_time>
+<#assign l=getLinkage("valid_time","id",valid_time) >
+<#if l??&&l.value??>
+	<#assign day=(l.value)?number>
+	<#assign remainTime=(addtime?number+day*24*60*60-(dateformat("now"))?number)?c >
+	<#return remainTime>
+</#if>
+<#return -1>
+</#function>
+
+
+<#function getInterest borrow >
+<#if borrow.isday??&&borrow.isday==1> 
+<#assign income=interest(borrow.account,borrow.apr/100,borrow.time_limit_day,"end")-borrow.account?number>
+<#elseif borrow.style??&&borrow.style=="2"> 
+<#assign income=interest(borrow.account,borrow.apr/100,borrow.time_limit,"monthEnd")-borrow.account?number>
+<#elseif borrow.style??&&borrow.style=="3"> 
+<#assign income=interest(borrow.account,borrow.apr/100,borrow.time_limit,"monthInterest")-borrow.account?number>
+<#else> 
+<#assign income=interest(borrow.account,borrow.apr/100,borrow.time_limit,"month")-borrow.account?number > 
+</#if>
+<#return income>
+</#function>
+
+<#function getRepaytime borrow >
+<#if borrow.isday??&&borrow.isday==1> 
+<#assign repaytime=dateroll(borrow.verify_time!0,0,0,borrow.time_limit_day,"yyyy-MM-dd") > 
+<#else> 
+<#assign repaytime=dateroll(borrow.verify_time!0,0,borrow.time_limit,0,"yyyy-MM-dd") > 
+</#if>
+<#return repaytime>
+</#function>
+
+<#function format4 num >
+<#assign temp=((((num)!0)?number)/10000) >
+<#if temp gt 1>
+<#return temp?string("#")+"万" >
+</#if>
+<#return num >
+</#function>
+
+<#function format2 num>
+<#return (((num)!0)?number)?string("##.##")>
+</#function>
+
+<#function ceil num>
+<#assign temp=((num)?c) >
+<#assign len=(temp?index_of("."))>
+<#if (len+3 gt (temp?length))||(len lt 0)>
+	<#assign len=(temp?length)>
+<#else>
+	<#assign len=len+3 >
+</#if>
+<#assign temp=temp?substring(0,len) >
+<#return (temp?number)?c>
+</#function>

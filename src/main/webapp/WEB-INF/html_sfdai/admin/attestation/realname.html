@@ -1,0 +1,115 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<div class="main_site">
+				<ul>
+					<#include "bar.html">
+
+					<li class="title">证明材料 <span>/ 实名认证</span></li>
+
+				</ul>
+			</div>
+			<div class="main_content">
+
+
+				<!--模块列表 开始-->
+				<table width="100%" cellspacing="1" border="0" bgcolor="#CCCCCC">
+
+					<tbody>
+						<tr>
+
+							<td width="*" class="main_td">用户名称</td>
+							<td class="main_td">真实姓名</td>
+							<td class="main_td">性别</td>
+							<td class="main_td">民族</td>
+							<td class="main_td">生日</td>
+							<td class="main_td">证件类型</td>
+							<td class="main_td">证件号码</td>
+							<td class="main_td">籍贯</td>
+							<td class="main_td">身份证图片</td>
+							<td class="main_td">状态</td>
+							<td class="main_td">操作</td>
+						</tr>
+						<tr>
+							
+						<#if list??> <#list list as obj>
+							<td align="center" class="main_td1"><a
+								onclick='tipsWindown("用户详细信息查看","url:get?viewUserInfo.html?username=${obj.username}",500,230,"true","","true","text");'
+								href="javascript:void(0)">${obj.username!"-"} </a></td>
+							<td align="center" class="main_td1">${obj.realname!"-"}</td>
+							<td align="center" class="main_td1"><#if obj.sex??&&
+								obj.sex=="1">男<#else>女</#if></td>
+							<td align="center" class="main_td1"><#if
+								obj.nation??>${Type(obj.nation,"name")}<#else>-</#if></td>
+							<td align="center" class="main_td1">${obj.birthday!"-"}</td>
+							<td align="center" class="main_td1"><#if
+								obj.card_type??>${Type(obj.card_type,"name")}<#else>-</#if></td>
+							<td align="center" class="main_td1">${obj.card_id!"-"}</td>
+							<td align="center" class="main_td1">${obj.provincetext!"-"}-${obj.citytext!"-"}-${obj.areatext!"-"}</td>
+							<td align="center" class="main_td1"><a target="_blank"
+								href="${webroot}/${obj.card_pic1!}">正面</a>| <a target="_blank"
+								href="${webroot}/${obj.card_pic2!}">背面</a></td>
+							<!--
+			<td class="main_td1" align="center" ><a href="data/upfiles/images/2012-09/04/2703_user_13467279370.jpg"  onclick='tipsWindown("身份证正面图片","img:data/upfiles/images/2012-09/04/2703_user_13467279370.jpg",500,430,"true","","true","img")'>正面</a>| <a  href="#"  onclick='tipsWindown("身份证反面图片","img:data/upfiles/images/2012-09/04/2703_user_13467279376.jpg",500,430,"true","","true","img")'>背面</a></td>
+			-->
+							<td align="center" class="main_td1"><#if obj.card_type??>
+								<#if obj.real_status??&&obj.real_status=="1"><font
+								color="#009900">审核通过<#else><font color="#00ffff">等待审核</font></#if>
+									<#else>暂未申请</#if> 
+							</td>
+
+							<td align="center" class="main_td1"><#if obj.card_type??>
+								<#if obj.real_status??&&obj.real_status=="1"> -<#else><a
+								onclick='tipsWindown("真实姓名审核","url:get?viewAudit.html?user_id=${obj.user_id?c}&type=realname",500,270,"true","","true","text");'
+								href="javascript:void(0)">审核</a></#if></#if>
+							</td>
+						</tr>
+						</#list> </#if>
+						<tr>	
+							<td class="action" colspan="11">
+								<div class="floatl"></div>
+								<div class="floatr">
+									<#if param??&&param.status??>
+										<#assign status=(param.get("status"))?number >
+									<#else>
+										<#assign status=0>
+									</#if>
+									<form action="verifyRealname.html" method="post">
+										用户名：<input type="text" value="${param.username!}" id="username" name="username">
+										状态<select id="status" name="status">
+											<option value="0" <#if status==0 >selected="selected"</#if> >全部</option>
+											<option value="1" <#if status==1 >selected="selected"</#if> >已通过</option>
+											<option value="-1" <#if status==-1 >selected="selected"</#if> >未通过</option>
+											</select> 
+											<input type="submit" value="搜索">
+									</form>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="page" colspan="11">
+								<#import "../../common/page.html" as pager > 
+								<@pager.pagination page=page url="/admin/attestation/verifyRealname.html" map=param style="style1"/>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>
+

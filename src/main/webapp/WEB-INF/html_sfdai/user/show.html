@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<#include "../include/resource.html"> 
+<body>
+	<#include "../include/header.html">
+	<!--header-end-->
+	<link href="${request.getContextPath()}${theme_dir}/media/css/modal.css" rel="stylesheet"
+		type="text/css" />
+	<link href="${request.getContextPath()}${theme_dir}/media/css/tipswindown.css" rel="stylesheet"
+		type="text/css" />
+
+	<div id="main" class="clearfix">
+		<ul id="tab" class="list-tab clearfix">
+			<li class="active"><a href="#grxx" data-toggle="tab">个人信息</a>
+			</li>
+			<li><a href="#jklb" data-toggle="tab">借款列表</a>
+			</li>
+			<li><a href="#tzjl" data-toggle="tab">投资记录</a>
+			</li>
+		</ul>
+
+		<div id="myTabContent" class="tab-content">
+
+			<!--个人信息-->
+			<div class="list-tab-con tab-pane fade in active" id="grxx">
+
+				<div class="box-detail-u clearfix">
+					<div class="box-info-u clearfix">
+						<#include "../include/userbox.html">
+						<#include "../common/function.html">
+						<div class="box-info-detail-u">
+							<br>
+							<div class="alert">
+								<span>个人资料</span>
+							</div>
+							<ul class="clearfix">
+								<li>性 别：<#if u?exists&&u.sex?exists&&u.sex=="1">男<#else>女</#if></li>
+								<li>年 龄：<#if u.birthday?exists>${(dateformat(u.birthday,'age'))!("-")}岁</#if></li>
+								<li>婚姻状况：<#if info??&&info.marry??><@linkage plantext=true default=info.marry></@linkage></#if></li>
+								<li>文化程度：<#if info??&&info.education??><@linkage plantext=true default=info.education></@linkage></#if></li>
+								<li>每月收入：<#if info??&&info.income??><@linkage plantext=true default=info.income></@linkage></#if></li>
+								<li>社 保：<#if info??&&info.shebao??><@linkage plantext=true default=info.shebao></@linkage></#if></li>
+								<li>住房条件：<#if info??&&info.housing??><@linkage plantext=true default=info.housing></@linkage></#if></li>
+								<li>是否购车：<#if info??&&info.car??><@linkage plantext=true default=info.car></@linkage></#if></li>
+								<li>是否逾期：--</li>
+							</ul>
+
+							<div class="alert">
+								<span>还款信用</span>
+							</div>
+							<ul class="clearfix">
+								<li>借款<#if summary?exists>${(summary.borrowTimes)?default("0")}</#if>次成功</li>
+								<li>0 次流标</li>
+								<li>0 笔待还款</li>
+								<li>0 笔已成功还款</li>
+								<li>0笔提前还款</li>
+								<li>0 笔迟还款</li>
+								<li>0 笔30天之内的逾期还款</li>
+								<li>0 笔超过30天的逾期还款</li>
+								<li>0 笔逾期未还款</li>
+							</ul>
+
+							<div class="alert">
+								<span>资料审核</span>
+							</div>
+							<table border="0" cellspacing="0" width="100%" class="tab1">
+								<tr>
+									<td><strong>资料类型</strong></td>
+									<td><strong>积分</strong>
+									</td>
+									<td><strong>上传时间</strong>
+									</td>
+									<td><strong>审核时间</strong>
+									</td>
+									<td><strong>审核说明</strong>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--借款列表-->
+			<div class="list-tab-con tab-pane fade" id="jklb">
+
+
+				<div class="box-detail-u clearfix">
+					<div class="box-info-u clearfix">
+						<#include "../include/userbox.html">
+						
+						<div class="box-info-detail-u">
+							<br>
+							<div class="alert">
+								<span>借款记录</span>
+							</div>
+								<#if (borrowList?exists)&&(borrowList?size>0)>
+                                	<#list borrowList as item>
+									
+                    	<ul>
+                    		<li class="clearfix">
+                        	<dl>
+                            	<dd class="d1">借款项目</dd><dd class="d2">还款日期</dd><dd class="d3">借款本金</dd><dd class="d4">借款利息</dd><dd class="d5">管理费</dd><dd class="d6">借款合计</dd>
+                            </dl>
+                        	</li>
+                          
+                       		 <li class="clearfix">
+                        		<dl>
+                            	<dd class="d1"><a href="${request.getContextPath()}/invest/detail.html?borrowid=${item.id?c}" target="_blank">${item.name!}</a></dd>
+                            	<dd class="d2">${getRepaytime(item)}</dd>
+                            	<dd class="d3">￥${item.account!}</dd>
+                            	<dd class="d4">￥${getInterest(item)}</dd>
+                            	<dd class="d5">￥${getInterest(item)*0.1}</dd>
+                            	<dd class="d6">￥${(item.account!0)?number+getInterest(item)*0.9}</dd>
+                            	</dl>
+                       		 </li>
+                      		 </#list>
+                            	<#else>
+                                 <tr>
+                                    <td colspan="7">暂无借款明细</td>
+                                  </tr>
+                         		</#if>
+                    		</ul>               
+									
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<!--投资记录-->
+			<div class="list-tab-con tab-pane fade" id="tzjl">
+				<div class="box-detail-u clearfix">
+					<div class="box-info-u clearfix">
+						<#include "../include/userbox.html">
+
+						<div class="box-info-detail-u">
+							<br>
+							<div class="alert">
+								<span>投资记录</span>
+							</div>
+							<#list investList as item>
+								<p>
+									${dateformat(item.tender_time!0)} 投标【<a href="${request.getContextPath()}/invest/detail.html?borrowid=${item.id?c}" title="${item.name!}"
+										target="_blank">${item.name!}</a>】 金额(${item.account}元) 成功
+								</p>
+							</#list>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="${request.getContextPath()}${theme_dir}/media/js/modal.js"></script>
+	<script src="${request.getContextPath()}${theme_dir}/media/js/tab.js"></script>
+	<script src="${request.getContextPath()}${theme_dir}/media/js/transition.js"></script>
+	<script src="${request.getContextPath()}${theme_dir}/media/js/tipswindown.js"></script>
+	<div class="footer">
+		<#include "../include/footer.html"> 
+	</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<#macro indexListItem item>
+<#if item.is_flow??&&item.is_flow==1>
+<div class="list-div">
+    <img src="${webroot}/imgurl.html?userid=${item.user_id?c}&size=middle" alt="" class="productimg">
+    <ul class="list-ul">
+        <li class="titleli">
+       <!-- <a href="#" class="aimg">抵押担保</a>
+            <a href="#" class="aimg2">优标</a>  -->
+			  <span>
+                  <a href="${webroot}/invest/detail.html?borrowid=${item.id?c}">${item.name}</a>
+             </span>
+			 <#include "function.html"> 
+                 <@showBorrowIcon item=item/>		
+                          
+        </li>
+        <li>
+          最小认购单位：￥<strong>${(item.flow_money!0)?c}</strong>
+        </li>
+        <li>
+            年利率：${item.apr!}%
+        </li>
+        <li>
+            借款期限：${item.time_limit!}月
+        </li>
+		 <li>
+           已认购：${(item.account_yes!0)?number/item.flow_money}份   还剩：${((item.account!0)?number-(item.account_yes!0)?number)/item.flow_money}份
+        </li>
+        <li>
+            <span>还款方式：</span>
+			一次性
+        </li>
+        <li>
+            认购总金额：￥${item.account}元
+            
+        </li>
+       
+    </ul>
+    <div class="list-btnbox">
+        <a href="${webroot}/invest/detail.html?borrowid=${item.id?c}" class="list-btn"><@showIndexTenderButton item /></a>
+        <a href="${webroot}/invest/detail.html?borrowid=${item.id?c}" class="txt">< 标的详情 ></a>
+    </div>
+</div>
+<#else>
+<div class="list-div">
+    <img src="${webroot}/imgurl.html?userid=${item.user_id?c}&size=middle" alt="" class="productimg">
+    <ul class="list-ul">
+        <li class="titleli">
+         <!--<a href="#" class="aimg">抵押担保</a>
+            <a href="#" class="aimg2">优标</a> -->
+			   <span>
+                    <a href="${webroot}/invest/detail.html?borrowid=${item.id?c}">${item.name}</a>
+               </span>	
+				<#include "function.html"> 
+                 <@showBorrowIcon item=item/>	
+        </li>
+        <li>
+            借款金额：<b class="color_blue">￥${item.account}</b>
+        </li>
+        <li>
+            年利率：<b class="color_blue">${item.apr!}%</b>
+        </li>
+        <li>
+            借款期限：<#if item.isday??&&item.isday==1><strong>${item.time_limit_day!0}</strong>天
+            <#elseif item.is_mb==1>满额到期自动还款
+                <#else><strong>${(item.time_limit)?default("0")}</strong>个月</#if>
+        </li>
+        <li class="clearfix">
+            <span style="float:left">信用等级：</span><img class="rank" src="${request.getContextPath()}/data/images/credit/${item.credit_pic}" title="${item.credit_jifen}"  />
+        </li>
+        <li class="clearfix">
+            <div class="float_left">已完成：</div>
+            <div class="jindu float_left">
+                <div class="tiaotiao" style="width:${item.scales*100}%"></div>
+            </div>
+            <div class="float_left">&nbsp;${((item.scales*100!0)?number)?string("##.##")}%</div>
+        </li>
+        <li>
+            已完成${item.tender_times!}笔投标
+        </li>
+		
+            发布时间：${dateformat(item.addtime)!}
+        
+    </ul>
+    <div class="list-btnbox">
+        <a href="${webroot}/invest/detail.html?borrowid=${item.id?c}" class="list-btn"><@showIndexTenderButton item /></a>
+        <a href="${webroot}/invest/detail.html?borrowid=${item.id?c}" class="txt">< 标的详情 ></a>
+    </div>
+</div>
+
+</#if>
+</#macro>
+
+<#macro showIndexTenderButton borrow>
+    <#assign nowTime=dateformat("now") >
+	<#if borrow.status==0>等待初审
+	<#elseif borrow.status==1&&((borrow.account_yes)?number lt (borrow.account)?number) > 
+	<#if borrow.is_flow==1>立即购买<#else>立即投标</#if>
+
+	<#elseif borrow.status==1&&((borrow.account_yes)?number gt (borrow.account)?number || (borrow.account_yes)?number==(borrow.account)?number) > 
+	<#if borrow.is_flow==1>流转中<#else>等待复审</#if>
+
+	<#elseif borrow.status==2> 
+	初审失败
+	<#elseif borrow.status==3> 
+	复审通过
+	<#elseif borrow.status==5||borrow.status==-1> 
+	用户取消</a>
+	<#elseif borrow.status==4> 
+	复审失败
+	<#elseif borrow.status==6> 
+	还款中</a>
+	<#elseif borrow.status==7> 
+	还款中</a>
+	<#elseif borrow.status==8> 
+	已还款</a>
+	<#else> 
+	用户取消</a> 
+	</#if> 
+</#macro>

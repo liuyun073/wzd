@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<#include "../include/resource.html">
+<body>
+<#assign nid="borrow" >
+<#include "../include/header.html">
+<#assign webroot=request.getContextPath()>
+<!--<link href="${webroot}${theme_dir}/media/css/borrow_new.css" rel="stylesheet" type="text/css" />
+<link href="${webroot}${theme_dir}/media/css/modal.css" rel="stylesheet" type="text/css" />-->
+
+<div class="mains investstyle">
+    <div class="positions">当前位置：<span>首页></span><span>融资项目></span><a href="#">正在招标的项目</a><div class="float_right">分享到<a href="#"></a></div></div>
+    <div class="jd-fs">
+   		<div class="jd-title">
+        	发布项目方式
+        </div>
+        <div class="jd-content">
+        	<div class="jd-content-list">
+            	<ul class="clearfix">
+                	<li><a href="${webroot}/borrow/loan.html?type=month" class="orgcolor">信用标</a></li>
+                    <li class="long">没有抵押的项目</li>
+                    <li><a href="${request.getContextPath()}/article/detail.html?catalog=98&id=40" class="grecolor">详细介绍>></a></li>
+                    <li>推荐指数：<img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"></li>
+                    <li class="jd-btn"><a href="${webroot}/borrow/loan.html?type=month" class="float_right"><img src="${webroot}${theme_dir}/media/bg/jd-fb.jpg"></a></li>
+                </ul>
+            </div>
+           <div class="jd-content-list">
+            	<ul class="clearfix">
+                	<li><a href="${webroot}/borrow/loan.html?type=offvouch" class="orgcolor">担保标贷款</a></li>
+                    <li class="long">站内给予的担保额度内发布的借款</li>
+                    <li><a href="${request.getContextPath()}/article/detail.html?catalog=98&id=40" class="grecolor">详细介绍>></a></li>
+                    <li>推荐指数：<img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"></li>
+                    <li class="jd-btn"><a href="${webroot}/borrow/loan.html?type=offvouch" class="float_right"><img src="${webroot}${theme_dir}/media/bg/jd-fb.jpg"></a></li>
+                </ul>
+            </div>  
+            <div class="jd-content-list">
+            	<ul class="clearfix">
+                	<li><a href="${webroot}/borrow/loan.html?type=jin" class="orgcolor">净值标</a></li>
+                    <li class="long">站内有资金或债权而发布的项目</li>
+                    <li><a href="${request.getContextPath()}/article/detail.html?catalog=98&id=40" class="grecolor">详细介绍>></a></li>
+                    <li>推荐指数：<img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"></li>
+                    <li class="jd-btn"><a href="${webroot}/borrow/loan.html?type=jin" class="float_right"><img src="${webroot}${theme_dir}/media/bg/jd-fb.jpg"></a></li>
+                </ul>
+            </div>
+            <div class="jd-content-list">
+            	<ul class="clearfix">
+                	<li><a href="${webroot}/borrow/loan.html?type=miaobiao" class="orgcolor">秒还标</a></li>
+                    <li class="long">融资成功后系统立即自动还款的项目</li>
+                    <li><a href="${request.getContextPath()}/article/detail.html?catalog=98&id=40" class="grecolor">详细介绍>></a></li>
+                    <li>推荐指数：<img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"></li>
+                    <li class="jd-btn"><a href="${webroot}/borrow/loan.html?type=miaobiao" class="float_right"><img src="${webroot}${theme_dir}/media/bg/jd-fb.jpg"></a></li>
+                </ul>
+            </div>
+            <div class="jd-content-list" style="border-bottom: none;">
+            	<ul class="clearfix">
+                	<li><a href="${webroot}/borrow/loan.html?type=fast" class="orgcolor">抵押标</a></li>
+                    <li class="long">小微企业现场审核抵押发布的项目</li>
+                    <li><a href="${request.getContextPath()}/article/detail.html?catalog=98&id=40" class="grecolor">详细介绍>></a></li>
+                    <li>推荐指数：<img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"></li>
+                    <li class="jd-btn"><a href="${webroot}/borrow/loan.html?type=fast" class="float_right"><img src="${webroot}${theme_dir}/media/bg/jd-fb.jpg"></a></li>
+                </ul>
+            </div>
+	<!--    <div class="jd-content-list">
+            	<ul class="clearfix">
+                	<li><a href="${webroot}/borrow/loan.html?type=offvouch" class="orgcolor">流转标</a></li>
+                    <li class="long">投标立即生息的项目</li>
+                    <li><a href="${request.getContextPath()}/article/detail.html?catalog=98&id=5" class="grecolor">详细介绍>></a></li>
+                    <li>推荐指数：<img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"><img src="${webroot}${theme_dir}/media/bg/jd-star.jpg"></li>
+                    <li class="jd-btn"><a href="${webroot}/borrow/loan.html?type=flow" class="float_right"><img src="${webroot}${theme_dir}/media/bg/jd-fb.jpg"></a></li>
+                </ul>
+            </div>-->
+        </div>
+    </div><!---借款方式-->
+    <div class="jd-lc">
+        <div class="jd-title">
+            发布融资流程
+        </div>
+        <div class="jd-content">
+            <div>
+                <ul  id="tab" class="list-tab clearfix">
+                    <li class="active"><a href="#zchy" data-toggle="tab">1)注册会员</a></li>
+                    <li><a href="#txzl" data-toggle="tab">=>2)填写资料</a></li>
+                    <li><a href="#smrz" data-toggle="tab">=>3)实名认证</a></li>
+                    <li><a href="#vip" data-toggle="tab">=>4)VIP认证</a></li>
+                    <li><a href="#sczl" data-toggle="tab">=>5)上传资料</a></li>
+                    <li><a href="#sprz" data-toggle="tab">=>6)视频认证</a></li>
+                    <li><a href="#sqed" data-toggle="tab">=>7)申请额度</a></li>
+                    <li><a href="#fbjk" data-toggle="tab">=>8)发布借款</a></li>
+
+                </ul>
+            </div>
+            <div id="myTabContent" class="tab-content">
+
+                <!--注册会员-->
+                <div class="list-tab-con tab-pane fade in active" id="zchy">
+                    <!--<ul class="clearfix">
+                 <li></li>
+             </ul>-->
+                    <span><strong><p class="text-red">注册操作步骤</p></strong></span>
+                    1、进入商富贷首页，点击左上角"<a href="/?user&q=action/reg">注册</a>"按钮。<br>
+                    2、此时您已进入注册页面，根据提示信息，填写您的注册邮箱、用户名、密码，角色，点击 "就完成了。<br>
+                    3、注册成功后，系统会发送一封账户激活邮件到您的注册邮箱，进入注册邮箱，点击激活链接，激活账户。<br>
+
+                    <span><strong><p class="text-red">注册时，一直没有收到确认电子邮件怎么办？</p></strong></span>
+                    1、请先到您的垃圾邮件文件夹里面寻找确认邮件<br>
+                    2、个别邮箱会误屏蔽商富贷确认邮件。如果你也碰到类似问题，请尝试使用由另一个邮件服务商提供的邮箱重新收取确认邮件。强烈建议你使用gmail免费邮箱、网易163免费邮箱、126免费邮箱，QQ邮箱。可随时联系网站客服人员。
+                    <br><br>
+                    <div class="alert"><span><p class="text-red"><a href="${webroot}/user/register.html">免费注册会员</a></p></span></div>
+                </div>
+
+                <!--填写资料-->
+                <div class="list-tab-con tab-pane fade" id="txzl">
+                    <span><strong><p class="text-red">填写资料操作步骤</p></strong></span>
+                    1、登录系统成功后，进入我的账户<br>
+                    2、在基本设置那里填写个人资料，个人资料包括：房产资料、单位资料、私营业主、财务状况、联系方式、配偶资料、教育背景等<br>
+                    3、资料完善的好处：资料上传的越详细完整，获得的信用积分相应也会增加<br><br>
+                    <div class="alert"><span><p class="text-red"><a href="${webroot}/member/userinfo/userinfo.html">填写资料</a></p></span></div>
+                </div>
+
+                <!--实名认证-->
+                <div class="list-tab-con tab-pane fade" id="smrz">
+                    <span><strong><p class="text-red">实名认证操作步骤</p></strong></span>
+                    1、登录系统成功后，进入我的账户<br>
+                    2、在认证中心菜单下面，进入实名认证<br>
+                    3、填写姓名，身份证号码，出生年月，户籍所在地，同时上传身份证正反面<br>
+                    4、注：实名认证一旦通过后将不能再修改真实姓名，请谨慎操作<br><br>
+                    <div class="alert"><span><p class="text-red"><a href="${webroot}/member/identify/realname.html">实名认证</a></p></span></div>
+                </div>
+
+                <!--VIP认证-->
+                <div class="list-tab-con tab-pane fade" id="vip">
+                    <span><strong><p class="text-red">关于VIP的权利和义务</p></strong></span>
+                    为了商富贷网站的稳定运营，方便更多用户参与网络借款中介平台，投资者成为VIP会员不需要提交资料，VIP会员享有坏账保障的功能。<br>
+                    　　1.用户先在网站上注册账户，并向其账户充值150元，提交VIP申请；等审核通过后，网站自动扣除VIP费用。<br>
+                    　　2.借入者成为VIP后，一年以内可在信用额度内多次借款，并享有客服跟踪服务。<br>
+                    　　3.借出者申请VIP时需提交身份证及联系电话，提现银行账号户名与身份证一致。<br>
+                    　　4.借出者成为VIP后，借出本金享有商富贷网站合作商的全额担保，最大限度降低投资风险。<br>
+                    　　5.VIP用户同时享有借入和借出权利，商富贷网站将根据个人资料及信用积分审核信用借款额度，并根据还款情况及借出资金总额作出调整。<br><br>
+                    <div class="alert"><span><p class="text-red"><a href="${webroot}/member/vip.html">申请VIP</a></p></span></div>
+                </div>
+
+                <!--上传资料-->
+                <div class="list-tab-con tab-pane fade" id="sczl">
+                    <span><strong><p class="text-red">上传资料操作步骤</p></strong></span>
+                    1、登录系统成功后，进入我的账户<br>
+                    2、在认证中心菜单下面，进入资料上传页面，资料类别主要有：居住证(暂住证)、住房公积金、社保、行驶证、驾驶证等等<br>
+                    3、资料上传的好处：资料上传的越详细完整，获得的信用积分相应也会增加<br><br>
+                    <div class="alert"><span><p class="text-red"><a href="${webroot}/member/identify/attestation.html">上传资料</a></p></span></div>
+                </div>
+
+                <!--视频认证-->
+                <div class="list-tab-con tab-pane fade" id="sprz">
+                    <span><strong><p class="text-red">视频认证操作步骤</p></strong></span>
+                    1、登录系统成功后，进入我的账户<br>
+                    2、在认证中心菜单下面，进入视频认证页面，点击申请视频认证，然后联系客户，进行安排视频认证，客服在于您视频完毕后会进行认证通过操作<br>
+                    3、视频认证能增加您的信用积分<br><br>
+                    <div class="alert"><span><p class="text-red"><a href="${webroot}/member/identify/video.html">视频认证</a></p></span></div>
+                </div>
+
+                <!--申请额度-->
+                <div class="list-tab-con tab-pane fade" id="sqed">
+                    <span><strong><p class="text-red">申请操作步骤</p></strong></span>
+                    1、登录系统成功后，进入我的账户<br>
+                    2、在个人账户主页面上，点击"额度申请"，进入额度申请页面，提交自己需要申请的信用借款额度，交由审核部门审核，审核人员会根据您的自身信用状况给予一定的信用借款额度<br>
+                    <br><br>
+                    <div class="alert"><span><p class="text-red"><a href="${webroot}/member/borrow/limitapp.html">申请额度</a></p></span></div>
+                </div>
+
+                <!--发布借款-->
+                <div class="list-tab-con tab-pane fade" id="fbjk">
+                    <span><strong><p class="text-red">发布借款标步骤</p></strong></span>
+                    目前系统的借款标种有：秒还标，信用标，给力标，净值标，担保标，用户可根据自身情况选择发布不同类型借款标。
+                    <br><br>
+                    <div class="alert"><span><p class="text-red"><a href="${webroot}/borrow/index.html">发布借款标</a></p></span></div>
+                </div>
+
+
+            </div>
+        </div>
+    </div><!--借款流程-->
+</div>
+
+
+<!--贷款帮助 结束-->
+<script src="${webroot}${theme_dir}/media/js/modal.js"></script>
+<script src="${webroot}${theme_dir}/media/js/tab.js"></script>
+<script src="${webroot}${theme_dir}/media/js/transition.js"></script>
+<#include "../include/footer.html"> 
+</body>
+</html>

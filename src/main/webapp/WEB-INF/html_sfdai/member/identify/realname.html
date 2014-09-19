@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<#include "../../include/resource.html">
+<body>
+	<#assign nid="member"> 
+	<#include "../../include/header.html">
+	<!--header-end-->
+	<!--用户中心的主栏目 开始-->
+	<div id="main" class="clearfix" >
+		<div class="wrap950 " style="margin-top:0">
+			<!--左边的导航 开始-->
+			<div class="user_left">
+			<#assign mid="m_identify" >
+			<#include "../user_menu.html"></div>
+			<!--左边的导航 结束-->
+
+			<!--右边的内容 开始-->
+			<div class="user_right">
+				<#if msg?exists>
+				<div id="msg24">
+					<p class="ok">${msg}</p>
+				</div>
+				<#else> <#if errormsg?exists>
+				<div id="msg25">
+					<p class="error">${errormsg}</p>
+				</div>
+				</#if> </#if>
+				<div class="user_right_menu">
+					<#assign userinfo_type="realname">
+					<#include "identify_menu.html"></div>
+				<div class="user_right_main">
+				<#if user?exists&&user.real_status?exists&&user.real_status=="2">
+					<div class="user_help alert">实名认证正在审核中!</div>
+				<#elseif user?exists&&user.real_status?exists&&user.real_status=="1">
+					<div class="user_help alert">恭喜您已经通过了实名认证，如要修改请跟客服联系，谢谢！</div>
+					<div class="user_right_border" style="background: #E8EEE5">
+						<div class="l">用户名：</div>
+						<div class="c">${user.username!}</div>
+					</div>
+					<div class="user_right_border" style="background: #E8EEE5">
+						<div class="l">真实姓名：</div>
+						<div class="c">${user.realname!}</div>
+					</div>
+		
+					<div class="user_right_border" style="background: #E8EEE5">
+						<div class="l">性 别 ：</div>
+						<div class="c"><#if user?exists&&user.sex?exists&&user.sex=="1">男<#else>女</#if> </div>
+					</div>
+		
+					<div class="user_right_border" style="background: #E8EEE5">
+						<div class="l">民 族：</div>
+						<div class="c"><#if user.nation??>${Type(user.nation,"name")}<#else>-</#if></div>
+					</div>
+		
+					<div class="user_right_border" style="background: #E8EEE5">
+						<div class="l">出生日期：</div>
+						<div class="c">${user.birthday!}</div>
+					</div>
+		
+					<div class="user_right_border" style="background: #E8EEE5">
+						<div class="l">证件类别：</div>
+						<div class="c">
+						<#if user?exists&&user.card_type?exists>
+							<@linkage name="card_type" plantext=true default=user.card_type></@linkage>
+						<#else>
+							-
+						</#if> 
+						</div>
+					</div>
+		
+					<div class="user_right_border" style="background: #E8EEE5">
+						<div class="l">证件号码：</div>
+						<div class="c">${user.card_id!}</div>
+					</div>
+		
+					<div class="user_right_border" style="background: #E8EEE5">
+						<div class="l">籍贯：</div>
+						<div class="c">${(user.provincetext)!} ${(user.citytext)!} ${(user.areatext)!} </div>
+					</div>
+					
+				<#else>
+					<form action="${webroot}/member/identify/realname.html" name="form1" method="post" onsubmit="return check_form()" enctype="multipart/form-data">
+					<div class="user_help alert">注意：请认真填写以下的内容，一旦通过实名认证以下信息将不能修改。</div>
+					<div class="user_right_border">
+						<div class="l">用户名：</div>
+						<div class="c">
+							<#if user?exists&&user.username?exists>${user.username}</#if>
+						</div>
+					</div>
+					
+					<div class="user_right_border">
+						<div class="l">真实姓名：</div>
+						<div class="c">
+							<input  name="realname" value="<#if user?exists&&user.realname?exists>${user.realname}</#if>" /><font color="#FF0000">*</font>
+							<!--<#if user?exists&&user.realname?exists>${user.realname}</#if> -->
+						</div>
+					</div>
+					
+					<div class="user_right_border">
+						<div class="l">性 别 ：</div>
+						<div class="c">
+							<#assign sex=true>
+							<#if (user?exists&&user.sex?exists&&user.sex=="2") >
+								<#assign sex=false>
+							</#if>
+							<input type="radio" name="sex" value="1" <#if sex==true> checked="checked"</#if>   />男
+			                   <input type="radio" name="sex" value="2" <#if sex==false> checked="checked"</#if>  />女
+							<font color="#FF0000">*</font> 
+						</div>
+					</div>
+					
+					<div class="user_right_border">
+						<div class="l">民 族：</div>
+						<div class="c">
+							<#if user?exists&&user.nation?exists>
+								<@linkage name="nation" id="nation" nid="nation" default=user.nation noselect="请选择"></@linkage>
+							<#else>
+								<@linkage name="nation" id="nation" nid="nation" noselect="请选择"></@linkage>
+							</#if> 
+						</div>
+					</div>
+					
+					<div class="user_right_border">
+						<div class="l">出生日期：</div>
+						<div class="c">
+							<input type="text" name="birthday" value="<#if user?exists&&user.birthday?exists>${user.birthday}</#if>" onclick="change_picktime()" />  <font color="#FF0000">*</font> 
+						</div>
+					</div>
+					
+					<div class="user_right_border">
+						<div class="l">证件类别：</div>
+						<div class="c">
+							<#if user?exists&&user.card_type?exists>
+								<@linkage name="card_type" id="card_type" nid="card_type" default=user.card_type></@linkage>
+							<#else>
+								<@linkage name="card_type" id="card_type" nid="card_type"></@linkage>
+							</#if> 
+							<font color="#FF0000">*</font> 
+						</div>
+					</div>
+					
+					<div class="user_right_border">
+						<div class="l">证件号码：</div>
+						<div class="c">
+							<input type="text" name="card_id" value="<#if user?exists&&user.card_id?exists>${user.card_id!}</#if>" />  
+							<font color="#FF0000">*(身份证号码中含X的必须为大写)</font> 
+						</div>
+					</div>
+					
+					<div class="user_right_border">
+						<div class="l">籍贯：</div>
+						<div class="c">
+			                <#if user?exists&&user.province?exists>
+			                		<@region name="province" id="province" value=user.province pid="0"></@region>&nbsp;
+			                	<#else>
+			                		<@region name="province" id="province" pid="0"></@region>&nbsp;
+			                	</#if>
+								
+								<#if user?exists&&user.province?exists>
+									<#if user.city?exists>
+										<@region name="city" id="city" value=user.city pid=user.province></@region>&nbsp;
+									<#else>
+										<@region name="city" id="city" pid=user.province></@region>&nbsp;
+									</#if>
+			                	<#else>
+			                		<@region name="city" id="city" pid="-1"></@region>&nbsp;
+			                	</#if>
+								
+								<#if user?exists&&user.city?exists>
+									<#if user.area?exists>
+										<@region name="area" id="area" value=user.area pid=user.city></@region>&nbsp;
+									<#else>
+										<@region name="area" id="area" pid=user.city></@region>&nbsp;
+									</#if>
+			                	<#else>
+			                		<@region name="area" id="area" pid="-1"></@region>&nbsp;
+			                	</#if>
+						</div>
+					</div>
+					
+					<div class="user_right_border">
+						<div class="l">身份证正面上传：</div>
+							<div class="c">
+								<input type="file" name="card_pic1" size="20" class="input_border"/>
+								<#if user?exists&&user.card_pic1?exists>
+									<a href="./{ $_G.user_result.card_pic1}" target="_blank" title="有图片">
+										<img src="${request.getContextPath()}${theme_dir}/images/ico_yes.gif" border="0"  />
+									</a>
+								</#if>
+								<font color="#FF0000">*(您上传的文件类型必须为.jpg或 .gif类型，附件不能超过1M)</font>
+				            </div>
+					</div>
+							
+				<div class="user_right_border">
+						<div class="l">身份证背面上传：</div>
+							<div class="c">
+								<input type="file" name="card_pic2" size="20" class="input_border"/>
+								<#if user?exists&&user.card_pic2?exists>
+									<a href="./{ $_G.user_result.card_pic2}" target="_blank" title="有图片">
+										<img src="${request.getContextPath()}${theme_dir}/images/ico_yes.gif" border="0"  />
+									</a>
+								</#if>
+								<font color="#FF0000">*(您上传的文件类型必须为.jpg或 .gif类型，附件不能超过1M)</font> 
+							</div>
+					</div>
+				<div class="user_right_border">
+						<div class="l" style="font-weight:bold; float:left;">验证码：</div>
+						<div class="c" >
+							<input name="valicode" type="text" size="11" maxlength="5"  tabindex="3"  style="float:left;"/>&nbsp;<img src="${request.getContextPath()}/validimg.html" alt="点击刷新" onClick="this.src='${request.getContextPath()}/validimg.html?t=' + Math.random();" align="absmiddle" style="cursor:pointer; display:inline-block;zoom:1;*display:inline; *float:none;" />
+						</div>
+				</div>	
+
+					<div class="user_right_border">
+						<div class="e"></div>
+						<div class="c">
+							<input type="submit"  class="btn-action" name="name"  value="确认提交" size="30" /> 			
+						</div>
+					</div>
+					<input type="hidden" name="type" value="1" />
+					</form>
+				</#if>
+				<div class="user_right_foot alert">
+				 * 温馨提示：我们将对所有的信息进行保密
+				</div>
+				
+				<script>
+			function check_form(){
+
+				 var frm = document.forms['form1'];
+                                 var card_pic1 = (frm.elements['card_pic1'].value);
+                                 var card_pic2 = (frm.elements['card_pic2'].value);
+				 var realname = frm.elements['realname'].value;
+				 var birthday = frm.elements['birthday'].value;
+				 var card_id = frm.elements['card_id'].value;
+				 var area = frm.elements['area'].value;
+				 var errorMsg = '';
+
+
+				  if (realname.length == 0 ) {
+					errorMsg += '* 真实姓名不能为空' + '\n';
+				  }
+				  if (birthday.length == 0 ) {
+					birthday += '* 生日不能为空' + '\n';
+				  }
+				  if (card_id.length == 0 ) {
+					errorMsg += '* 证件号码不能为空' + '\n';
+				  }
+				  if (area.length == 0 ) {
+					errorMsg += '* 请填写籍贯' + '\n';
+				  }
+                                 var pos1 = card_pic1.lastIndexOf(".");
+                                 var lastname1 = card_pic1.substring(pos1,card_pic1.length);
+
+                                 var pos2 = card_pic2.lastIndexOf(".");
+                                 var lastname2 = card_pic2.substring(pos2,card_pic2.length);
+
+                                 if (!(lastname1.toLowerCase()==".jpg" || lastname1.toLowerCase()==".gif" || lastname2.toLowerCase()==".png" ))
+                                 {
+                                     errorMsg += "*您上传的身份证正面上传文件类型必须为.jpg, .gif或者.png类型" + '\n';
+                                 }
+
+                                 if (!(lastname2.toLowerCase()==".jpg" || lastname2.toLowerCase()==".gif" || lastname2.toLowerCase()==".png" ))
+                                 {
+                                     errorMsg += "*您上传的身份证背面上传文件类型必须为.jpg, .gif或者.png类型" + '\n';
+                                 }
+				   
+				  if (errorMsg.length > 0){
+					alert(errorMsg); return false;
+				  } else{  
+					return true;
+				}
+			
+			}
+		</script>
+				
+				</div>
+			</div>
+			<!--右边的内容 结束-->
+		</div>
+	</div>
+	<!--用户中心的主栏目 结束-->
+	<script
+		src="${request.getContextPath()}${theme_dir}/media/js/modal.js"></script>
+	<script
+		src="${request.getContextPath()}${theme_dir}/media/js/tab.js"></script>
+	<script
+		src="${request.getContextPath()}${theme_dir}/media/js/alert.js"></script>
+	<script
+		src="${request.getContextPath()}${theme_dir}/media/js/transition.js"></script>
+		<script type="text/javascript" src="${request.getContextPath()}${theme_dir}/media/js/area.js"></script>
+	<#include "../../include/footer.html">
+</body>
+</html>

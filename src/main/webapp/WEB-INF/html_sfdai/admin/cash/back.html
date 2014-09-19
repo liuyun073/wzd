@@ -1,0 +1,77 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#include "banner.html">
+			<div class="main_content">
+				<!--模块列表 开始-->
+				<div class="module_add">
+					<form name="form1" method="post" action=""
+						onsubmit="return check_form();" enctype="multipart/form-data">
+						<div class="module_title">
+							<strong>添加充值</strong>
+						</div>
+						<div class="module_border">
+							<div class="l">用户名：</div>
+							<div class="c">
+								<input type="text" name="username" />
+							</div>
+						</div>
+						<div class="module_border">
+							<div class="l">类型：</div>
+							<div class="c">
+								账户扣款<input type="hidden" name="type" />
+							</div>
+						</div>
+						<div class="module_border">
+							<div class="l">金额：</div>
+							<div class="c">
+								<input type="text" name="money" />
+							</div>
+							<span>*目前仅支持8位数（千万级别）的充值</span>
+						</div>
+
+						<div class="module_border">
+							<div class="l">备注：</div>
+							<div class="c">
+								<input type="text" name="remark" />
+							</div>
+						</div>
+						<div class="module_submit">
+							<input type="hidden" name="actionType" value="back" /> <input
+								type="submit" name="reset" value="确认扣款" />
+						</div>
+					</form>
+
+			<!-- 	<script>
+					function check_form() {
+						var money = document.getElementsByName("money").value;
+						var errMsg = "你输入的充值金额过大,目前系统仅支持千万级别的充值";
+						if(money.length >= 9){
+							alert(errMsg);
+							return flase;
+						}
+
+					}
+				</script> -->
+
+				</div>
+
+
+
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left">
+
+			<div class="main_left">
+				<div class="fenlan">
+					<div class="fenlan_title">
+						<span><a onclick="change_menu('system_menu_1',this)"
+							href="javascript:void(0);">+</a></span><strong><a
+							href="javascript:void(0);">系统设置</a></strong>
+					</div>
+					<div class="fenlan_content">
+						<ul id="system_menu_1">
+							<li><a href="${request.getContextPath()}/admin/system/index.html">系统参数</a></li>
+							<!-- 	
+							<li><a href="index.php?wzd888&amp;q=system/watermark">图片水印设置</a></li>
+							<li><a href="index.php?wzd888&amp;q=system/fujian">附件设置</a></li>
+							<li><a href="index.php?wzd888&amp;q=system/flag">自定义属性</a></li>
+							<li><a href="index.php?wzd888&amp;q=system/email">邮件设置</a></li>
+							<li><a href="index.php?wzd888&amp;q=system/phone">短信设置</a></li> 
+							-->
+						</ul>
+					</div>
+				</div>
+
+
+				<!--	
+				<div class="fenlan">
+					<div class="fenlan_title">
+						<span><a onclick="change_menu('system_menu_2',this)"
+							href="javascript:void(0);">+</a></span><strong><a
+							href="javascript:void(0);">数据库管理</a></strong>
+					</div>
+					<div class="fenlan_content">
+						<ul id="system_menu_2">
+							<li><a href="index.php?wzd888&amp;q=system/dbbackup/back">数据库备份</a></li>
+							<li><a href="index.php?wzd888&amp;q=system/dbbackup/revert">数据库还原</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="fenlan">
+					<div class="fenlan_title">
+						<span><a onclick="change_menu('site_menu_6',this)"
+							href="javascript:void(0);">+</a></span><strong><a
+							href="javascript:void(0);">用户管理</a></strong>
+					</div>
+					<div class="fenlan_content">
+						<ul id="site_menu_6">
+							<li><a
+								href="index.php?wzd888&amp;q=module/manager&amp;a=system">管理员管理</a></li>
+							<li><a
+								href="index.php?wzd888&amp;q=module/user&amp;a=system">用户管理</a></li>
+							<li><a href="index.php?wzd888&amp;q=system/user">修改个人信息（密码）</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="fenlan">
+					<div class="fenlan_title">
+						<span><a onclick="change_menu('system_menu_3',this)"
+							href="javascript:void(0);">+</a></span><strong><a
+							href="javascript:void(0);">操作记录</a></strong>
+					</div>
+					<div class="fenlan_content">
+						<ul id="system_menu_3">
+							<li><a href="index.php?wzd888&amp;q=system/userlog">用户操作记录</a></li>
+						</ul>
+					</div>
+				</div>-->
+				<div class="fenlan">
+					<div class="fenlan_title">
+						<span><a onclick="change_menu('system_menu_5',this)"
+							href="javascript:void(0);">+</a></span><strong><a
+							href="javascript:void(0);">其它管理</a></strong>
+					</div>
+							<div class="fenlan_content">
+								<ul id="system_menu_5">
+									<!-- <li><a href="index.php?wzd888&amp;q=system/upfiles">图片管理</a></li> -->
+									<li><a href="${request.getContextPath()}/admin/system/clean.html">清空缓存</a></li>
+
+								</ul>
+							</div>
+					</div>
+				</div>
+			</div>
+			<!-- div.main_left end  -->
+			<!-- div.main_right start  -->
+			<div class="main_right">
+				<div class="main_site">
+					<ul>
+						<li class="site_sub"></li>
+						<li class="title">管理首页 <span>/ 系统信息 </span></li>
+					</ul>
+				</div>
+				<div class="main_content"><#include "systemconfig.html"></div>
+			</div>
+			<!-- div.main_right end  -->
+		</div>
+		<!-- div.main end  -->
+		<#include "../foot.html">
+</body>
+</html>

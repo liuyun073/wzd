@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<#include "../../include/resource.html">
+<body>
+	<#assign nid="member"> 
+	<#include "../../include/header.html">
+
+	<link href="${request.getContextPath()}/media/css/modal.css"
+		rel="stylesheet" type="text/css" />
+	<!--用户中心的主栏目 开始-->
+	<div id="main" class="clearfix">
+		<div class="wrap950 ">
+			<!--左边的导航 开始-->
+			<div class="user_left">
+				<#assign mid="m_borrow" >
+			<#include "../user_menu.html"></div>
+			<!--左边的导航 结束-->
+
+			<!--右边的内容 开始-->
+			<div class="user_right">
+				<div class="user_right_menu">
+					<#assign borrow_type="publish">
+				    <#if type?exists>
+				    	<#assign borrow_type=type>
+				    </#if>
+					<#include "borrow_menu.html">
+				</div>
+				<div class="user_right_main">
+					<!--正在招标 开始-->
+					<#if param?exists>
+						<#if param.get("dotime1")?exists><#assign dotime1=param.get("dotime1")></#if>
+						<#if param.get("dotime2")?exists><#assign dotime2=param.get("dotime2")></#if>
+						<#if param.get("searchkeywords")?exists><#assign searchkeywords=param.get("searchkeywords")></#if>
+					</#if>
+					<div class="user_main_title" style="height:30px; padding-top:7px;">
+						发布时间：
+						<input type="text" name="dotime1" id="dotime1" value="${dotime1?default("")}" size="15" onclick="change_picktime()" /> 到 
+						<input type="text" name="dotime2" value="${dotime2?default("")}" id="dotime2" size="15" onclick="change_picktime()" /> 关键字：
+						<input type="text" name="keywords" id="keywords" size="15" value="${searchkeywords?default("")}" /> 
+						<input value="搜索" type="submit" onclick="sousuo('')" />
+					</div>
+				<!-- 正在招标开始 -->		
+				<table  border="0"  cellspacing="1" class="table table-striped  table-condensed" style="width:100%">
+			  <form cur="" method="post">
+				<tr class="head" >
+					<td>标题</td>
+					<td>类型</td>
+					<td>金额(元)</td>
+					<td>年利率</td>
+					<td>期限</td>
+					<td>发布时间</td>
+					<td>进度</td>
+					<td>状态</td>
+					<td>操作</td>
+				</tr>
+				<#import "../../common/function.html" as func>  
+				<#list borrowList as item>
+				<tr>
+					<td width="70"  ><a href="${request.getContextPath()}/invest/detail.html?borrowid=${item.id?c}" title="{$item.name}" target="_blank"><#if item.name?length lt 11>${item.name}<#else>${item.name[0..10]}</#if></a></td>
+					<td><@func.borrowTypeName item=item /></td>
+					<td>${item.account}元</td><!-- func.format2(item.account) -->
+					<td>${item.apr} %</td>
+					<td><#if item.isday??&&item.isday==1>${item.time_limit_day!0}天
+                         <#else>${(item.time_limit)?default("0")}个月</#if></td>
+					<td>${dateformat(item.addtime)}</td>
+					<td><div class="rate_bg floatl" align="left">
+						<#if item.scales?exists>
+							<#assign scales=(item.scales)?number*100 >
+						<#else>
+							<#assign scales=0>
+						</#if>
+						<div class="rate_tiao" style=" width:${scales}%"></div>
+						</div><span class="floatl">${scales}%</span></td>
+					<td><#if item.status==0>发布审批中<#elseif item.status==1><#if item.account_yes?exists&&(item.account_yes)?number==(item.account)?number>满标审核中<#else>正在募集</#if><#elseif item.status==2>审核失败<#elseif item.status==3>已满标<#elseif item.status==4>满标审核失败<#elseif item.status==5>撤回</#if></td>
+					<td>
+						<#if item.status==0>
+							<a href="${request.getContextPath()}/borrow/loan.html?id=${item.id?c}">编辑</a> 
+							<!--<a href="#" onclick="javascript:if(confirm('确定要撤回此招标')) location.href='${request.getContextPath()}/borrow/delete.html?id=${item.id?c}'">撤回</a>--> 
+						<#elseif item.status==1 >
+							<a href="#" onclick="javascript:if(confirm('确定要撤回此招标')) location.href='${request.getContextPath()}/borrow/delete.html?id=${item.id?c}'">撤回</a>
+						<#elseif item.status==3||item.status gt 5 >
+							<a href="${request.getContextPath()}/member/borrow/repaymentdetail.html?borrowId=${item.id?c}" >还款明细</a>
+						<#else>
+							-
+						</#if>
+					</td>
+				</tr>
+				</#list>
+				
+				
+				<tr>
+					<td colspan="9" class="page">
+						<!--分页开始-->
+						<br />
+						<div align="center">
+							<#import "../../common/page.html" as pager>  
+		         	 		<@pager.pagination page=p url="/member/borrow/borrow.html?type="+type map=param style="style1"  /> 
+						</div>
+						<!--分页结束-->
+					</td>
+				</tr>
+			</form>	
+		</table>
+		
+				<!--正在招标 结束-->
+		</div>
+			</div>
+			<script>
+				var url = "borrow.html?type=${type}";
+				function sousuo() {
+					var _url = "";
+					var dotime1 = jQuery("#dotime1").val();
+
+					var keywords = jQuery("#keywords").val();
+					var username = jQuery("#username").val();
+					var dotime2 = jQuery("#dotime2").val();
+					if (username != null) {
+						_url += "&username=" + username;
+					}
+					if (keywords != null) {
+						_url += "&keywords=" + keywords;
+					}
+					if (dotime1 != null) {
+						_url += "&dotime1=" + dotime1;
+					}
+					if (dotime2 != null) {
+						_url += "&dotime2=" + dotime2;
+					}
+					if (status != "") {
+						_url += "&status=" + status;
+					}
+
+					location.href = url + _url;
+				}
+			</script>
+		</div>
+	</div>
+	<!--用户中心的主栏目 结束-->
+	<#include "../../include/footer.html">

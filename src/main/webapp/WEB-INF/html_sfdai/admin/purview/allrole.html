@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+		<#assign moduleName="角色模块" >
+			<#include "banner.html">
+			<div class="main_content">
+				<table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr>
+						<td width="" class="main_td">ID</td>
+						<td width="" class="main_td">角色名</td>
+						<td width="" class="main_td">类型</td>
+						<td width="" class="main_td">备注</td>
+						<td width="" class="main_td">操作</td>
+					</tr>
+						<#list list as item>
+					<tr>
+						<td>${item.type_id!0}</td>
+						<td>${item.name!0}</td>
+						<td>${item.type!0}</td>
+						<td>${item.remark!0}</td>
+			            <td>
+			            	<a href="modifyRole.html?id=${item.type_id!0}">修改</a>&nbsp;
+			            	<a href="setPurview.html?user_typeid=${item.type_id!0}">管理权限</a>&nbsp;
+			            	<a href="delRole.html?id=${item.type_id!0}">删除</a>&nbsp;
+			            </td>
+					</tr>
+					</#list>
+					<tr>
+						<td colspan="10" class="action">
+							<div class="floatr">
+								<a href="addRole.html?id=${id}">新增角色</a> 
+							</div>
+						</td>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

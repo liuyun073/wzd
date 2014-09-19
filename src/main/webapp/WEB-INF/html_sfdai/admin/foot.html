@@ -1,0 +1,11 @@
+<div class="foot">2011-2012 杭州融都P2P for Java V1.0系统</div>
+
+<script>
+$(function(){
+	
+	$("[onclick='change_picktime()']").each(function(){
+        this.className = "js-datetime";
+	})
+	$('.js-datetime').datepicker({yearRange:"1900:2020"});
+})
+</script>

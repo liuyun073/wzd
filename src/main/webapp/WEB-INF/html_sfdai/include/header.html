@@ -1,0 +1,108 @@
+<div class="head">
+    <#if session_user?exists >
+    <div class="headcontent clearfix">
+        <span class="float_left">您好,欢迎来到商富贷</span>
+        <span class="float_right">
+            当前登录账户:${session_user.username!}　|　<a href="${webroot}/member/index.html">个人中心</a>　| <a href="${webroot}/user/logout.html">退出</a>
+        </span>
+    </div>
+    <#else>
+    <div class="headcontent clearfix">
+        <span class="float_left">您好,欢迎来到商富贷</span>
+    <span class="float_right">
+        <a href="${webroot}/user/register.html">注册</a>　|　<a href="${webroot}/user/login.html">登录</a>　|　<a href="/service/onlinekefu.html">在线客服</a>　|　<a href="http://e.weibo.com/2625742387/profile?ref=http%3A%2F%2Fweibo.com%2F2625742387%2Fmyfans">官方微博</a>
+    </span>
+    </div>
+    </#if>
+    <div class="logotxtbox">
+        <div class="logotxt clearfix">
+            <div class="logoimg float_left">
+                <a href="/"><img src="${webroot}${theme_dir}/images/logos.png" alt="" style="position:relative; top:7px;"></a>
+            </div>
+            <div class="float_right telbox">
+                
+                <div class="tel">
+                    热线电话： <span>4000-511113</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbox">
+        <div class="nav" style="position: relative;">
+           <!-- <span style="width:166px; height: 43px; line-height: 46px; font-size: 16px; color: #fff; position: absolute; right: 0; top:0;">官方QQ群：<b style="font-size: 18px;">81393641</b></span>-->
+            <ul class="navul clearfix">
+                <li <#if (nid?exists&&nid=="index")> class="hover2 firstli" <#else> class="firstli" </#if>>
+                    <a href="${webroot}/index.html"><img src="${webroot}${theme_dir}/images/sybg.png" alt="">首页</a>
+                </li>
+                <li <#if (nid?exists&&nid=="invest")> class="hover2 clearfix" <#else> class="clearfix" </#if>>
+                    <a href="${webroot}/invest/index.html">我要投资</a>
+                </li>
+                <li <#if (nid?exists&&nid=="borrow")> class="hover2 clearfix" <#else> class="clearfix" </#if>>
+                    <a href="${webroot}/borrow/index.html">我要借款</a>
+                </li>
+                <li <#if (nid?exists&&nid=="member")> class="hover2 clearfix" <#else> class="" </#if>>
+                    <a href="${webroot}/member/index.html">我的账号</a>
+                </li>
+
+				 <li <#if (nid?exists&&nid=="zxfw")> class="hover2 clearfix" <#else> class="" </#if>>
+                    <a href="${request.getContextPath()}/article/list.html?catalog=98">咨询服务</a>
+                </li>
+
+                <li <#if (nid?exists&&nid=="bbs")> class="hover2 clearfix" <#else> class="" </#if>>
+                    <a href="http://bbs.sfdai.com">商富论坛</a>
+                </li>
+            </ul>
+            <div class="navlist <#if (nid??&&nid=="index")> <#else> hide </#if> ">
+				<a class="submenu" href="${request.getContextPath()}/article/list.html?catalog=106" >平台原理</a>　|　
+				<a class="submenu" href="${request.getContextPath()}/article/list.html?catalog=3" >政策法规</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/article/list.html?catalog=2" >关于我们</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/article/list.html?catalog=57" >收费规则</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/tools/interest.html" >工具箱</a>　|　
+				<a class="submenu" href="${request.getContextPath()}/article/list.html?catalog=117" >隐私声明</a>
+            </div>
+            <div class="navlist  <#if (nid??&&nid=="invest")> <#else> hide </#if>">
+                <!--<a href="${webroot}/borrow/loan.html?type=miaobiao">秒标</a>　|　<a href="${webroot}/borrow/loan.html?type=fast">抵押标</a>　|　<a href="${webroot}/borrow/loan.html?type=month">信用标</a>　|　<a href="${webroot}/borrow/loan.html?type=offvouch">担保标</a>-->
+                <a class="submenu" href="${request.getContextPath()}/article/list.html?catalog=129">如何投资</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/invest/index.html?search=select&status=1" >正在招标的借款</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/invest/index.html?search=select&status=2" >等待复审的借款</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/invest/index.html?search=select&status=12" >成功的借款</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/invest/index.html?search=select&status=3" >逾期的借款</a> 
+        </div>
+            <div class="navlist  <#if (nid??&&nid=="borrow")> <#else> hide</#if>">
+                <a class="submenu" href="${request.getContextPath()}/borrow/index.html" >如何贷款</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/borrow/loan.html?type=month" >发布信用标</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/borrow/loan.html?type=offvouch" >发布担保标</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/borrow/loan.html?type=fast" >发布抵押标</a>　|　
+ <!--           <a class="submenu" href="${request.getContextPath()}/borrow/loan.html?type=flow" >发布流转标</a> |  -->
+                <a class="submenu" href="${request.getContextPath()}/borrow/loan.html?type=jin" >发布净值标</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/borrow/loan.html?type=miaobiao" >发布秒标</a>
+            </div>
+            <div class="navlist  <#if (nid??&&nid=="member")> <#else> hide </#if>">
+                <a class="submenu" href="${request.getContextPath()}/member/index.html" >我的账号</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/member/friend/myfriend.html" >我的好友</a>　|　
+                <!--<a class="submenu" href="${request.getContextPath()}/member/friend/myfriend.html" >邀请好友</a> |-->
+                <a class="submenu" href="${request.getContextPath()}/member/vip.html" >vip申请</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/member/account/newrecharge.html" >账户充值</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/member/account/newcash.html" >账户提现</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/member/borrow/repaymentdetail.html" >我要还款</a>
+            </div>
+
+
+			<div class="navlist  <#if (nid??&&nid=="zxfw")> <#else> hide </#if>">
+                <a class="submenu" href="${request.getContextPath()}/article/list.html?catalog=11" >常见问题</a>　|　
+				<a class="submenu" href="${request.getContextPath()}/article/list.html?catalog=67" >新手上路</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/article/list.html?catalog=98" >网站规则</a>　|　
+ <!--           <a class="submenu" href="${request.getContextPath()}/article/list.html?catalog=102" >安全保障</a>　|　-->
+                <a class="submenu" href="${request.getContextPath()}/service/onlinekefu.html" >在线客服</a>　|　
+                <a class="submenu" href="${request.getContextPath()}/article/list.html?catalog=118" >下载中心</a> 	
+            </div>
+
+            <div class="navlist  <#if (nid??&&nid=="1")> <#else>hide </#if>">
+               
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--<script src="${request.getContextPath()}/plugins/timepicker/WdatePicker.js" type="text/javascript"></script> -->

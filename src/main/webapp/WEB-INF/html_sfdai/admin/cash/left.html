@@ -1,0 +1,46 @@
+<div class="fenlan">
+			<div class="fenlan_title"><span><a href="javascript:void(0);" onclick="change_menu('site_menu_1',this)">+</a></span><strong><a href="#" >提现管理</a></strong></div>
+			<div class="fenlan_content">
+				<ul id="site_menu_1">
+					<li><a href="showCash.html?status=0" id="">待审核提现</a></li>
+					<li><a href="showCash.html?status=1" id="">提现成功</a></li>
+					<li><a href="showCash.html?status=3" id="">提现失败</a></li>
+					<li><a href="cashbank.html" id="">提现银行卡管理</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="fenlan">
+			<div class="fenlan_title"><span><a href="javascript:void(0);" onclick="change_menu('site_menu_2',this)">+</a></span><strong><a href="#" >充值管理</a></strong></div>
+			<div class="fenlan_content">
+				<ul id="site_menu_2"> 
+					<li><a href="recharge.html" id="">添加线下充值</a></li>
+					<li><a href="rechargelist.html" id="">充值记录</a></li>
+					<li><a href="back.html" id="">扣款</a></li>
+					<li><a href="backlist.html" id="">扣款记录</a></li>
+					<li><a href="excelRecharge.html" id="">批量导入充值</a></li>
+				</ul>
+			</div>
+		</div>
+ 		<div class="fenlan">
+			<div class="fenlan_title"><span><a href="javascript:void(0);" onclick="change_menu('site_menu_3',this)">+</a></span><strong><a href="#" >资金记录</a></strong></div>
+			<div class="fenlan_content">
+				<ul id="site_menu_3">
+					<li><a href="showAllAccount.html" id="">查看所有帐户</a></li>
+					<li><a href="log.html" id="">资金使用记录</a></li>
+					<li><a href="tenderLog.html" id="">用户投标记录</a></li>
+					<li><a href="viptc.html" id="">会员邀请记录</a></li>
+					<li><#if auth_user??&&(auth_user.type_id==1||auth_user.type_id==15)>
+					<a href="vipstatistic.html" id="">VIP客户统计</a>
+					</#if></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="fenlan">
+			<div class="fenlan_title"><span><a href="javascript:void(0);" onclick="change_menu('site_menu_2',this)">+</a></span><strong><a href="#" >操作记录管理</a></strong></div>
+			<div class="fenlan_content">
+				<ul id="site_menu_2"> 
+					 <li><a href="operationLog.html" id="">操作记录</a></li> 
+				</ul>
+			</div>
+		</div>

@@ -1,0 +1,26 @@
+<table border="0" cellspacing="1" bgcolor="#CCCCCC" width="100%">
+	<form action="${request.getContextPath()}/admin/system/update.html"
+		method="post">
+		<tr>
+			<td width="32%" class="main_td">参数名称</td>
+			<td width="*" class="main_td">参数值</td>
+			<td width="22%" class="main_td">变量名</td>
+		</tr>
+		<#if sysInfo??> 
+			<#list sysInfo as obj> 
+				<tr>
+					<td class="main_td1">${obj.name!"-"}</td>
+					<td align="left" class="main_td1">
+						<input type="hidden" name="sysInfo[${obj_index}].id" value="${obj.id!}"/>  
+						<input type="text" name="sysInfo[${obj_index}].value" value="${obj.value!}" size="50" /></td>
+					<td class="main_td1">${obj.nid!"-"}</td>
+					<!-- <td class="main_td1">-</td> -->
+				</tr>
+			 </#list>
+		  </#if>
+	
+	<tr>
+		<td colspan="7" class="submit"><input type="submit" value="确认修改" /></td>
+	</tr>
+	</form>
+</table>

@@ -1,0 +1,59 @@
+<!DOCTYPE>
+<html>
+<#include "head.html">
+<body>
+	<#include "top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left">
+		</div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<div class="main_site">
+				<ul>
+					<li class="site_sub"></li>
+					<li class="title">管理首页 <span>/ 系统信息 </span></li>
+				</ul>
+			</div>
+			<div class="main_content">
+				<table border="0" cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr>
+						<td colspan="2" bgcolor="#ffffff" class="main_td2">
+							<div class="main_title">系统基本信息</div>
+						</td>
+					</tr>
+					<tr>
+                        <td class="main_td1" align="right" width="15%">操作系统版本：</td>
+                        <td class="main_td1" align="left"><span class="black">${props['os.name']!} ${props['os.version']!}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="main_td1" align="right" width="15%">操作系统类型：</td>
+                        <td class="main_td1" align="left"><span class="black">${props['os.arch']!} ${props['sun.arch.data.model']!}位</span> </td>
+                    </tr>
+                    <tr>
+                        <td class="main_td1" align="right" width="15%">用户、目录、临时目录：</td>
+                        <td class="main_td1" align="left"><span class="black">${props['user.name']!}, ${props['user.dir']!}, ${props['java.io.tmpdir']!}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="main_td1" align="right" width="15%">JAVA运行环境：</td>
+                        <td class="main_td1" align="left"><span>${props['java.runtime.name']!} ${props['java.runtime.version']!}</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="main_td1" align="right" width="15%">JAVA虚拟机：</td>
+                        <td class="main_td1" align="left"> <span>${props['java.vm.name']!} ${props['java.vm.version']!}</span></td>
+                    </tr>
+                    <tr>
+						<td class="main_td1" align="right" width="15%">Mysql版本:</td>
+						<td class="main_td1" align="left">5.5.25</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "foot.html">
+</body>
+</html>

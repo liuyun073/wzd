@@ -43,6 +43,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
+
+/**
+ * 
+ * @author liuyun073
+ *
+ */
 public class InvestAction extends BaseAction implements ModelDriven<BorrowModel> {
 	private static Logger logger = Logger.getLogger(InvestAction.class);
 	

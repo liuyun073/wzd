@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#assign moduleName="我要贷款" >
+			<div class="main_content">
+				<div class="module_add">
+					<form enctype="multipart/form-data" name="form1" method="post" action="" onsubmit="return check_form();"  >
+					<div class="module_title"><strong>角色权限设置</strong></div>
+					<div class="module_border">
+						<div class="l">类型名称:</div>
+						<div class="c">
+							${role.name!"-"}
+						</div>
+					</div>
+				 <!-- 
+					<#list purviews as item>
+					   第一级层次:${purviews.size()}<br/>
+						${item.model.name}<br/>
+						<#list item.childs as subitem>
+						-第二级层次:${item.childs.size()}<br/>
+							-${subitem.model.name}<br/>
+							<#list subitem.childs as thriditem>
+								@@第三级层次:${subitem.childs.size()}<br/>
+								@@${thriditem.model.name}<br/>
+							</#list>
+						</#list>
+					</#list>
+					 -->
+					<div class="module_border">
+						<div class="l">权限:</div>
+							
+						<div style="padding:4px 5px 3px 10px">
+							<#list purviews as item>
+							<div style="border:1px dashed #CCCCCC;padding:5px;width:80%" class="floatl">
+								<div style="height:28px;border-bottom:1px solid #CCCCCC; padding-top:5px">
+									<strong style="color:green">${item.model.name}:</strong>
+									<!--<input type="checkbox" title="全选" onclick="changeAll('other','_other')" id="_other"/>-->
+								</div>
+								<#list item.childs as subitem>
+								<div style="height:auto; width:100%" class="floatl">
+									<div style="width:97%; border-bottom:1px dashed #CCCCCC; height:28px; padding-top:5px"  class="floatl">
+										<!--  <input type="checkbox" title="全选" onclick="changeAll('other','_other')" id="_other"/>-->
+										 <span style="color:red">${subitem.model.name}</span>:
+									</div>
+							 		<div style="width:97%;float:left;">
+							 			<#list subitem.childs as thriditem>
+										<div style="float:left; width:140px; height:25px;" title="site_all">
+											<input type="checkbox" value="${thriditem.model.id?c}" name="purviewid" id="other" <#if thriditem.model.checked??&&thriditem.model.checked >checked="checked"</#if> />${thriditem.model.name}
+										</div>
+										</#list>
+									</div>
+								</div>
+								</#list>
+							</div>
+							</#list>
+						</div>
+						
+						
+					</div>
+					
+					<div class="module_submit" >
+						<input type="hidden" name="user_typeid" value="${(role.type_id!0)?c}" />		
+						<input type="hidden" name="actionType" value="setPurview" />		
+						<input type="submit" value="确认提交" />
+						<input type="reset" name="reset" value="重置表单" />
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

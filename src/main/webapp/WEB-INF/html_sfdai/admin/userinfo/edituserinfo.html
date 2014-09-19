@@ -1,0 +1,908 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+
+			<div class="main_site">
+				<ul>
+					<li class="title">用户信息 <span>/ 客户信息管理</span></li>
+				</ul>
+			</div>
+			<div class="main_content">
+				<!--模块列表 开始-->
+				<div class="module_add">
+					<div class="module_title">
+						<span id="user_info_menu"> <a tab="1" class="current"
+							href="javascript:void(0)">基本资料</a> <a tab="2"
+							href="javascript:void(0)">个人详细资料</a> <a tab="3"
+							href="javascript:void(0)">房产资料</a> <a tab="4"
+							href="javascript:void(0)">单位资料</a> <a tab="5"
+							href="javascript:void(0)">私营业主资料</a> <a tab="6"
+							href="javascript:void(0)">财务状况</a> <a tab="7"
+							href="javascript:void(0)">联系方式</a> <a tab="8"
+							href="javascript:void(0)">配偶资料</a> <a tab="9"
+							href="javascript:void(0)">教育背景</a> <a tab="11"
+							href="javascript:void(0)">其他信息</a>
+						</span><strong>添加用户信息</strong>
+					</div>
+					<form enctype="multipart/form-data"
+						action="${request.getContextPath()}/admin/userinfo/updateuser.html"
+						method="post">
+						<input type="hidden" value="0" name="updatetype">
+						<div id="user_info_menu_tab">
+							<!--基本资料 开始-->
+							<div id="user_info_menu_1">
+								<div class="module_border">
+									<div class="l">用户：</div>
+									<div class="c">${user.username!}(ID:${user.user_id?c})</div>
+								</div>
+								<div class="module_border">
+									<div class="l">真实姓名：</div>
+									<div class="c">${user.realname!"-"}</div>
+								</div>
+								<div class="module_border">
+									<div class="l">邮箱：</div>
+									<div class="c">${user.email!"-"}</div>
+								</div>
+
+								<div class="module_border">
+
+									<div class="c">您可以一起填完了再提交</div>
+								</div>
+								<input type="hidden" value="${user.user_id?c}" name="user_id" />
+								<div class="module_submit">
+									<input type="submit" value="确认提交" name="submit"> <input
+										type="reset" value="重置表单" name="reset">
+								</div>
+							</div>
+
+
+							<!--基本资料 结束-->
+							<!--个人资料 开始-->
+					</form>
+					<div class="hide" id="user_info_menu_2">
+						<form enctype="multipart/form-data"
+							action="${request.getContextPath()}/admin/userinfo/updateuser.html"
+							method="post">
+							<input type="hidden" value="1" name="updatetype">
+							<div class="module_border">
+								<div class="w">婚姻状况：</div>
+								<div class="c"><#if user?exists&&user.marry?exists>
+									<@linkage name="marry" id="marry" typeid=1
+									default=user.marry></@linkage> <#else> <@linkage name="marry"
+									id="marry" typeid=1></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">子 女：</div>
+								<div class="c"><#if user?exists&&user.child?exists>
+									<@linkage name="child" id="child" typeid=2
+									default=user.child></@linkage> <#else> <@linkage name="child"
+									id="child" typeid=2></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">学 历：</div>
+								<div class="c"><#if user?exists&&user.education?exists>
+									<@linkage name="education" id="education" typeid=3
+									default=user.education></@linkage> <#else> <@linkage
+									name="education" id="education" typeid=3></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">月收入：</div>
+								<div class="c"><#if user?exists&&user.income?exists>
+									<@linkage name="income" id="income" typeid=4
+									default=user.income></@linkage> <#else> <@linkage name="income"
+									id="income" typeid=4></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">社 保：</div>
+								<div class="c"><#if user?exists&&user.income?exists>
+									<@linkage name="shebao" id="shebao" typeid=5
+									default=user.shebao></@linkage> <#else> <@linkage name="shebao"
+									id="shebao" typeid=5></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">社保电脑号：</div>
+								<div class="c">
+									<input type="text" size="30" name="shebaoid"
+										value="<#if user??>${user.shebaoid!}</#if>" />
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">住房条件：</div>
+								<div class="c"><#if user?exists&&user.housing?exists>
+									<@linkage name="housing" id="housing" typeid=6
+									default=user.housing></@linkage> <#else> <@linkage
+									name="housing" id="housing" typeid=6></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">是否购车：</div>
+								<div class="c"><#if user?exists&&user.car?exists>
+									<@linkage name="car" id="car" typeid=7
+									default=user.car></@linkage> <#else> <@linkage name="car"
+									id="car" typeid=7></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">逾期记录：</div>
+								<div class="c"><#if user?exists&&user.late?exists>
+									<@linkage name="late" id="late" typeid=8
+									default=user.late></@linkage> <#else> <@linkage name="late"
+									id="late" typeid=8></@linkage> </#if></div>
+							</div>
+							<input type="hidden" value="${user.user_id?c}" name="user_id" />
+							<div class="module_submit ">
+								<input type="submit" value="确认提交" name="submit"> <input
+									type="reset" value="重置表单" name="reset">
+							</div>
+					</div>
+					<!--个人资料 开始-->
+					</form>
+					<!--房产资料 开始-->
+					<div class="hide" id="user_info_menu_3">
+						<form enctype="multipart/form-data"
+							action="${request.getContextPath()}/admin/userinfo/updateuser.html"
+							method="post">
+							<input type="hidden" value="2" name="updatetype">
+							<div class="module_border">
+								<div class="w">房产地址：</div>
+								<div class="c">
+									<input type="text" name="house_address"
+										value="<#if user??>${user.house_address!}</#if>" size="30" />
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">建筑面积：</div>
+								<div class="c">
+									<input type="text" name="house_area"
+										value="${user.house_area!}" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">建筑年份：</div>
+								<div class="c">
+									<input type="text" onclick="change_picktime()"
+										value="${user.house_year!}" name="house_year" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">供款状况：</div>
+								<div class="c">
+									<input type="text" value="${user.house_status!}"
+										name="house_status" size="15"> 元
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">所有权人1：</div>
+								<div class="c">
+									<input type="text" value="${user.house_holder1!}"
+										name="house_holder1" size="15"> 产权份额<input type="text"
+										value="${user.house_right1!}" name="house_right1" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">所有权人2：</div>
+								<div class="c">
+									<input type="text" value="${user.house_holder1!}"
+										name="house_holder2" size="15"> 产权份额<input type="text"
+										value="${user.house_right2!}" name="house_right2" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">若房产尚在按揭中, 请填写：</div>
+								<div class="c">
+									贷款年限：<input type="text" value="${user.house_loanyear!}"
+										name="house_loanyear" size="10">每月供款<input type="text"
+										value="${user.house_loanprice!}" name="house_loanprice"
+										size="10"> 元
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">尚欠贷款余额：</div>
+								<div class="c">
+									<input type="text" value="${user.house_balance!}"
+										name="house_balance" size="15"> 元
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">按揭银行：</div>
+								<div class="c">
+									<input type="text" value="${user.house_bank!}"
+										name="house_bank" size="15">
+								</div>
+							</div>
+							<input type="hidden" value="${user.user_id?c}" name="user_id" />
+							<div class="module_submit ">
+								<input type="submit" value="确认提交" name="submit"> <input
+									type="reset" value="重置表单" name="reset">
+							</div>
+					</div>
+					<!--房产资料 结束-->
+					</form>
+					<!--单位资料 开始-->
+					<div class="hide" id="user_info_menu_4">
+						<form enctype="multipart/form-data"
+							action="${request.getContextPath()}/admin/userinfo/updateuser.html"
+							method="post">
+							<input type="hidden" value="3" name="updatetype">
+							<div class="module_border">
+								<div class="w">公司名称：</div>
+								<div class="c">
+									<input type="text" value="${user.company_name!}"
+										name="company_name" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">公司性质：</div>
+								<div class="c"><#if user?exists&&user.company_type?exists>
+									<@linkage name="company_type" id="company_type"
+									nid="user_company_type" default=user.company_type></@linkage>
+									<#else> <@linkage name="company_type" id="company_type"
+									nid="user_company_type"></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">公司行业：</div>
+								<div class="c"><#if
+									user?exists&&user.company_industry?exists> <@linkage
+									name="company_industry" id="company_industry"
+									nid="user_company_industry"
+									default=user.company_industry></@linkage> <#else> <@linkage
+									name="company_industry" id="company_industry"
+									nid="user_company_industry"></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">工作级别：</div>
+								<div class="c"><#if
+									user?exists&&user.company_jibie?exists> <@linkage
+									name="company_jibie" id="company_jibie"
+									nid="user_company_jibie" default=user.company_jibie></@linkage>
+									<#else> <@linkage name="company_jibie" id="company_jibie"
+									nid="user_company_jibie"></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">职 位：</div>
+								<div class="c"><#if
+									user?exists&&user.company_office?exists> <@linkage
+									name="company_office" id="company_office"
+									nid="user_company_office"
+									default=user.company_office></@linkage> <#else> <@linkage
+									name="company_office" id="company_office"
+									nid="user_company_office"></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">服务时间：</div>
+								<div class="c">
+									<input type="text" onclick="change_picktime()"
+										value="${user.company_worktime1!}" name="company_worktime1"
+										size="15"> 到 <input type="text"
+										onclick="change_picktime()" value="${user.company_worktime2!}"
+										name="company_worktime2" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">工作年限：</div>
+								<div class="c"><#if
+									user?exists&&user.company_workyear?exists> <@linkage
+									name="company_workyear" id="company_workyear"
+									nid="user_company_workyear"
+									default=user.company_workyear></@linkage> <#else> <@linkage
+									name="company_workyear" id="company_workyear"
+									nid="user_company_workyear"></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">工作电话：</div>
+								<div class="c">
+									<input type="text" value="${user.company_tel!}"
+										name="company_tel" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">公司地址：</div>
+								<div class="c">
+									<input type="text" value="${user.company_address!}"
+										name="company_address" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">公司网站：</div>
+								<div class="c">
+									<input type="text" value="${user.company_weburl!}"
+										name="company_weburl" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">备注说明：</div>
+								<div class="c">
+									<textarea name="company_reamrk" rows="6" cols="50">${user.company_reamrk!}</textarea>
+								</div>
+							</div>
+							<input type="hidden" value="${user.user_id?c}" name="user_id" />
+							<div class="module_submit ">
+								<input type="submit" value="确认提交" name="submit"> <input
+									type="reset" value="重置表单" name="reset">
+							</div>
+					</div>
+					<!--单位资料 结束-->
+					</form>
+
+					<!--私营业主资料 开始-->
+					<div class="hide" id="user_info_menu_5">
+						<form enctype="multipart/form-data"
+							action="${request.getContextPath()}/admin/userinfo/updateuser.html"
+							method="post">
+							<input type="hidden" value="4" name="updatetype">
+							<div class="module_border">
+								<div class="w">私营企业类型：</div>
+								<div class="c"><#if user?exists&&user.private_type?exists>
+									<@linkage name="private_type" id="private_type"
+									nid="user_company_industry"
+									default=user.private_type></@linkage> <#else> <@linkage
+									name="private_type" id="private_type"
+									nid="user_company_industry"></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">成立日期：</div>
+								<div class="c">
+									<input type="text" onclick="change_picktime()"
+										value="${user.private_date!}" name="private_date" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">经营场所：</div>
+								<div class="c">
+									<input type="text" value="${user.private_place!}"
+										name="private_place" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">租金：</div>
+								<div class="c">
+									<input type="text" value="${user.private_rent!}"
+										name="private_rent" size="15"> 元
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">租期：</div>
+								<div class="c">
+									<input type="text" value="${user.private_term!}"
+										name="private_term" size="15"> 月
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">税务编号：</div>
+								<div class="c">
+									<input type="text" value="${user.private_taxid!}"
+										name="private_taxid" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">工商登记号：</div>
+								<div class="c">
+									<input type="text" value="${user.private_commerceid!}"
+										name="private_commerceid" size="15">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">全年盈利/亏损额：</div>
+								<div class="c">
+									<input type="text" value="${user.private_income!}"
+										name="private_income" size="15"> 元（年度）
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">雇员人数：</div>
+								<div class="c">
+									<input type="text" value="${user.private_employee!}"
+										name="private_employee" size="15"> 人
+								</div>
+							</div>
+							<input type="hidden" value="${user.user_id?c}" name="user_id" />
+							<div class="module_submit ">
+								<input type="submit" value="确认提交" name="submit"> <input
+									type="reset" value="重置表单" name="reset">
+							</div>
+					</div>
+					<!--私营业主资料 结束-->
+					</form>
+					<!--财务状况 开始-->
+					<div class="hide" id="user_info_menu_6">
+						<form enctype="multipart/form-data"
+							action="${request.getContextPath()}/admin/userinfo/updateuser.html"
+							method="post">
+							<input type="hidden" value="5" name="updatetype">
+							<div class="module_border">
+								<div class="w">每月无抵押贷款还款额：</div>
+								<div class="c">
+									<input type="text" value="${user.finance_repayment!}"
+										name="finance_repayment" size="15"> 元
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">自有房产：</div>
+								<div class="c"><#if
+									user?exists&&user.finance_property?exists> <@linkage
+									name="finance_property" id="finance_property"
+									nid="user_finance_property"
+									default=user.finance_property></@linkage> <#else> <@linkage
+									name="finance_property" id="finance_property"
+									nid="user_finance_property"></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">每月房屋按揭金额：</div>
+								<div class="c">
+									<input type="text" value="${user.finance_amount!}"
+										name="finance_amount" size="15"> 元
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">自有汽车：</div>
+								<div class="c"><#if
+									user?exists&&user.finance_property?exists> <@linkage
+									name="finance_car" id="finance_car" nid="user_finance_car"
+									default=user.finance_car></@linkage> <#else> <@linkage
+									name="finance_car" id="finance_car"
+									nid="user_finance_car"></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">每月汽车按揭金额：</div>
+								<div class="c">
+									<input type="text" value="${user.finance_caramount!}"
+										name="finance_caramount" size="15"> 元
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">每月信用卡还款金额：</div>
+								<div class="c">
+									<input type="text" value="${user.finance_creditcard!}"
+										name="finance_creditcard" size="15"> 元
+								</div>
+							</div>
+							<input type="hidden" value="${user.user_id?c}" name="user_id" />
+							<div class="module_submit">
+								<input type="submit" value="确认提交" name="submit"> <input
+									type="reset" value="重置表单" name="reset">
+							</div>
+					</div>
+					<!--财务状况 结束-->
+					</form>
+
+					<!--配偶资料 开始-->
+					<div class="hide" id="user_info_menu_7">
+						<form enctype="multipart/form-data"
+							action="${request.getContextPath()}/admin/userinfo/updateuser.html"
+							method="post">
+							<input type="hidden" value="6" name="updatetype">
+							<div class="module_border">
+								<div class="w">居住地电话：</div>
+								<div class="c">
+									<input type="text" value="${user.tel!}" name="tel" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">手机号码：</div>
+								<div class="c">
+									<input type="text" value="${user.phone!}" name="phone"
+										size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">居住所在省市：</div>
+								<div class="c"><#if user?exists&&user.province?exists>
+									<@region name="province" id="province" value=user.province
+									pid="0"></@region>&nbsp; <#else> <@region name="province"
+									id="province" pid="0"></@region>&nbsp; </#if> <#if
+									user?exists&&user.province?exists> <#if user.city?exists>
+									<@region name="city" id="city" value=user.city
+									pid=user.province></@region>&nbsp; <#else> <@region name="city"
+									id="city" pid=user.province></@region>&nbsp; </#if> <#else>
+									<@region name="city" id="city" pid="-1"></@region>&nbsp; </#if>
+
+									<#if user?exists&&user.city?exists> <#if user.area?exists>
+									<@region name="area" id="area" value=user.area
+									pid=user.city></@region>&nbsp; <#else> <@region name="area"
+									id="area" pid=user.city></@region>&nbsp; </#if> <#else>
+									<@region name="area" id="area" pid="-1"></@region>&nbsp; </#if>
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">居住地邮编：</div>
+								<div class="c">
+									<input type="text" value="${user.post!}" name="post" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">现居住地址：</div>
+								<div class="c">
+									<input type="text" value="${user.address!}" name="address"
+										size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">第二联系人姓名：</div>
+								<div class="c">
+									<input type="text" value="${user.linkman1!}" name="linkman1"
+										size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">第二联系人关系：</div>
+								<div class="c"><#if user?exists&&user.relation1?exists>
+									<@linkage name="relation1" id="relation1" nid="user_relation"
+									default=user.relation1></@linkage> <#else> <@linkage
+									name="relation1" id="relation1" nid="user_relation"></@linkage>
+									</#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">第二联系人联系电话：</div>
+								<div class="c">
+									<input type="text" value="${user.tel1!}" name="tel1" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">第二联系人联系手机：</div>
+								<div class="c">
+									<input type="text" value="${user.phone!}" name="phone1"
+										size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">第三联系人姓名：</div>
+								<div class="c">
+									<input type="text" value="${user.linkman2!}" name="linkman2"
+										size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">第三联系人关系：</div>
+								<div class="c"><#if user?exists&&user.relation1?exists>
+									<@linkage name="relation2" id="relation2" nid="user_relation"
+									default=user.relation2></@linkage> <#else> <@linkage
+									name="relation2" id="relation2" nid="user_relation"></@linkage>
+									</#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">第三联系人联系电话：</div>
+								<div class="c">
+									<input type="text" value="${user.tel2!}" name="tel2" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">第三联系人联系手机：</div>
+								<div class="c">
+									<input type="text" value="${user.phone2!}" name="phone2"
+										size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">第四联系人姓名：</div>
+								<div class="c">
+									<input type="text" value="${user.linkman3!}" name="linkman3"
+										size="20">
+								</div>
+							</div>
+							<div class="module_border">
+								<div class="w">第四联系人关系：</div>
+								<div class="c"><#if user?exists&&user.relation1?exists>
+									<@linkage name="relation3" id="relation3" nid="user_relation"
+									default=user.relation3></@linkage> <#else> <@linkage
+									name="relation3" id="relation3" nid="user_relation"></@linkage>
+									</#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">第四联系人联系电话：</div>
+								<div class="c">
+									<input type="text" value="${user.tel3!}" name="tel3" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">第四联系人联系手机：</div>
+								<div class="c">
+									<input type="text" value="${user.phone3!}" name="phone3"
+										size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">MSN：</div>
+								<div class="c">
+									<input type="text" value="${user.msn!}" name="msn" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">QQ：</div>
+								<div class="c">
+									<input type="text" value="${user.qq!}" name="qq" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="w">旺旺：</div>
+								<div class="c">
+									<input type="text" value="${user.wangwang!}" name="wangwang"
+										size="20">
+								</div>
+							</div>
+							<input type="hidden" value="${user.user_id?c}" name="user_id" />
+							<div class="module_submit">
+								<input type="submit" value="确认提交" name="submit"> <input
+									type="reset" value="重置表单" name="reset">
+							</div>
+					</div>
+					</form>
+					<!--配偶资料 结束-->
+
+					<!--配偶资料 开始-->
+					<div class="hide" id="user_info_menu_8">
+						<form enctype="multipart/form-data"
+							action="${request.getContextPath()}/admin/userinfo/updateuser.html"
+							method="post">
+							<input type="hidden" value="7" name="updatetype">
+							<div class="module_border">
+								<div class="l">配偶姓名：</div>
+								<div class="c">
+									<input type="text" value="${user.mate_name!}" name="mate_name"
+										size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="l">每月薪金：</div>
+								<div class="c">
+									<input type="text" value="${user.mate_salary!}"
+										name="mate_salary" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="l">移动电话：</div>
+								<div class="c">
+									<input type="text" value="${user.mate_phone!}"
+										name="mate_phone" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="l">单位电话：</div>
+								<div class="c">
+									<input type="text" value="${user.mate_tel!}" name="mate_tel"
+										size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="l">工作单位：</div>
+								<div class="c"><#if user?exists&&user.mate_office?exists>
+									<@linkage name="mate_type" id="mate_type"
+									nid="user_company_industry" default=user.mate_type></@linkage>
+									<#else> <@linkage name="mate_type" id="mate_type"
+									nid="user_company_industry"></@linkage> </#if></div>
+							</div>
+
+
+							<div class="module_border">
+								<div class="l">职位：</div>
+								<div class="c"><#if user?exists&&user.mate_office?exists>
+									<@linkage name="mate_office" id="mate_office"
+									nid="user_company_office" default=user.mate_office></@linkage>
+									<#else> <@linkage name="mate_office" id="mate_office"
+									nid="user_company_office"></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="l">单位地址：</div>
+								<div class="c">
+									<input type="text" value="${user.mate_address!}"
+										name="mate_address" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="l">月收入：</div>
+								<div class="c">
+									<input type="text" value="${user.mate_income!}"
+										name="mate_income" size="20">
+								</div>
+							</div>
+							<input type="hidden" value="${user.user_id?c}" name="user_id" />
+							<div class="module_submit">
+								<input type="submit" value="确认提交" name="submit"> <input
+									type="reset" value="重置表单" name="reset">
+							</div>
+					</div>
+					</form>
+					<!--配偶资料 结束-->
+
+					<!--教育背景 开始-->
+					<div class="hide" id="user_info_menu_9">
+						<form enctype="multipart/form-data"
+							action="${request.getContextPath()}/admin/userinfo/updateuser.html"
+							method="post">
+							<input type="hidden" value="8" name="updatetype">
+							<div class="module_border">
+								<div class="l">最高学历：</div>
+								<div class="c"><#if
+									user?exists&&user.education_record?exists> <@linkage
+									name="education_record" id="education_record"
+									nid="user_education" default=user.education_record></@linkage>
+									<#else> <@linkage name="education_record" id="education_record"
+									nid="user_education"></@linkage> </#if></div>
+							</div>
+
+							<div class="module_border">
+								<div class="l">最高学历学校：</div>
+								<div class="c">
+									<input type="text" value="${user.education_school!}"
+										name="education_school" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="l">专业：</div>
+								<div class="c">
+									<input type="text" value="${user.education_study!}"
+										name="education_study" size="20">
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="l">时间：</div>
+								<div class="c">
+									<input type="text" onclick="change_picktime()"
+										value="${user.education_time1!}" name="education_time1"
+										size="20"> 到 <input type="text"
+										onclick="change_picktime()" value="${user.education_time2!}"
+										name="education_time2" size="20">
+								</div>
+							</div>
+							<input type="hidden" value="${user.user_id?c}" name="user_id" />
+							<div class="module_submit">
+								<input type="submit" value="确认提交" name="submit"> <input
+									type="reset" value="重置表单" name="reset">
+							</div>
+					</div>
+					<!--教育背景 结束-->
+
+					<!--工作经历 开始-->
+					<!-- 
+				<div class="hide" id="user_info_menu_10">
+
+					<div class="module_border">
+						<div class="l">个人能力：</div>
+						<div class="c">
+							<textarea name="ability" cols="50" rows="7"></textarea>
+							<br>（如电脑能力、组织协调能力或其他）
+						</div>
+					</div>
+
+					<div class="module_border">
+						<div class="l">个人爱好：</div>
+						<div class="c">
+							<textarea name="interest" cols="50" rows="7"></textarea>
+							<br>（突出自己的个性，工作态度或他人对自己的评价等）
+						</div>
+					</div>
+
+					<div class="module_border">
+						<div class="l">其他说明：</div>
+						<div class="c">
+							<textarea name="others" cols="50" rows="7"></textarea>
+							<br>
+
+						</div>
+					</div>
+				</div>-->
+
+					<!--工作经历 结束-->
+					</form>
+					<!--其他信息 开始-->
+					<div class="hide" id="user_info_menu_11">
+						<form enctype="multipart/form-data"
+							action="${request.getContextPath()}/admin/userinfo/updateuser.html"
+							method="post">
+							<input type="hidden" value="9" name="updatetype">
+							<div class="module_border">
+								<div class="l">个人能力：</div>
+								<div class="c">
+									<textarea name="ability" cols="50" rows="7">${user.ability!}</textarea>
+									<br>（如电脑能力、组织协调能力或其他）
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="l">个人爱好：</div>
+								<div class="c">
+									<textarea name="interest" cols="50" rows="7">${user.interest!}</textarea>
+									<br>（突出自己的个性，工作态度或他人对自己的评价等）
+								</div>
+							</div>
+
+							<div class="module_border">
+								<div class="l">其他说明：</div>
+								<div class="c">
+									<textarea name="others" cols="50" rows="7">${user.other!}</textarea>
+									<br>
+								</div>
+							</div>
+							<input type="hidden" value="${user.user_id?c}" name="user_id" />
+							<div class="module_submit">
+								<input type="submit" value="确认提交" name="submit"> <input
+									type="reset" value="重置表单" name="reset">
+							</div>
+					</div>
+					</form>
+				</div>
+
+
+			</div>
+		</div>
+		<script type="text/javascript">
+			change_menu_tab("user_info_menu");
+		</script>
+	</div>
+	<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

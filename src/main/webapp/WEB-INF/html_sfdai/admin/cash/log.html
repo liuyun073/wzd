@@ -1,0 +1,143 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#include "banner.html">
+			<div class="main_content">  
+			  <table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+				  <form action="" method="post">
+					<tr >
+						<td width="" class="main_td">ID</td>
+						<td width="*" class="main_td">用户名称</td>
+			<!--		<td width="" class="main_td">真实姓名</td>  -->
+						<td width="" class="main_td">类型</td>
+						<td width="" class="main_td">总金额</td>
+						<td width="" class="main_td">操作金额</td>
+						<td width="" class="main_td">可用金额</td>
+						<td width="" class="main_td">冻结金额</td>
+						<td width="" class="main_td">待收金额</td>
+						<td width="" class="main_td">交易对方</td>
+						<td width="" class="main_td">记录时间</td>
+			            <td width="" class="main_td">备注</td>
+						<!-- <td width="" class="main_td">操作</td> -->
+					</tr>
+					<#list list as item>
+					<tr>
+						<td>${item.id?c}</td>
+						<td><a href="${webroot}/user/show.html?user_id=${item.user_id?c}">${item.username!}</a></td>
+			<!--		<td>${item.realname!}</td>    -->
+						<td>${(item.typename)!"错误类型!"}</td>
+						<td>${item.total!}</td>
+						<td>${item.money!}</td>
+						<td>${item.use_money!}</td>
+						<td>${item.no_use_money!}</td>
+						<td>${item.collection}</td>
+						<td>${item.to_username!}</td>
+						<td>${dateformat(item.addtime!)}</td>
+			            <td>${item.remark!}</td>
+					</tr>
+					</#list>
+					<tr>
+					<td colspan="11" class="action">
+					<div class="floatl">
+			         <a href="#" onclick="exportxls()">导出当前报表</a>
+					</div>
+					<#if param?exists>
+						<#if param.get("dotime1")?exists><#assign dotime1=param.get("dotime1")></#if>
+						<#if param.get("dotime2")?exists><#assign dotime2=param.get("dotime2")></#if>
+						<#if param.get("username")?exists><#assign username=param.get("username")></#if>
+						<#if param.get("account_type")?exists><#assign account_type=param.get("account_type")></#if>
+					</#if>
+					<div class="floatr">
+						时间：<input type="text" name="dotime1" id="dotime1" value="${dotime1}" size="15" onclick="change_picktime()"/> 
+						到 <input type="text"  name="dotime2" id="dotime2"  value="${dotime2}"  size="15" onclick="change_picktime()"/> 
+						&nbsp;类型：<#if account_type?exists>
+							<@linkage name="account_type" id="account_type" class="account_type" nid="account_type" type="value" default=param.account_type noselect="全部"/>
+						<#else>
+							<@linkage name="account_type" id="account_type" class="account_type" nid="account_type" type="value" noselect="全部"/>
+						</#if>
+						 用户名：<input type="text" name="username" id="username" value="${username!}"/> 
+						 <input type="button" value="搜索" / onclick="sousuo()">
+					</div>
+					</td>
+				</tr>
+					<tr>
+						<td colspan="11" class="page">
+							<#import "../../common/page.html" as pager>  
+			         	 	<@pager.pagination page=page url="/admin/cash/log.html" map=param style="style1"  /> 
+						</td>
+					</tr>
+				</form>	
+			</table>
+			<script>
+			var url = 'log.html?search=true';
+			var xlsurl = 'log.html?type=export';
+			
+			function sousuo(){
+			var sou = "";
+			var username = $("#username").val();
+			if (username!=""){
+				sou += "&username="+username;
+			}
+			
+			var dotime1 = $("#dotime1").val();
+			var dotime2 = $("#dotime2").val();
+			var account_type = $("#account_type").val();
+
+			if (dotime1!=null){
+				 sou += "&dotime1="+dotime1;
+			}
+			if (dotime2!=null){
+				 sou += "&dotime2="+dotime2;
+			}
+			if (account_type!=null){
+				 sou += "&account_type="+account_type;
+			}
+				if (sou!=""){
+				location.href=url+sou;
+				}
+			}
+			function exportxls(){
+			var sou = "";
+			var username = $("#username").val();
+			if (username!=""){
+				sou += "&username="+username;
+			}
+			
+			var dotime1 = $("#dotime1").val();
+			var dotime2 = $("#dotime2").val();
+			var account_type = $("#account_type").val();
+
+			if (dotime1!=null){
+				 sou += "&dotime1="+dotime1;
+			}
+			if (dotime2!=null){
+				 sou += "&dotime2="+dotime2;
+			}
+			if (account_type!=null){
+				 sou += "&account_type="+account_type;
+			}
+				if (sou!=""){
+				location.href=xlsurl+sou;
+				}else{
+					location.href=xlsurl;
+				}
+			}
+			</script>
+			
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

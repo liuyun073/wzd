@@ -1,0 +1,44 @@
+	<div class="fenlan">
+		<div class="fenlan_title"><span><a href="javascript:void(0);" onclick="change_menu('site_menu_1',this)">+</a></span><strong><a href="#" >审核管理</a></strong></div>
+		<div class="fenlan_content">
+			<ul id="site_menu_1">
+				<li><a href="${request.getContextPath()}/admin/borrow/showTrialBorrow.html" id="adminlist">发标待审</a></li>
+				<li><a href="${request.getContextPath()}/admin/borrow/showNotTrialBorrow.html" id="adminlist">发标审核未通过</a></li>
+				<li><a href="${request.getContextPath()}/admin/borrow/showBorrowing.html" id="adminlist">正在招标款</a></li>
+				<li><a href="${request.getContextPath()}/admin/borrow/amountApply.html" id="adminlist">借款额度审批</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="fenlan">
+		<div class="fenlan_title"><span><a href="javascript:void(0);" onclick="change_menu('site_menu_4',this)">+</a></span><strong><a href="index.php?wzd888&q=module/borrow&site_id=8&a=borrow" >贷款管理</a></strong></div>
+		<div class="fenlan_content">
+			<ul id="site_menu_4">
+				<li><a href="${request.getContextPath()}/admin/borrow/showAllBorrow.html" id="admintype">所有借款</a></li>
+				<li><a href="${request.getContextPath()}/admin/borrow/showElapseBorrow.html" id="adminlist">流标</a></li>
+				<li><a href="${request.getContextPath()}/admin/borrow/showCancelBorrow.html" id="adminlist">撤回</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="fenlan">
+		<div class="fenlan_title"><span><a href="javascript:void(0);" onclick="change_menu('site_menu_3',this)">+</a></span><strong><a href="#" >满标管理</a></strong></div>
+		<div class="fenlan_content">
+			<ul id="site_menu_3">
+				<li><a href="${request.getContextPath()}/admin/borrow/showReviewBorrow.html" id="adminlist">己满标待审</a></li>
+				<li><a href="${request.getContextPath()}/admin/borrow/showIsFullBorrow.html" id="adminlist">满标审核通过</a></li>
+				<li><a href="${request.getContextPath()}/admin/borrow/showNotFullBorrow.html" id="adminlist">满标审核未通过</a></li>
+			</ul>
+		</div>
+	</div>
+			
+			
+	<div class="fenlan">
+		<div class="fenlan_title"><span><a href="javascript:void(0);" onclick="change_menu('site_menu_5',this)">+</a></span><strong><a href="#" >还款管理</a></strong></div>
+		<div class="fenlan_content">
+			<ul id="site_menu_5">
+				<li><a href="${webroot}/admin/borrow/repaying.html" id="adminlist">待还款</a></li>
+				<li><a href="${webroot}/admin/borrow/repaid.html" id="adminlist">已还款</a></li>
+				<li><a href="${webroot}/admin/borrow/late.html" id="adminlist">逾期</a></li>
+			</ul>
+		</div>
+	</div>

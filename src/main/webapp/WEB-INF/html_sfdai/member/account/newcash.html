@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+	<#include "../../include/resource.html">
+	<body>
+		<#assign nid="member"> <#include "../../include/header.html">
+		<link href="${request.getContextPath()}/media/css/modal.css"
+			rel="stylesheet" type="text/css" />
+		<!-- #main start-->
+		<div id="main" class="clearfix">
+			<!-- .wrap950 开始-->
+			<div class="wrap950 ">
+				<!--左边的导航user_left 开始-->
+				<div class="user_left">
+					<#assign mid="m_account" > <#include "../user_menu.html">
+				</div>
+				<!--左边的导航user_left 结束-->
+
+				<!--右边的内容user_right 开始-->
+				<div class="user_right">
+					<div class="user_right_menu">
+						<#assign account_type="newcash"> <#include "account_menu.html">
+					</div>
+					<#if errormsg?exists&&errormsg!="">
+					<div id="msg25">
+						<p class="error">
+							${errormsg}
+						</p>
+					</div>
+					<#elseif msg?exists&&msg!="">
+					<div id="msg24">
+						<p class="ok">
+							${msg}
+						</p>
+					</div>
+					<#else>
+					<!--右边的内容user_right_main 开始-->
+					<div class="user_right_main">
+						<div class="user_help alert" style="text-align: left;">
+							<strong>注：</strong>
+							<br />
+							1、确保您的银行帐号的姓名和您的网站上的真实姓名一致
+							<br>
+							2、请输入您要取出金额,我们将在1至2个工作日(国家节假日除外)之内处理您提交的提现申请。资金将在24小时内到达您的账上。请用户务必于每个工作日的下午5点之前提交提现申请，每个工作日17:00之后提交的提现申请在当天将不会得到及时处理。
+							<br>
+							3、单笔取现下限100元（特殊帐户清理可例外）。单笔提现金额30000元（包含）以下，每笔收取3元手续费。单笔提现30000元以上50000（包含）以下，每笔收取5元手续费。最高单笔提现金额为50000元。同一帐户每天取现总额无限制。用户自充值之日起于15日之内提现的将收取金额的千分之三为手续费。
+							<br>
+							4、如您急需要把钱转到你的帐号或者3天之内网站未将钱转入到你的银行帐号,或涉及大额资金提现可直接联系网站财务。
+							<br>
+						</div>
+						<#include "../../common/function.html">
+
+						<form action="" method="post" onSubmit="javascript:check_form()"
+							name="form1">
+							<div class="user_right_border">
+								<div class="l" style="font-weight: bold;">
+									真实姓名：
+								</div>
+								<div class="c">
+									${session_user.realname!}
+								</div>
+							</div>
+
+							<div class="user_right_border">
+								<div class="l" style="font-weight: bold;">
+									账户余额：
+								</div>
+								<div class="c">
+
+									${ceil(account.total!0)}元
+								</div>
+							</div>
+
+							<div class="user_right_border">
+								<div class="l" style="font-weight: bold;">
+									可用余额：
+								</div>
+								<div class="c">
+
+									${ceil(account.use_money!0)}元
+								</div>
+							</div>
+
+							<div class="user_right_border">
+								<div class="l" style="font-weight: bold;">
+									冻结总额：
+								</div>
+								<div class="c">
+
+									${ceil(account.no_use_money!0)}元
+								</div>
+							</div>
+
+							<div class="user_right_border">
+								<div class="l" style="font-weight: bold;">
+									提现的银行：
+								</div>
+								<div class="c">
+									${account.bankname!} ${account.branch!} ${account.bankaccount!}
+								</div>
+							</div>
+
+							<div class="user_right_border">
+								<div class="l" style="font-weight: bold;">
+									交易密码：
+								</div>
+								<div class="c">
+									<#if session_user.paypassword?exists>
+									<input type="password" name="paypassword" />
+									<#else>
+									<a
+										href="${request.getContextPath()}/memberSecurity/paypwd.html"><font
+										color="#FF0000">请先设置一个支付密码</font>
+									</a> </#if>
+								</div>
+							</div>
+
+							<div class="user_right_border">
+								<div class="l" style="font-weight: bold;">
+									提现金额：
+								</div>
+								<div class="c">
+									<input type="text" name="money" onblur="commit(this);" />
+									<!--<span id="realacc">实际到账：<font color="#FF0000" id="real_money">0</font> 元</span>
+					<span id="realacc">本次提现使用红包抵消提现费用：<font color="#FF0000" id="hongbao_used">0</font> 元</span>
+					-->
+								</div>
+							</div>
+							<div class="user_right_border">
+								<div class="l" style="font-weight: bold;">
+									动态口令(可选)：
+								</div>
+								<div class="c">
+									<input type="text" name="uchoncode" maxlength="6" />
+								</div>
+							</div>
+
+							<script language="javascript">
+			       function commit(obj) {
+			            if (parseFloat(obj.value) > 0 )
+			            {
+			                var realMoney=parseFloat(obj.value);
+			                var inputValue=parseFloat(obj.value);
+								//alert(inputValue);
+			                if(inputValue<=30000 && inputValue>100){
+			                    //alert(inputValue);
+			                    realMoney=parseFloat(inputValue-3);
+			                }else if(30000<inputValue && inputValue<=500000){
+			                    //alert("2");
+			                    realMoney=parseFloat(inputValue-5);
+			                }else if(inputValue>500000 || inputValue <100){
+			                    alert("您好，提现资金不能低于100元高于500000元");
+			                    obj.value=0;
+			                    document.getElementById("real_money").innerText = 0 ;
+			                    return;
+			                }
+			                var cashAmount;
+			                cashAmount = parseFloat(obj.value);
+			                
+			                getCashFeeValue(cashAmount);
+			                //document.getElementById("real_money").innerText = realMoney ;
+			            }
+			        }
+			        
+			        function getCashFeeValue(cashAmount){
+			           
+			                var yValue = document.getElementById("cashGoodAmount").value;
+							var hongbao = document.getElementById("hongbao").value;
+			                var hongbaoUsed = 0;
+							
+			                var caseFee;
+			                if(cashAmount<=1500 || yValue<=1500){
+			                    caseFee = 0.002*cashAmount; 
+			                }else if(yValue >= cashAmount){
+			                    if(cashAmount>1500 && cashAmount<=30000){
+			                        caseFee=3;
+			                    }else{
+			                        caseFee=5;
+			                    }
+			                }else if(yValue < cashAmount){
+			                    if(yValue>1500 && yValue<=30000){
+			                        caseFee=3+(cashAmount-yValue)*0.002;
+			                    }else{
+			                        caseFee=5+(cashAmount-yValue)*0.002;
+			                    }
+			                }
+							
+							if(caseFee>=hongbao){
+								hongbaoUsed=hongbao*1;
+							}else{
+								hongbaoUsed=caseFee*1;
+							}
+							
+			                document.getElementById("real_money").innerText = changeTwoDecimal(cashAmount*1-caseFee*1+hongbaoUsed*1);
+							document.getElementById("hongbaoUsed").value = changeTwoDecimal(hongbaoUsed);
+							document.getElementById("hongbao_used").innerText = changeTwoDecimal(hongbaoUsed);
+							
+			        }
+			        
+			        function changeTwoDecimal(x)
+			        {
+			            var f_x = parseFloat(x);
+			            if (isNaN(f_x))
+			            {
+			                alert('function:changeTwoDecimal->parameter error');
+			                return false;
+			            }
+			            var f_x = Math.round(x*100)/100;
+			            return f_x;
+			        }
+			</script>
+
+							<div class="user_right_border">
+								<div class="l" style="font-weight: bold;"></div>
+								<div class="c">
+									<input type="hidden" name="type" value="newcash" />
+									<input type="hidden" name="newcash_token"
+										value="${newcash_token}" />
+									<input type="submit" class="btn-action" name="name"
+										value="确认提交" size="30" />
+								</div>
+							</div>
+						</form>
+						<div class="user_right_foot alert">
+							* 温馨提示：禁止信用卡套现
+						</div>
+
+						<script>
+					var use_money = 59829.00;
+					
+					function check_form(){
+						 var frm = document.forms['form1'];
+						 var paypassword = frm.elements['paypassword'].value;
+						 var money = frm.elements['money'].value;
+						 var errorMsg = '';
+						  if (paypassword.length == 0 ) {
+							errorMsg += '请输入您的交易密码' + '\n';
+						  }
+						  if (money.length == 0 ) {
+							errorMsg += '请输入你的提现金额' + '\n';
+						  }
+						 if (money<10||money>500000) {
+							errorMsg += '提现金额要大于10元少于500000' + '\n';
+						  }
+					
+						 if (money >use_money) {
+							errorMsg += '您的提现金额大于现有的可用余额' + '\n';
+						  }
+						  if (errorMsg.length > 0){
+							alert(errorMsg); return false;
+						  } else{  
+							return true;
+						  }
+					}
+					</script>
+						</#if>
+
+						<!-- 内容结束 -->
+					</div>
+				</div>
+				<!--右边的内容user_right_main 结束-->
+			</div>
+			<!--右边的内容user_right 结束-->
+		</div>
+		<!-- .wrap950 结束-->
+		</div>
+		<!-- #main start-->
+		<#include "../../include/footer.html">

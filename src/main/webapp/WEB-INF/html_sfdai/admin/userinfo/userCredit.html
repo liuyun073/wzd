@@ -1,0 +1,72 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+
+			<div class="main_site">
+				<ul>
+					<#include "bar.html">
+					<li class="title">用户管理 <span>/ 积分管理</span></li>
+
+				</ul>
+			</div>
+			<div class="main_content">
+
+				<!--模块列表 开始-->
+				<table border="0" cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr>
+						<td width="" class="main_td">用户ID</td>
+						<td width="*" class="main_td">用户名</td>
+						<td width="*" class="main_td">真实姓名</td>
+						<td width="*" class="main_td">总积分</td>
+						<th width="" class="main_td">最后调整时间</th>
+						<!--<th width="" class="main_td">登录次数</th>-->
+						<td width="" class="main_td">操作</td>
+					</tr>
+					<#if userCreditList??> <#list userCreditList as obj>
+					<tr>
+						<td class="main_td1" align="center">${(obj.user_id?c)!"-"}</td>
+						<td class="main_td1" align="center">${obj.userName!"-"}</td>
+						<td class="main_td1" align="center">${obj.realname!"-"}</td>
+						<td class="main_td1" align="center">${obj.value!"-"}分&nbsp;&nbsp;<img class="rank" src="${request.getContextPath()}/data/images/credit/${obj.credit_pic!}" title="${obj.credit_pic!}"/></td>
+						<td class="main_td1" align="center"></td>		
+						<td class="main_td1" align="center"><a href="${request.getContextPath()}/admin/userinfo/viewUserCreditDetail.html?user_id=${obj.user_id?c}">查看明细</a>&nbsp;&nbsp;
+						<a href="${request.getContextPath()}/admin/userinfo/editUserCredit.html?user_id=${obj.user_id?c}">修改积分</a>
+						</td>
+					</tr>
+					</#list> <#else> 暂无 </#if>
+					<tr>
+						<td colspan="11" class="action">
+							<div class="floatl"></div>
+							<div class="floatr">
+								<form action="" method="post">
+									用户名：<input type="text" name="username" id="username" value="${params.username!}" />
+									 真实姓名：<input type="text" name="realname" id="realname" value="${params.realname!}" />			
+									 <input type="submit" value="搜索">		
+								</form>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="11" class="page">
+						<#import "../../common/page.html" as pager> 
+						<@pager.pagination page=page url="/admin/userinfo/userCredit.html" map=params style="style1" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

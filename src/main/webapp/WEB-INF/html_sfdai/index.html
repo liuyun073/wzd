@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html>
+<#assign nid="index" >
+<#include "include/resource.html"> 
+
+<#include "include/header.html"> 
+
+<div class="sfcontentbox">
+<div class="sfcontent clearfix">
+<div class="main-left float_left">
+<div class="slidebox">
+    <div class="slider" id="slider">
+        <ul>
+		    <li>
+               <img src="${webroot}${theme_dir}/images/slideimg1.jpg" alt="">
+            </li>
+		    <li>
+                 <a href="http://www.sfdai.com/article/detail.html?catalog=22&id=296"><img src="${webroot}${theme_dir}/images/slideimg5.jpg" alt=""></a>
+            </li>
+			<li>
+                 <a href="http://www.sfdai.com/article/detail.html?catalog=22&id=220"><img src="${webroot}${theme_dir}/images/slideimg4.jpg" alt=""></a>
+            </li>
+          
+            <li>
+                <img src="${webroot}${theme_dir}/images/slideimg2.jpg" alt="">
+            </li>
+            <li>
+                <img src="${webroot}${theme_dir}/images/slideimg3.jpg" alt="">
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('#slider').flashSlider();
+        });
+    </script>
+</div>
+<!--轮播-->
+    <div class="mt5"><img src="${webroot}${theme_dir}/images/lcimgs.png" alt=""></div>
+<div class="listmain">
+
+
+<div class="zb-title clearfix">
+     <span class="float_left zbtxt">累计：</span>申请借入总额：<font color="red";size="14px">${(applyBorrowTotal!0)?string("##.##")}</font>元 &nbsp;申请借入总笔数：<font color="red";size="14px">${applyBorrowCount}</font>笔 &nbsp;借出总额：<font color="red";size="14px">${(totalrankmoney!0)?string("##.##")}</font>元 &nbsp;
+     借出笔数：<font color="red";size="14px">${borrowCount}</font>笔
+</div>
+
+<div class="zb-title clearfix">
+    <span class="float_left zbtxt">正在招标</span><a href="${webroot}/invest/index.html?status=1" class="float_right" style="color: #db0100">更多>></a>
+    <ul class="listtab float_right hide">
+        <li class="hover">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
+<div class="list-content1">
+<div class="list-content2">
+<div class="list-content3">
+    <#include "common/function.html">
+    <#include "common/macro_zr.html">
+        <#if borrowList?exists>
+            <#list borrowList as item>
+                <@indexListItem item=item />
+            </#list>
+        </#if><!--借款标-->
+
+</div>
+</div>
+</div>
+<div class="leftbottom"></div>
+<!--详细列表-->
+</div>
+
+</div>
+<div class="main-right float_right">
+    <div class="righttitle">
+        用户登录
+    </div>
+    <div class="rightcontent1">
+        <div class="rightcontent2">
+            <div class="rightcontent3">
+			<#if session_user??>
+				<div class="yh-content">
+					<div class="box-con index-login" style="height:148px;">
+		             	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		                  <tr>
+							<td width="100"><img src="${request.getContextPath()}/imgurl.html?userid=${session_user.user_id?c}&size=middle" height="98" width="98" style="padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 2px; border-top-color: #999; border-right-color: #999; border-bottom-color: #999; border-left-color: #999; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: dashed; border-right-style: dashed; border-bottom-style: dashed; border-left-style: dashed;" class="pic"/></td>
+		                   	 <td style="padding-left:10px;"><strong><font color="#FF0000">${session_user.username!}</font></strong>
+							<br/><br/>
+							<br/><a href="${request.getContextPath()}/member/index.html"><font color="#427E1D">[我的账号]</font></a>
+							<a href="${request.getContextPath()}/user/logout.html"><font color="#FF0000">[退出]</font></a></td>
+		                  </tr>
+		                </table>
+				   	 	<li style="text-align:center;list-style:none;margin:3px auto;">
+		                 <a href="${request.getContextPath()}/member/account/newrecharge.html" 
+						 class="btn-action" style="line-height:30px; font-size:14px;">充值</a>&nbsp;&nbsp;&nbsp;
+	                     <a href="${request.getContextPath()}/member/account/newcash.html" class="btn-action" style="line-height:30px; font-size:14px;">提现</a>
+				    	</li>
+					</div>
+				</div>
+				<#else>
+				<div class="indexlogin ">
+					<form action="${webroot}/user/login.html" >
+                    <p><span>用户名：</span><input type="text" name="username" value="" class="inputtxt" /></p>
+                    <p><span>密　码：</span><input type="password" name="password" value="" class="inputtxt" /></p>
+					<p><span>COOKIE：</span> 
+								<select name="login_cookie" id="">
+                                    <option value="15">保存15分钟</option>
+                                    <option value="30">保存30分钟</option>
+                                    <option value="60" selected="selected">保存1小时</option>
+                                    <option value="180">保存3小时</option>
+                                    <option value="360">保存6小时</option>
+                                    <option value="1440">保存1天</option>
+                                    <option value="4320">保存3天</option>
+                                    <option value="7200">保存5天</option>
+                                </select></p>
+                    <p class="zhucep">
+                        <a href="${webroot}/user/register.html">注册</a> / <a href="${webroot}/user/getpwd.html">忘记密码？</a>
+                        <input type="submit" value="立即登录" class="loginbtn">
+						 <input type="hidden" name="source" value="index" />
+						 <input type="hidden" name="actionType"  value="login" />
+                    </p>
+					</form>
+                </div><!--登录-->
+				</#if>
+                <div class="adimg">
+                    <a href="${webroot}/member/friend/invite.html"><img src="${webroot}${theme_dir}/images/adimg.png" alt=""></a>
+                </div>
+
+                <div class="r-title clearfix">
+                    <span class="float_left">网站公告</span><a href="${webroot}/article/list.html?catalog=22" class="float_right" style="color: #db0100">更多>></a>
+                </div>
+                <div class="articlebox">
+                    <ul class="ggul">
+                        <!--<li>
+                            <a href="#"><b>【</b>商富贷<b>】</b>网站公告网站公告网站公告网站公告</a>
+                        </li>-->
+                        <#if (ggList?exists)&&(ggList?size>0)>
+                            <#list ggList as item>
+                                <li>
+                                    <a href="${webroot}/article/detail.html?catalog=22&id=${item.id}"><#if item.name?length lt 20>${item.name}<#else>${item.name[0..19]}..</#if></a> 
+                                </li>
+                            </#list>
+                        </#if>
+                    </ul>
+                </div>
+                <div class="r-title clearfix">
+                   <span class="float_left">新闻动态</span><a href="${webroot}/article/list.html?catalog=132" class="float_right" style="color: #db0100">更多>></a>
+                </div>
+                <div class="articlebox">
+                    <ul class="news">
+                        <!--<li class="clearfix">
+                            <a href="#" class="float_left">网站公告网站公告网站公告网站公告</a> <span class="float_right">2012.12.11</span>
+                        </li>-->
+                         <#if (fbList?exists)&&(fbList?size>0)>
+                            <#list fbList as item>
+                                <li><a href="${webroot}/article/detail.html?catalog=132&id=${item.id}" class="float_left"><#if item.name?length lt 20>${item.name}<#else>${item.name[0..19]}..</#if></a></li>
+                            </#list>
+                        </#if>
+                    </ul>
+                </div>
+                <div class="r-title">
+                    成功贷款<a href="${webroot}/invest/index.html?search=select&status=12" class="float_right" style="color: #db0100">更多>></a>
+                </div>
+                <div class="articlebox">
+                    <div class="slideupbox">
+                        <ul class="sucul">
+                       <#if (successList?exists)&&(successList?size>0)>
+						 <#list successList as item>   
+                
+						 <li class="clearfix">
+                        	<img src="${webroot}/imgurl.html?userid=${item.user_id?c}&size=middle" class="float_left marginRight" style="width:60px;height:60px;">
+                            <div class="float_left">
+                            <a href="${request.getContextPath()}/invest/detail.html?borrowid=${item.id?c}" target="_blank" title=""><#if item.name?length lt 8>${item.name}<#else>${item.name[0..7]}..</#if></a>
+                            <p>金额：<span class="text-red">${item.account}</span></p>
+                            <p>期限：<#if item.isday??&&item.isday==1><strong>${item.isday!0}</strong>天
+                            	<#else><strong>${(item.time_limit)?default("0")}</strong>个月</#if>
+                            </p>
+                            </div>
+						 </li>
+						</#list>	
+					 </#if>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="r-title clearfix">
+                    <span class="float_left">常见问题</span><a href="${webroot}/article/list.html?catalog=11" class="float_right" style="color: #db0100">更多>></a>
+                </div>
+                <div class="articlebox">
+                    <ul class="questionul">
+                          <#if (cjList?exists)&&(cjList?size>0)>
+                            <#list cjList as item>
+                                <li><a href="${webroot}/article/detail.html?catalog=11&id=${item.id}" class="float_left"><#if item.name?length lt 10>${item.name}<#else>${item.name[0..9]}..</#if></a><span class="float_right">${dateformat(item.addtime,"yyyy.MM.dd")}</span></li>
+                            </#list>
+                        </#if>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rightbottom"></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+jQuery(function(){
+	jQuery('#invest_dialog').click(function(){
+		jQuery('#modal_dialog').dialog('destroy');
+		jQuery('#modal_dialog').dialog({ modal: true ,height: 410,width:760 });
+	});
+});
+
+function check_form(lowest,most,use_money){
+		 var frm = document.forms['form1'];
+		 var account = frm.elements['money'].value;
+		 var valicode = frm.elements['valicode'].value;
+		 if (account==""){
+		 	alert("投标金额不能为空");
+			return false;
+		 }else if (account>use_money ){
+		 	alert("您的可用余额小于您的投标额，要投标请先充值。");
+			return false;
+		}else if (account>most && most>0){
+		 	alert("投标金额不能大于最大限额"+most+"元");
+			return false;
+		 }else if(account<lowest && lowest>0){
+			alert("投标金额不能低于最小限额"+lowest+"元");
+			return false;
+		 }
+		  /* if (valicode==""){
+		 	alert("验证码不能为空");
+			return false;
+		 }*/
+		if(confirm('确定要投标'+account+'元，确定了将不能取消')){
+			return true;
+		}else{
+			return false;
+		}
+		 
+	}
+    function inputAll(lowest,most,use_money){
+       
+            if(most==0){
+               
+                jQuery("#money").val(use_money);
+            }else if(use_money>most){
+                jQuery("#money").val(most);
+            }else{
+                jQuery("#money").val(use_money);
+            } 
+        }
+function showRemainTime(){
+	var endtimes=$(".endtime");
+	endtimes.each(function(){
+		RemainTime($(this));
+	});
+}
+showRemainTime();
+setInterval("showRemainTime()",1000);
+
+function RemainTime(t){
+	var iDay,iHour,iMinute,iSecond,account;
+	var sDay="",sTime="";
+	var at="data-time"
+	var iTime=t.attr(at);
+    if (iTime >= 0){
+    	iDay = parseInt(iTime/24/3600);
+        iHour = parseInt((iTime/3600)%24);
+        iMinute = parseInt((iTime/60)%60);
+        iSecond = parseInt(iTime%60);
+    	if (iDay > 0){ 
+   			sDay = iDay + "天"; 
+    	}
+	    sTime =sDay + iHour + "小时" + iMinute + "分钟" + iSecond + "秒";
+	    if(iTime==0){
+        	sTime="<span style='color:green'>时间到了！</span>";
+        }
+			t.attr(at,iTime-1);
+      }else{
+	     sTime="<span style='color:red'>此标已过期！</span>";
+	 }
+	t.html(sTime);
+	}
+</script>
+
+<#include "include/footer.html"> 
+</body>
+</html>

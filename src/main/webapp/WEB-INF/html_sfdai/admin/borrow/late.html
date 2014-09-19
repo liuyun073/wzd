@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#assign moduleName="逾期管理" >
+			<#include "banner.html">
+			<div class="main_content">
+				<form action="" method="post">
+				<table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr>
+						<td width="" class="main_td">ID</td>
+						<td width="*" class="main_td" align="left">借款人</td>
+						<td width="*" class="main_td">借款标的名称</td>
+						<td width="" class="main_td">期数</td>
+						<td width="" class="main_td">应还时间</td>
+						<td width="" class="main_td">实际还款时间</td>
+						<td width="" class="main_td">应还金额</td>
+						<td width="" class="main_td">应还利息</td>
+						<td width="" class="main_td">逾期天数</td>
+						<td width="" class="main_td">逾期利息</td>
+						<td width="" class="main_td">操作</td>
+				<!--	<td width="" class="main_td">查看</td> -->
+					</tr>
+					<#import "../../common/function.html" as func>  
+					<#list list as item>
+					<tr>
+						<td>${item.id?c}</td>
+						<td class="main_td1"  align="left"><a onclick='tipsWindown("用户详细信息查看","url:get?/admin/attestation/viewLateUserDetails.html?username=${item.username!}",500,230,"true","","true","text");'
+							href="javascript:void(0)">${item.username!}</a></td>
+						<td title="${item.borrow_name!}" align="left">
+						<a href="${webroot}/invest/detail.html?borrowid=${(item.borrow_id!0)?c}" target="_blank">${item.borrow_name!}</a></td>
+						<td align="left">${item.order+1}/${item.time_limit}</td>
+						<td align="left"><#if item.repayment_time??>${dateformat(item.repayment_time)} </#if></td>
+							<td align="left"><#if item.repayment_yestime??>${dateformat(item.repayment_yestime)} </#if></td>
+						<td align="left">${(((item.repayment_account)!0)?number)?string("##.##")}元</td>
+						<td align="left">${(((item.interest)!0)?number)?string("##.##")}元</td>
+						<td align="left">${item.late_days!0}天</td>
+						<td align="left">${(((item.late_interest)!0)?number)?string("##.##")}元</td>
+						<td align="left">
+						<#if item.status?exists && item.status == 0 >
+							<a href="/admin/borrow/overdueReceivables.html?borrowid=${(item.borrow_id!0)?c}"><font color="#006600">邮件提醒</font></a>
+						<#--	<a href="/admin/borrow/goLateLog.html?borrowid=${(item.borrow_id!0)?c}"><font color="#006600">催收</font></a>
+						 	<#if item.webstatus?exists && item.webstatus != 3 && item.late_days gt 30 >
+							<a href="/admin/borrow/websitepayborrow.html?borrowid=${(item.borrow_id!0)?c}"><font color="#006600">网站垫付</font></a></#if>-->
+						</td>
+						<#else>
+							已还款
+						</#if>
+				<!--	<td><a href="/admin/borrow/getLateBorrowDetails.html?borrowid=${(item.borrow_id!0)?c}"><font color="#006600">查看记录</font></a></td> -->
+					</tr>
+					</#list>
+					<tr>
+						<td colspan="8" class="action">
+							<#if param?exists>
+								<#if param.get("username")?exists><#assign username=param.get("username")></#if>
+								<#if param.get("keywords")?exists><#assign keywords=param.get("keywords")></#if>
+							</#if>
+							<div class="floatr">
+								用户名：<input type="text" name="username" id="username" value="${username!}"/> 
+								关键字：<input type="text" name="keywords" id="keywords" value="${keywords!}"/> 
+								<input type="button" value="搜索"  onclick="sousuo();"  />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="14" class="page">
+							<#import "../../common/page.html" as pager>  
+			         	 	<@pager.pagination page=page url="/admin/borrow/late.html" map=param style="style1" /> 
+						</td>
+					</tr>
+		
+				</table>
+				</form>	
+				<script>
+				
+				var urls = 'late.html?search=true';
+				function sousuo(){
+					var sou = "";
+					var username = $("#username").val();
+					if (username!=""){
+						sou += "&username="+username;
+					}
+					var keywords = $("#keywords").val();
+					if (keywords!=""){
+						sou += "&keywords="+keywords;
+					}
+					location.href=urls+sou;
+				}
+				</script>
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

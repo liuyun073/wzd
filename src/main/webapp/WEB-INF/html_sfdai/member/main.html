@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+	<#assign nid="member" > <#include "../include/resource.html">
+	<body>
+		<#include "../include/header.html">
+		<!--header-end-->
+		<link href="${webroot}/media/css/modal.css" rel="stylesheet"
+			type="text/css" />
+		<!--用户中心的主栏目 开始-->
+		<div id="main" class="clearfix">
+			<div class="wrap950 " style="margin-top: 0">
+				<!--左边的导航 开始-->
+				<div class="user_left">
+					<#include "user_menu.html">
+				</div>
+				<!--左边的导航 结束-->
+
+				<!--右边的内容 开始-->
+				<div class="user_right ">
+
+					<div class="user_right_l clearfix">
+						<#if (!detailuser.real_status?exists)||(detailuser.real_status)=="0">
+						<div class="alert alert-error" id="user_amange"
+							style="clear: both;">
+							<a class="close" data-dismiss="alert">×</a>
+							${webname}提醒你：你还没有进行实名认证。
+							<a href="${webroot}/member/identify/realname.html"><strong>请先进行实名认证</strong>
+							</a>
+						</div>
+						</#if>
+						<div class="zh-user-right clearfix">
+							<div class="user_right_lmain clearfix">
+								<div class="user_right_img">
+									<img
+										src="${webroot}/imgurl.html?userid=${detailuser.user_id?c}&size=middle"
+										height="98" width="98" class="picborder"
+										style="border: 1px dashed #999; padding: 2px;" />
+									<a href="${webroot}/member/identify/avatar.html"><font
+										color="#FF0000">[更换头像]</font>
+									</a>
+								</div>
+								<div class="user_right_txt">
+									<ul
+										style="width: 388px; * width: 378px; overflow: hidden; * float: left;">
+
+										<li style="overflow: hidden; width: 427px;">
+											<div class="floatl">
+												<span> 认&nbsp;&nbsp;&nbsp; 证：</span>
+											</div>
+
+											<#include "../common/macro.html"> <@identifyShow
+											detailuser=detailuser/>
+
+										</li>
+										<li>
+											<span>VIP 期限： <a href="${webroot}/member/vip.html">
+													<#if detailuser.vip_status==1> <#assign
+													vip_expire_time=(((detailuser.vip_verify_time)!0)+60*60*24*365)?c>
+													<#assign nowtime=dateformat("now") > <#if nowtime lt
+													vip_expire_time?number>
+													${dateformat(vip_expire_time,"yyyy-MM-dd")} <#else> 已经过期
+													</#if> <#elseif detailuser.vip_status==-1> VIP审核中 <#else> <font
+													color="#999999">不是VIP</font> </#if> </a>&nbsp;&nbsp;&nbsp;&nbsp;
+												<span>总积分：<#if !detailuser.credit_pic?exists><#else><img
+														style="float: right; right: 542px; position: absolute"
+														class="rank"
+														src="${request.getContextPath()}/data/images/credit/${detailuser.credit_pic!}"
+														title="总积分：${detailuser.credit_jifen!}" /></#if></span>
+										</li>
+										<li>
+											系统告知:
+											<a href="${webroot}/member/message/box.html"><font
+												color="red">${unreadmsg?default(0)}</font>封未读信息</a>&nbsp; &nbsp;
+											好友邀请:
+											<a href="${webroot}/member/friend/request.html"><font
+												color="red">${friendrequests?default(0)}</font>个</a>
+											<a href="${webroot}/member/account/newrecharge.html"
+												class="orgcolor">[账户充值]</a>
+											<a href="${webroot}/member/borrow/limitapp.html"
+												class="orgcolor">[申请额度]</a>
+										</li>
+
+										<li>
+											<div class="float_left">
+												资料完善度：
+											</div>
+											<div class="jindu">
+												<div
+													style="width: ${((( userinfo . rate ) ! 0 ) * 100 ) ? string("
+													##.##")}%;"class="rate_tiao"></div>
+											</div>
+											<div style="float: left;">
+												${(((userinfo.rate)!0)*100)?string("##.##")}%
+												<a href="${webroot}/member/userinfo/userinfo.html">继续完善</a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<#include "../common/function.html">
+							<div class="zh-user-tab">
+								<div class="zh-user-tab-title">
+									<span class="titles">账户详情</span>
+								</div>
+								<div class="zh-user-tabcontent" style="display: block;">
+									<table width="100%" cellspacing="2">
+										<tr>
+											<td width="35%">
+												<a href="#" rel="tooltip" title="总额=可用余额+冻结金额+待收金额">账户总额</a>：
+												<font>￥<#if
+													summary??>${ceil(summary.accountTotal!0)}</#if></font>
+											</td>
+											<td width="65%">
+												<a href="${webroot}/member/account/log.html">资金记录查询</a> |
+												<a href="${webroot}/member/account/log.html">账户资金详情</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="#" rel="tooltip" title="可用余额表示当前您账户中可实际用来来投标的金额">可用余额</a>：
+												<font>￥<#if
+													summary??>${ceil(summary.accountUseMoney!0)}</#if></font>
+											</td>
+											<td width="65%">
+												<a href="${webroot}/member/account/newcash.html"><font
+													style="font-size: 12px;"><strong>提现</strong>
+												</font>
+												</a>
+												<a href="${webroot}/member/account/newrecharge.html"><font
+													style="font-size: 12px;"><strong>充值
+												</font></strong> </a>
+												<a href="${webroot}/member/account/bank.html">
+													&nbsp;银行账户设置 </a>
+												<a href="${webroot}/member/account/recharge.html">
+													&nbsp;充值记录查询 </a> &nbsp;
+												<a href="${webroot}/member/account/cash.html">提现记录查询 </a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="#" rel="tooltip"
+													title="冻结金额账户中暂时冻结的金额，一般是投标中(尚未满标审核)或申请VIP等待客服审核等">冻结总额</a>：
+												<font>￥<#if
+													summary??>${ceil(summary.accountNoUseMoney!0)}</#if></font>
+											</td>
+											<td width="65%">
+												<a href="${webroot}/member/invest/list.html">正在进行的投标</a>
+												<a href="${webroot}/member/account/cash.html">正在申请的提现</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a>已赚利息：</a><font>￥<#if
+													summary??>${ceil(summary.yes_interest!0)}</#if></font>
+											</td>
+											<td width="65%">
+												<a>已赚奖励：</a><font>￥${summary.awardTotal}</font>
+											</td>
+										</tr>
+										<!--   <tr>
+                            <td>
+                                可以红包：<font>￥0.00</font>
+                            </td>
+                        </tr>-->
+									</table>
+								</div>
+							</div>
+
+							<div class="zh-user-tab">
+								<div class="zh-user-tab-title">
+									<span class="titles">待收待还详情</span>
+								</div>
+								<div class="zh-user-tabcontent">
+									<table width="100%" cellspacing="2">
+										<tr>
+											<td>
+												<a href="#" rel="tooltip"
+													title="待收总额是指当前用户所有借款标中尚未收回的金额(包括本金+利息)">待收总额</a>：
+												<font>￥<#if
+													summary??>${ceil((summary.collectTotal)!0)}</#if></font>
+											</td>
+											<td width="65%">
+												<a href="#" rel="tooltip" title="待收利息是指当前用户待收金额中的利息部分">&nbsp;&nbsp;待收利息</a>：
+												<font><#if
+													summary??>￥${ceil(summary.collectInterest!0)}</#if></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a href="${webroot}/member/invest/tender.html">借出明细账</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												最近待收金额：
+												<font>￥<#if
+													summary??>${ceil((summary.newestCollectMoney)!0)}</#if></font>
+											</td>
+											<td width="65%">
+												&nbsp;&nbsp;最近待收时间：
+												<font><#if
+													summary??&&summary.newestCollectDate??>${dateformat(summary.newestCollectDate)}<#else>-</#if></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											</td>
+										</tr>
+										<!--    <tr>
+                            <td>以赚利息：<font>￥0.00</td>
+                            <td width="65%">&nbsp;&nbsp;以赚奖励：<font>￥0.00</font> </td>
+                        </tr>-->
+										<tr>
+											<td>
+												融资总额：
+												<font><#if
+													summary??>￥${ceil(summary.borrowTotal!0)}</#if></font>
+											</td>
+											<td width="65%">
+												&nbsp;&nbsp;待还总额：
+												<font><#if
+													summary??>￥${ceil((summary.repayTotal)!0)}</#if></font>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a href="${webroot}/member/borrow/repaymentdetail.html">还款明细账</a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												最近待还金额：
+												<font>￥<#if
+													summary??>${((summary.newestRepayMoney)!0)?string("##.##")}</#if></font>
+											</td>
+											<td width="65%">
+												&nbsp;&nbsp;最近待还时间：
+												<font><#if
+													summary??&&summary.newestRepayDate??>${dateformat(summary.newestRepayDate)}<#else>-</#if></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a href="${webroot}/member/borrow/repaymentdetail.html"><strong><font
+														color="red">我要还款</font>
+												</strong>
+												</a>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+							<div class="zh-user-tab">
+								<div class="zh-user-tab-title">
+									<span class="titles">信用额度</span>
+								</div>
+								<div class="zh-user-tabcontent">
+									<table width="100%" cellspacing="2">
+										<tr>
+											<td>
+												信用总额：
+												<font>￥${(amount.credit)!0}</font>
+											</td>
+											<td width="65%">
+												&nbsp;&nbsp;&nbsp;&nbsp;可用信用额度：
+												<font>￥${(amount.credit_use)!0}</font>
+											</td>
+										</tr>
+										<!--   <tr>
+                            <td>借款担保额度：<font>￥0.00</font> </td>
+                            <td width="65%">&nbsp;&nbsp;&nbsp;&nbsp;可用借款担保额度：<font>￥0.00</font></td>
+                        </tr>
+                        <tr>
+                            <td>投资担保额度：<font>￥0.00</font> </td>
+                            <td width="65%">&nbsp;&nbsp;&nbsp;&nbsp;可用投资担保额度：<font>￥0.00</font></td>
+                        </tr>-->
+									</table>
+								</div>
+							</div>
+
+						</div>
+						<!--账户中间内容部分-->
+
+						<div class="float_right">
+							<#if kf??>
+							<div class="zh-kefu">
+								<div class="kefu-content">
+									<img class="user-photo"
+										src="${webroot}/imgurl.html?userid=${kf.user_id?c}&size=middle" />
+									<p>
+										客服名称：${kf.username!}
+									</p>
+									<p>
+										客服QQ：
+										<a target="_blank"
+											href="http://wpa.qq.com/msgrd?v=3&uin=${kf.qq!}&site=qq&menu=yes"><img
+												border="0" src="${webroot}${theme_dir}/images/qqkfbig.png"
+												alt="点击这里给我发消息" title="点击这里给我发消息" style="display: inline;">
+										</a>
+									</p>
+									<!-- <p>
+                        	客服电话：${kf.tel!}
+                         </p> -->
+								</div>
+							</div>
+							<!--专属客服-->
+							</#if>
+							<div class="right-notice">
+								<div class="right-notice-tit">
+									网站公告
+								</div>
+								<ul>
+									<#if (ggList?exists)&&(ggList?size>0)> <#list ggList as item>
+									<li>
+										<a
+											href="${request.getContextPath()}/article/detail.html?catalog=22&id=${item.id}"
+											target="_blank"><#if item.name?length lt
+											15>${item.name}<#else>${item.name[0..14]}</#if></a>
+									</li>
+									</#list> </#if>
+								</ul>
+							</div>
+							<!--网站公告-->
+
+							<div class="right-notice">
+								<div class="right-notice-tit">
+									金融资讯
+								</div>
+								<ul>
+									<#if (jrzx?exists)&&(jrzx?size>0)> <#list jrzx as item>
+									<li>
+										<a
+											href="${webroot}/article/detail.html?catalog=126&id=${item.id}"
+											target="_blank"><#if item.name?length lt
+											15>${item.name}<#else>${item.name[0..14]}</#if></a>
+									</li>
+									</#list> </#if>
+								</ul>
+							</div>
+							<!--金融资讯-->
+
+						</div>
+
+					</div>
+				</div>
+				<!--右边的内容 结束-->
+			</div>
+		</div>
+		<!--用户中心的主栏目 结束-->
+		<script src="${webroot}${theme_dir}/media/js/modal.js"></script>
+		<script src="${webroot}${theme_dir}/media/js/tab.js"></script>
+		<script src="${webroot}${theme_dir}/media/js/alert.js"></script>
+		<script src="${webroot}${theme_dir}/media/js/transition.js"></script>
+		<#include "../include/footer.html">
+	</body>
+</html>

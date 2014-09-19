@@ -1,0 +1,144 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#include "banner.html">
+			<div class="main_content">  
+			  <table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+				  <form action="" method="post">
+					<tr >
+						<td width="" class="main_td">ID</td>
+						<td width="" class="main_td">借款标ID</td>
+						<td width="" class="main_td">借款标名称</td>
+						<td width="*" class="main_td">投标人</td>
+				<!--	<td width="" class="main_td">真实姓名</td> -->
+						<td width="" class="main_td">操作金额</td>
+						<td width="" class="main_td">有效金额</td>
+						<td width="" class="main_td">还款金额</td>
+						<td width="" class="main_td">利率</td>
+						<td width="" class="main_td">利息</td>
+						<td width="" class="main_td">投标时间</td>
+			      
+					</tr>
+					<#include "../../common/function.html"> 
+					<#list list as item>
+					<tr>
+						<td>${item.id?c}</td>
+						<td>${item.borrow_id?c}</td>
+						<td><a href="${request.getContextPath()}/invest/detail.html?borrowid=${item.borrow_id?c}" target="_blank">
+						<#if item.borrow_name?length lt 8>${item.borrow_name}<#else>${item.borrow_name[0..7]}..</#if></a></td>
+						<td><a href="${webroot}/user/show.html?user_id=${item.user_id?c}">${item.username}</a></td>
+					<!-- <td>${item.realname!}</td> -->
+						<td>${item.tender_money!}</td>
+						<td>${item.tender_account!}</td>
+						<td>${format2((item.repayment_account!"0"))}</td>
+						<td>${item.apr!}%</td>
+						<td>${format2((item.interest!"0"))}</td>
+						<td>${dateformat(item.addtime!)}</td>
+			         
+					</tr>
+					</#list>
+					<tr>
+					<td colspan="11" class="action">
+					<div class="floatl">
+			         <a href="#" onclick="exportxls()">导出当前报表</a>
+			           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			         <font color="red">利息总额：<#if sum??> ${(sum!0)?string("##.##")}</#if></font>
+			         
+					</div>
+					<#if param?exists>
+						<#if param.get("dotime1")?exists><#assign dotime1=param.get("dotime1")></#if>
+						<#if param.get("dotime2")?exists><#assign dotime2=param.get("dotime2")></#if>
+						<#if param.get("username")?exists><#assign username=param.get("username")></#if>
+						
+						
+					</#if>
+					<div class="floatr">
+						时间：<input type="text" name="dotime1" id="dotime1" value="${dotime1}" size="15" onclick="change_picktime()"/> 
+						到 <input type="text"  name="dotime2" id="dotime2"  value="${dotime2}"  size="15" onclick="change_picktime()"/> 
+						 用户名：<input type="text" name="username" id="username" value="${username!}"/> 
+					
+						 <input type="button" value="搜索" / onclick="sousuo()">
+					</div>
+					</td>
+				</tr>
+					<tr>
+						<td colspan="11" class="page">
+							<#import "../../common/page.html" as pager>  
+			         	 	<@pager.pagination page=page url="/admin/cash/tenderLog.html" map=param style="style1"  /> 
+						</td>
+					</tr>
+				</form>	
+			</table>
+			<script>
+			var url = 'tenderLog.html?search=true';
+			var xlsurl = 'tenderLog.html?type=export';
+			
+			function sousuo(){
+			var sou = "";
+			var username = $("#username").val();
+			var realname = $("#realname").val();
+			if (username!=""){
+				sou += "&username="+username;
+			}
+			if (realname!=""){
+				sou += "&realname="+realname;
+			}
+			
+			var dotime1 = $("#dotime1").val();
+			var dotime2 = $("#dotime2").val();
+		
+			if (dotime1!=null){
+				 sou += "&dotime1="+dotime1;
+			}
+			if (dotime2!=null){
+				 sou += "&dotime2="+dotime2;
+			}
+				if (sou!=""){
+				location.href=url+sou;
+				}
+			}
+			function exportxls(){
+			var sou = "";
+			var username = $("#username").val();
+			var realname = $("#realname").val();
+			
+			if (username!=""){
+				sou += "&username="+username;
+			}
+			if (realname!=""){
+				sou += "&realname="+realname;
+			}
+			var dotime1 = $("#dotime1").val();
+			var dotime2 = $("#dotime2").val();
+			
+			if (dotime1!=null){
+				 sou += "&dotime1="+dotime1;
+			}
+			if (dotime2!=null){
+				 sou += "&dotime2="+dotime2;
+			}
+				if (sou!=""){
+				location.href=xlsurl+sou;
+				}else{
+					location.href=xlsurl;
+				}
+			}
+			</script>
+			
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

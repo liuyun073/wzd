@@ -1,0 +1,461 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "../attestation/left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+
+			<div class="main_site">
+				<ul>
+					<#include "bar.html">
+					<li class="title">证明材料 <span>/ 客户证明材料</span></li>
+
+				</ul>
+			</div>
+			<div class="module_add">
+				<div class="module_title">
+					<strong>用户信息查看</strong>
+				</div>
+				<div class="module_border">
+					<div class="l">用户名:</div>
+					<div class="c">${user.username!"-"}</div>
+				</div>
+				<div class="module_border">
+					<div class="l">登陆次数:</div>
+					<div class="c">${userLoginCount!0}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="l">最后登录时间:</div>
+					<div class="c"><#if t??>dateformat(t.login_time)<#else>-</#if></div>
+					<div class="l">注册时间:</div>
+					<div class="c">${dateformat(user.addtime)}</div>
+				</div>
+				<div class="module_title">
+					<strong>实名认证信息</strong>
+				</div>
+				<div class="module_border">
+					<div class="l">真实姓名 :</div>
+					<div class="h">${user.realname!"-"}</div>
+					<div class="l">性别 :</div>
+					<div class="c"><#if user.sex??><#if
+						user.sex=="1">男<#else>女</#if><#else>-</#if></div>
+				</div>
+
+				<div class="module_border">
+					<div class="l">证件类型:</div>
+					<div class="h"><#if
+						user.card_type??>${Type(user.card_type,"name")}<#else>-</#if></div>
+					<div class="l">证件号码:</div>
+					<div class="c">${user.card_id!"-"}</div>
+				</div>
+				<div class="module_border">
+					<div class="l">籍贯:</div>
+					<div class="h"><#if user.province??>
+							${Type(user.province,"area")} - <#else> - </#if> <#if user.city??>
+							${Type(user.city,"area")} - <#else> - </#if> <#if user.area??>
+							${Type(user.area,"area")} <#else> - </#if></div>
+					<div class="l">身份证图片:</div>
+					<div class="c">
+						<a href="/${user.card_pic1_path!}" target="_blank">正面</a> | <a
+							href="/${user.card_pic2_path!}" target="_blank">反面</a>
+					</div>
+				</div>
+
+				<div class="module_border">
+					<div class="l">民族:</div>
+					<div class="h"><#if
+						user.nation??>${Type(user.nation,"name")}<#else>-</#if></div>
+					<div class="l">生日:</div>
+					<div class="c">${user.birthday!}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="l">状态:</div>
+					<div class="c"><#if user.real_status??><#if
+						user.real_status=="1">认证!<#else>未认证</#if><#else>-</#if></div>
+				</div>
+
+				<div class="module_title">
+					<strong>邮箱认证信息</strong>
+				</div>
+				<div class="module_border">
+					<div class="l">邮箱 :</div>
+					<div class="h">${user.email!"-"}</div>
+
+				</div>
+				<div class="module_border">
+					<div class="l">状态:</div>
+					<div class="c"><#if user.email_status??><#if
+						user.email_status=="1">邮箱已通过认证<#else>邮箱未认证</#if><#else>-</#if></div>
+				</div>
+				<div class="module_title">
+					<strong>视频认证</strong>
+				</div>
+
+				<div class="module_border">
+					<div class="l">状态:</div>
+					<div class="c"><#if user.video_status??><#if
+						user.video_status=="1">已通过认证<#else>未通过视频认证</#if><#else>-</#if></div>
+				</div>
+				<div class="module_title">
+					<strong>现场认证</strong>
+				</div>
+
+				<div class="module_border">
+					<div class="l">状态:</div>
+					<div class="c"><#if user.scene_status??><#if
+						user.scene_status=="1">已通过认证<#else>未通过现场认证</#if><#else>-</#if></div>
+				</div>
+				<div class="module_title">
+					<strong>手机认证信息</strong>
+				</div>
+				<div class="module_border">
+					<div class="l">手机号 :</div>
+					<div class="h">${user.phone!"-"}</div>
+				</div>
+				<div class="module_border">
+					<div class="l">状态:</div>
+					<div class="c"><#if user.phone_status??><#if
+						user.phone_status=="1">已通过认证<#else>未通过认证</#if><#else>-</#if></div>
+				</div>
+
+
+				<div class="module_title">
+					<strong>VIP认证信息</strong>
+				</div>
+				<div class="module_border">
+					<div class="l">申请备注:</div>
+					<div class="h">${user.vip_remark!"-"}</div>
+				</div>
+				<div class="module_border">
+					<div class="l">状态:</div>
+					<div class="c"><#if user.vip_status??><#if
+						user.vip_status=="1">Vip用户<#else>非Vip用户</#if><#else>-</#if></div>
+				</div>
+				<div class="module_title">
+					<strong>用户基本信息</strong>
+				</div>
+
+				<div class="module_border">
+					<div class="w">婚姻状况：</div>
+					<div class="h"><#if user.marry??>${Type(user.marry,"name")}</#if></div>
+
+					<div class="w">子 女：</div>
+					<div class="c"><#if user.child??>${Type(user.child,"name")}</#if></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">学 历：</div>
+					<div class="h"><#if user.education??>${Type(user.education,"name")}</#if></div>
+					<div class="w">月收入：</div>
+					<div class="c"><#if user.income??>${Type(user.income,"name")}</#if></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">社 保：<#if user.shebao??>${Type(user.shebao,"name")}</#if></div>
+					<div class="h"></div>
+					<div class="w">社保电脑号：</div>
+					<div class="c"><#if user.shebaoid??>${user.shebaoid!"-"}</#if></div>
+				</div>
+				<div class="module_border">
+					<div class="w">住房条件：</div>
+					<div class="h"><#if user.housing??>${Type(user.housing,"name")}</#if></div>
+					<div class="w">是否购车：</div>
+					<div class="c"><#if user.car??>${Type(user.car,"name")}</#if></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">逾期记录：</div>
+					<div class="c"><#if user.late??>${Type(user.late,"name")}</#if></div>
+				</div>
+
+				<div class="module_title">
+					<strong>房产资料</strong>
+				</div>
+				<div class="module_border">
+					<div class="w">房产地址：</div>
+					<div class="h">${user.house_address!"-"}</div>
+					<div class="w">建筑面积：</div>
+					<div class="c">${user.house_area!"-"}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">建筑年份：</div>
+					<div class="h">${user.house_year!"-"}</div>
+					<div class="w">供款状况：</div>
+					<div class="c">${user.house_status!"-"}元</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">所有权人1：${user.house_holder1!"-"}</div>
+					<div class="h">产权份额:${user.house_right1!"-"}</div>
+					<div class="w">所有权人2：${user.house_holder2!"-"}</div>
+					<div class="c">产权份额:${user.house_right2!"-"}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">若房产尚在按揭中, 请填写：</div>
+					<div class="h">贷款年限：${user.house_loanyear!"-"}
+						每月供款${user.house_loanprice!"-"} 元</div>
+					<div class="w">尚欠贷款余额：</div>
+					<div class="c">${user.house_balance!"-"}元</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">按揭银行：</div>
+					<div class="c">${user.house_bank!"-"}</div>
+				</div>
+
+				<div class="module_title">
+					<strong>公司资料</strong>
+				</div>
+				<div class="module_border">
+					<div class="w">公司名称：</div>
+					<div class="h">${user.company_name!"-"}</div>
+					<div class="w">公司性质：</div>
+					<div class="c"><#if
+						user.company_name??>${Type(user.company_type,"name")}<#else>-</#if></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">公司行业：</div>
+					<div class="h"><#if
+						user.company_industry??>${Type(user.company_industry,"name")}<#else>-</#if></div>
+					<div class="w">工作级别：</div>
+					<div class="c"><#if
+						user.company_jibie??>${Type(user.company_jibie,"name")}<#else>-</#if></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">职 位：</div>
+					<div class="h"><#if
+						user.company_office??>${Type(user.company_office,"name")}<#else>-</#if></div>
+					<div class="w">服务时间：</div>
+					<div class="c">${user.company_worktime1!"-"}到${user.company_worktime2!"-"}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">工作年限：</div>
+					<div class="h"><#if
+						user.company_workyear??>${Type(user.company_workyear,"name")}<#else>-</#if></div>
+					<div class="w">工作电话：</div>
+					<div class="c">${user.company_tel!"-"}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">公司地址：</div>
+					<div class="h">${user.company_address!"-"}</div>
+					<div class="w">公司网站：</div>
+					<div class="c">${user.company_weburl!"-"}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">公司备注说明：</div>
+					<div class="c">${user.company_reamrk!"-"}</div>
+				</div>
+
+				<div class="module_title">
+					<strong>私营业主资料</strong>
+				</div>
+				<div class="module_border">
+					<div class="w">私营企业类型：</div>
+					<div class="h"><#if
+						user.private_type??>${Type(user.private_type,"name")}<#else>-</#if>
+					</div>
+					<div class="w">成立日期：</div>
+					<div class="c">${user.private_date!"-"}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">经营场所：</div>
+					<div class="h">${user.private_place!"-"}</div>
+					<div class="w">租金：</div>
+					<div class="c">${user.private_rent!"-"}元</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">租期：</div>
+					<div class="h">${user.private_term!"-"}月</div>
+					<div class="w">税务编号：</div>
+					<div class="c">${user.private_taxid!"-"}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">工商登记号：</div>
+					<div class="h">${user.private_commerceid!"-"}</div>
+					<div class="w">全年盈利/亏损额：</div>
+					<div class="c">${user.private_income!"-"}元（年度）</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">雇员人数：</div>
+					<div class="c">${user.private_employee!"-"}人</div>
+				</div>
+				<div class="module_title">
+					<strong>财务状况</strong>
+				</div>
+				<div class="module_border">
+					<div class="w">每月无抵押贷款还款额：</div>
+					<div class="h">${user.finance_repayment!"-"}元</div>
+					<div class="w">自有房产：</div>
+					<div class="c"><#if
+						user.finance_property??>${Type(user.finance_property,"name")}<#else>-</#if>
+					</div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">每月房屋按揭金额：</div>
+					<div class="h">${user.finance_amount!"-"}元</div>
+					<div class="w">自有汽车：</div>
+					<div class="c"><#if
+						user.finance_car??>${Type(user.finance_car,"name")}<#else>-</#if></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">每月汽车按揭金额：</div>
+					<div class="h">${user.finance_caramount!"-"}元</div>
+					<div class="w">每月信用卡还款金额：</div>
+					<div class="c">${user.finance_creditcard!"-"}元</div>
+				</div>
+				<div class="module_title">
+					<strong>联系方式</strong>
+				</div>
+				<div class="module_border">
+					<div class="w">居住地电话：${user.tel!"-"}</div>
+					<div class="h"></div>
+
+					<div class="w">手机号码：${user.phone!"-"}</div>
+					<div class="c"></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">居住所在省市：${user.provincetext!}-${user.citytext!}</div>
+					<div class="h"></div>
+					<div class="w">居住地邮编：${user.post!"-"}</div>
+					<div class="c"></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">现居住地址：${user.address!"-"}</div>
+					<div class="h"></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">第二联系人姓名：${user.linkman1!"-"}</div>
+					<div class="h"></div>
+					<div class="w">第二联系人关系： <#if
+						user.relation1??>${Type(user.relation1,"name")}<#else>-</#if></div>
+					<div class="h"></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">第二联系人联系电话:${user.tel1!"-"}</div>
+					<div class="h"></div>
+					<div class="w">第二联系人联系手机：${user.phone1!"-"}</div>
+					<div class="h"></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">第三联系人姓名：${user.linkman2!"-"}</div>
+					<div class="h"></div>
+					<div class="w">第三联系人关系： <#if
+						user.relation2??>${Type(user.relation2,"name")}<#else>-</#if></div>
+					<div class="h"></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">第三联系人联系电话：${user.tel2!"-"}</div>
+					<div class="h"></div>
+					<div class="w">第三联系人联系手机：${user.phone2!"-"}</div>
+					<div class="h"></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">第四联系人姓名：${user.linkman3!"-"}</div>
+					<div class="h"></div>
+					<div class="w">第四联系人关系： <#if
+						user.relation3??>${Type(user.relation3,"name")}<#else>-</#if></div>
+					<div class="c"></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">第四联系人联系电话：${user.tel3!"-"}</div>
+					<div class="h"></div>
+					<div class="w">第四联系人联系手机：${user.phone3!"-"}</div>
+					<div class="c"></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">MSN：${user.msn!"-"}</div>
+					<div class="h"></div>
+					<div class="w">QQ：${user.qq!"-"}</div>
+					<div class="c"></div>
+				</div>
+
+				<div class="module_border">
+					<div class="w">旺旺：</div>
+					<div class="c"></div>
+				</div>
+				<div class="module_title">
+					<strong>配偶资料</strong>
+				</div>
+				<div class="module_border">
+					<div class="l">配偶姓名：</div>
+					<div class="h">${user.mate_name!"-"}</div>
+					<div class="l">每月薪金：</div>
+					<div class="c">${user.mate_salary!"-"}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="l">移动电话：</div>
+					<div class="h">${user.mate_phone!"-"}</div>
+					<div class="l">单位电话：</div>
+					<div class="c">${user.mate_tel!"-"}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="l">工作单位：</div>
+					<div class="h"> <#if
+						user.mate_type??>${Type(user.mate_type,"name")}<#else>-</#if></div>
+					<div class="l">职位：</div>
+					<div class="c"><#if
+						user.mate_office??>${Type(user.mate_office,"name")}<#else>-</#if></div>
+				</div>
+
+				<div class="module_border">
+					<div class="l">单位地址：</div>
+					<div class="h">${user.mate_address!"-"}</div>
+					<div class="l">月收入：</div>
+					<div class="c">${user.mate_income!"-"}</div>
+				</div>
+				<div class="module_title">
+					<strong>其他信息</strong>
+				</div>
+				<div class="module_border">
+					<div class="l">个人能力：</div>
+					<div class="c">${user.ability!"-"}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="l">个人爱好：</div>
+					<div class="c">${user.interest!"-"}</div>
+				</div>
+
+				<div class="module_border">
+					<div class="l">其他说明：</div>
+					<div class="c">${user.others!"-"}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

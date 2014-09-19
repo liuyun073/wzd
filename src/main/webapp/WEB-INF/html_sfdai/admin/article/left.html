@@ -1,0 +1,47 @@
+	<link rel="stylesheet" href="${webroot}/themes/admin/css/jquery.treeview.css" />
+	<script src="${webroot}/themes/admin/js/jquery.treeview.js" type="text/javascript"></script>
+	<script src="${webroot}/themes/admin/js/jquery.cookie.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#browser").treeview({
+			animated: "medium",
+			collapsed: true,
+			persist: "cookie",
+			cookieId: "treeview-black"
+		});
+	});
+	</script>
+	<div class="fenlan">
+		<div class="fenlan_title"><span><a href="javascript:void(0);" onclick="change_menu('site_menu_1',this)">+</a></span><strong><a href="#" >栏目管理</a></strong></div>
+		<div class="fenlan_content_new">
+		<ul id="browser" class="filetree treeview">
+		<li class="open collapsable lastCollapsable" id=""> 
+			<li><span class="folder">根目录</span>
+			<#if tree??&&tree.hasChild()>
+			<ul>
+				<#list tree.child as item>
+				<li><span class="folder"><a href="showSite.html?site_id=${item.model.site_id!}">${item.model.name!}</a></span>
+					<#if item??&&item.hasChild()>
+					<ul>
+						<#list item.child as subitem>
+						<li><span class="file"><a href="showSite.html?site_id=${subitem.model.site_id!}">${subitem.model.name}</a></span></li>
+						</#list>
+					</ul>
+					</#if>
+				</li>
+				</#list>
+			</ul>
+			</#if>
+		</li>
+	</ul>
+	</div>
+	<div class="fenlan_title"><span><a href="javascript:void(0);" onclick="change_menu('site_menu_1',this)">+</a></span><strong><a href="#" >文章管理</a></strong></div>
+	<div class="fenlan_content">
+		<ul id="site_menu_5">
+			<li><a href="showArticle.html" id="adminlist">文章列表</a></li>
+			<li><a href="addArticle.html" id="adminlist">新增文章</a></li>
+		</ul>
+	</div>
+	
+	
+</div>

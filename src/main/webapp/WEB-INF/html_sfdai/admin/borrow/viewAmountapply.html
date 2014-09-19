@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#assign moduleName="额度审核" >
+			<#include "banner.html">
+			<div class="main_content">
+				<div class="module_border">
+					<div class="l">用户名：</div>
+					<div class="h">${apply.username!}</div>
+				</div>
+				<div class="module_border">
+					<div class="l">借款类型：</div>
+					<div class="h">信用额度</div>
+				</div>
+				<div class="module_border">
+					<div class="l">原来金额：</div>
+					<div class="h">${apply.account_old!0}</div>
+				</div>
+				<div class="module_border">
+					<div class="l">申请额度：</div>
+					<div class="h">${apply.account!0}</div>
+				</div>
+				<div class="module_border">
+					<div class="l">内容：</div>
+					<div class="h">${apply.content!}</div>
+				</div>
+				
+				<div class="module_border">
+					<div class="l">备注：</div>
+					<div class="h">${apply.remark!}</div>
+				</div>
+				
+				<div class="module_border">
+					<div class="l">申请时间：</div>
+					<div class="h">${dateformat(apply.addtime)}</div>
+				</div>
+				<div class="module_title"><strong>审核</strong></div>
+				<form method="post" action="verifyAmountApply.html">
+				<div class="module_border">
+					<div class="l">审核状态：</div>
+					<div class="h">
+						<input type="radio" name="status" value="1" />通过  <input type="radio" name="status" value="0" checked="checked" />不通过
+					</div>
+				</div>
+				<div class="module_border">
+					<div class="l">通过额度：</div>
+					<div class="h">
+						<input type="text" name="account" value="${apply.account!?c}" />
+						<input type="hidden" name="id" value="${(apply.id!0)?c}" />
+					</div>
+				</div>
+				
+				<div class="module_border">
+					<div class="l">审核备注：</div>
+					<div class="h">
+						<textarea name="verify_remark" rows="5" cols="40" ></textarea>
+					</div>
+				</div>
+				<div class="module_border">
+					<div class="l"></div>
+					<div class="h">
+						<input type="submit" value="确定审核" />
+					</div>
+				</div>
+				</form>
+			
+			
+			<!--统计 开始-->
+			
+			
+			<script>
+			
+			var urls = 'index.php?wzd888&q=module/borrow';
+			
+			function sousuo(url){
+				var sou = "";
+				var username = $("#username").val();
+				if (username!=""){
+					sou += "&username="+username;
+				}
+				var keywords = $("#keywords").val();
+				if (keywords!=""){
+					sou += "&keywords="+keywords;
+				}
+				var status = $("#status").val();
+				if (status!=""){
+					sou += "&status="+status;
+				}
+				var is_vouch = $("#is_vouch").val();
+				if (is_vouch!=""){
+					sou += "&is_vouch="+is_vouch;
+				}
+				if (sou!=""){
+					
+					location.href=url+sou;
+				}
+			}
+			
+			function sousuoFull(url){
+				var sou = "";
+				var username = $("#username").val();
+				if (username!=""){
+					sou += "&username="+username;
+				}
+				var biaoType = $("#biaoType").val();
+				if (biaoType!=""){
+					sou += "&biaoType="+biaoType;
+				}
+				var is_vouch = $("#is_vouch").val();
+				if (is_vouch!=""){
+					sou += "&is_vouch="+is_vouch;
+				}
+				if (sou!=""){
+					
+					location.href=url+sou;
+				}
+			}
+			</script>
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

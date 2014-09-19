@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<#include "include/resource.html"> 
+<body>
+<#assign nid="member" >
+<#include "include/header.html"> 
+	<!--用户注册 开始-->
+<div id="main" class="clearfix">
+	<div class="user_action_main">
+		<!--用户注册左边 开始-->
+		<div class="user_action_reg_left">
+			<!--用户注册 开始-->
+			<div class="user_action_getpwd_top"></div>
+			<div class="user_action_reg_submit" style="padding-top:0">
+			<form action="" method="post" name="formUser" >
+				<div class="alert alert-info"> <a class="close" data-dismiss="alert">x</a>
+					<#if !errormsg?exists>
+						请填写你的用户名进行密码的重置
+					<#else>
+						<span style="color:red">${errormsg}</span>
+					</#if>
+				</div>
+				<p>
+				  <label for="email">&nbsp;&nbsp;&nbsp;用户名：</label>
+				  <input maxLength=15  class="user_aciton_input1" name="username" id="username" >
+				</p>
+				<input type="hidden" name="getpwdtype" value="${getpwdtype}";>
+				<p>
+				  <label for="email" style="float:left;">&nbsp;&nbsp;&nbsp;验证码：</label>
+				  <span style="float:left;"><input maxLength=5  class="user_aciton_input" name=validcode id=validcode align="top" ></span>
+				   <span style="float:left;margin-left:5px;">
+				   <img src="${request.getContextPath()}/validimg.action" alt="点击刷新" 
+				   onClick="this.src='${request.getContextPath()}/validimg.action?t=' + Math.random();" align="absmiddle" style="cursor: pointer; float: left;" />
+				   </span>
+				</p>
+				<br/><br/>
+				<p align="left"> 
+				 <input type="submit" value="确认" class="btn-action"/>
+				  <input type="hidden" name="getpwdtype" value="${getpwdtype}">
+				  <input type="hidden" value="getpwd" name="actionType"/>
+				</p>
+			</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!--用户注册 结束-->
+<#include "include/footer.html"> 
+</body>
+</html>

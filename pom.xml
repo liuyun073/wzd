@@ -17,6 +17,9 @@
 		<spring.version>3.2.2.RELEASE</spring.version>
 		<hibernate.version>4.1.12.Final</hibernate.version>
 
+		<aspectj.version>1.8.1</aspectj.version>
+		<cglib.version>3.0</cglib.version>
+		<asm.version>3.3.1</asm.version>
 
 		<hibernate-validator.version>5.0.1.Final</hibernate-validator.version>
 		<hibernate-search.version>4.2.0.Final</hibernate-search.version>
@@ -239,14 +242,54 @@
 
 		<!-- SPRING end -->
 
-
-
-		<!-- connection pool -->
+		<!-- AOP begin -->
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>${druid.version}</version>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib.version}</version>
+			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.ow2.asm</groupId>
+					<artifactId>asm</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>${asm.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- AOP end -->
+
+
+		<!-- connection pool begin <dependency> <groupId>com.alibaba</groupId> 
+			<artifactId>druid</artifactId> <version>${druid.version}</version> </dependency> -->
+
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.9.0.GA</version>
+		</dependency>
+
+		<!-- connection pool begin end -->
 
 		<!-- jdbc driver -->
 		<dependency>

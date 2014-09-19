@@ -46,6 +46,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+/**
+ * 会员action
+ * @author liuyun073
+ *
+ */
 public class MemberAction extends BaseAction implements
 		ModelDriven<UserinfoModel> {
 	private static Logger logger = Logger.getLogger(MemberAction.class);

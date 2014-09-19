@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#assign moduleName="我要贷款" >
+			<#include "banner.html">
+			<div class="main_content">
+				<form action="" method="post">
+				<table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr>
+						<td width="" class="main_td">ID</td>
+						<td width="*" class="main_td" align="left">用户名称</td>
+						<td width="*" class="main_td">用户姓名</td>
+						<td width="" class="main_td">借款标题</td>
+						<td width="" class="main_td">借款金额</td>
+						<td width="" class="main_td">最小认购单位</td>
+						<td width="" class="main_td">利率</td>
+						<td width="" class="main_td">借款期限</td>
+						<td width="" class="main_td">发布时间</td>
+			     		<td width="" class="main_td">投标记录</td> 
+						<td width="" class="main_td">状态</td>
+						<td width="" class="main_td">操作</td>
+					</tr>
+					<#import "../../common/function.html" as func>  
+					<#list list as item>
+					<tr>
+						<td>${(item.id!)?c}</td>
+						<td class="main_td1" align="left">
+							<a href="javascript:void(0)" 
+							onclick='tipsWindown("用户详细信息查看","url:get?${request.getContextPath()}/admin/attestation/viewUserInfo.html?username=${item.username!}",500,230,"true","","true","text");'>
+								${item.username!}
+							</a>
+						</td>
+						<td align="left">${item.realname!}</td>
+						<td title="${item.name}" align="left">
+							<span style="color:#FF0000">【<@func.borrowTypeName item=item /> 】</span>												
+							<a href="${request.getContextPath()}/invest/detail.html?borrowid=${item.id?c}" target="_blank">${item.name!}</a>
+						</td>
+						<td align="left">${item.account!0}元</td>
+						<#if item.is_flow==1>
+						<td align="left">${item.flow_money!0}元</td>
+						<#else><td align="left">-</td>
+						</#if>
+						
+						<td align="left">${item.apr!}%</td>
+						<td align="left"><#if item.isday??&&item.isday==1><strong>${item.time_limit_day!0}</strong>天
+							<#elseif item.is_mb==1>满额到期自动还款
+							<#else><strong>${(item.time_limit)?default("0")}</strong>个月</#if></td>
+						<td align="left">${dateformat(item.addtime!)}</td>
+				<!--	<td align="left"><a href="${webroot}/admin/borrow/tenderlist.html?borrow_id=${item.id?c}">查看</a></td> -->
+					    <td align="left"><a href="${webroot}/admin/borrow/tenderlist.html?borrow_id=${item.id?c}">查看</a></td>
+						<#assign status=item.status!(-1)>
+						<td align="left"><@func.statusTypeName status=item.status /></td>
+						<td align="left">
+							<#if status==0||status==1>
+							<a href="${request.getContextPath()}/admin/borrow/verifyBorrow.html?id=${item.id?c}">审核</a>
+							</#if>
+							<#if status==2||status==4||status==0||status==1>
+							<a href="#" onClick="javascript:if(confirm('确定要删除吗?删除后将不可恢复')) location.href='cancelBorrow.html?id=${item.id?c}'">撤回</a>
+							</#if>
+							<a href="${request.getContextPath()}/admin/borrow/viewBorrow.html?id=${item.id?c}" >查看</a>
+						</td>
+					</tr>
+					</#list>
+					<tr>
+						<td colspan="14" class="action">
+							<#if param??&&param.status??>
+								<#assign status=(param.get("status"))?number >
+							<#else>
+								<#assign status=-1>
+							</#if>
+
+							<#if param??&&param.type??>
+								<#assign type=(param.get("type"))?number >
+							<#else>
+								<#assign type=0>
+							</#if>
+							<#if param??&&param.get("dotime1")??><#assign dotime1=param.get("dotime1")></#if>
+							<#if param??&&param.get("dotime2")??><#assign dotime2=param.get("dotime2")></#if>
+
+							<div class="floatr">
+								发标时间：<input type="text" name="dotime1" id="dotime1" value="${dotime1!}" size="10" onclick="change_picktime()"/> 到 <input type="text"  name="dotime2" value="${dotime2!}" id="dotime2" size="10" onclick="change_picktime()"/>	
+								标种类型：<select id="types" >
+										<option value="0" <#if type==0 >selected="selected"</#if> >全部</option>
+										<option value="1" <#if type==1 >selected="selected"</#if> >秒标</option>
+										<option value="2" <#if type==2 >selected="selected"</#if> >信用标</option>
+										<option value="3" <#if type==3 >selected="selected"</#if> >抵押标</option>
+										<option value="4" <#if type==4 >selected="selected"</#if> >净值标</option>
+										<option value="12" <#if type==12 >selected="selected"</#if> >担保标</option>
+										<option value="10" <#if type==10 >selected="selected"</#if> >流转标</option>
+									</select> 
+								用户名：<input type="text" name="username" id="username" value="${param.username!}"/> 
+								<#if borrowType??&&borrowType=="all">
+								状态：<select id="status" >
+										<option value="" <#if status==-1 >selected="selected"</#if> >全部</option>
+										<option value="0" <#if status==0 >selected="selected"</#if> >等待初审</option>
+										<option value="1" <#if status==1 >selected="selected"</#if> >初审通过</option>
+										<option value="2" <#if status==2 >selected="selected"</#if> >等待复审</option>
+										<option value="3" <#if status==3 >selected="selected"</#if> >复审通过</option>
+										<option value="4" <#if status==4 >selected="selected"</#if> >复审未通过</option>
+										<option value="5" <#if status==5 >selected="selected"</#if> >用户取消</option>
+										<option value="6" <#if status==6 >selected="selected"</#if> >放款成功</option>
+										<option value="7" <#if status==7 >selected="selected"</#if> >部分还款</option>
+										<option value="8" <#if status==8 >selected="selected"</#if> >还款成功</option>
+									</select> 
+								</#if>
+								<input type="button" value="搜索"  onclick="sousuo();"  />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="14" class="page">
+							<#import "../../common/page.html" as pager>  
+			         	 
+							<@pager.pagination page=page url=currentUrl map=param style="style1" /> 
+						</td>
+					</tr>
+		
+				</table>
+				</form>	
+				<script>
+				var urls = '?search=true';
+				function sousuo(){
+					var sou = "";
+					var username = $("#username").val();
+					if (username!=null&&username!=""&&username!="undefine"){
+						sou += "&username="+username;
+					}
+					var status = $("#status").val();
+					if (status!=null&&status!=""&&status!="undefine"){
+						sou += "&status="+status;
+					}
+					var type = $("#types").val();
+					if (type!=null&&type!=""&&type!="undefine"){
+						sou += "&type="+type;
+					}
+					var dotime1 = $("#dotime1").val();
+					var dotime2 = $("#dotime2").val();
+					if (dotime1!=null){
+						 sou += "&dotime1="+dotime1;
+					}
+					if (dotime2!=null){
+						 sou += "&dotime2="+dotime2;
+					}
+
+					var url=urls+sou
+					location.href=url;
+				}
+				</script>
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

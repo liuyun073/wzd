@@ -1,0 +1,93 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "../attestation/left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<div class="main_site">
+				<ul>
+
+					<#include "bar.html">
+					<li class="title">证明材料 <span>/ 客户证明材料</span></li>
+
+				</ul>
+			</div>
+			<div class="main_content">
+				<#if detailuserlist??>
+
+				<table border="0" cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr>
+						<td width="" class="main_td">ID</td>
+						<td width="*" class="main_td">用户名</td>
+						<td width="*" class="main_td">真实姓名</td>
+						<th width="" class="main_td">实名认证</th>
+						<th width="" class="main_td">邮箱认证</th>
+						<th width="" class="main_td">手机认证</th>
+						<th width="" class="main_td">是否VIP</th>
+						<th width="" class="main_td">注册时间</th>
+						<td width="" class="main_td">操作</td>
+					</tr>
+					<#list detailuserlist as obj>
+					<tr>
+						<td class="main_td1" align="center">${obj.user_id?c}</td>
+						<td class="main_td1" align="center">${obj.username!"-"}</td>
+						<td class="main_td1" align="center">${obj.realname!"-"}</td>
+						<td class="main_td1" align="center"><#if
+							obj.real_status??><#if obj.real_status=="1">认证<#else><font
+							color="#FF0000">未认证</font></#if><#else><font color="#FF0000">未认证</font></#if>
+						</td>
+						<td class="main_td1" align="center"><#if
+							obj.email_status??><#if obj.email_status=="1">认证<#else><font
+							color="#FF0000">未认证</font></#if><#else><font color="#FF0000">未认证</font></#if>
+						</td>
+						<td class="main_td1" align="center"><#if
+							obj.phone_status??><#if obj.phone_status=="1">认证<#else><font
+							color="#FF0000">未认证</font></#if><#else><font color="#FF0000">未认证</font></#if>
+						</td>
+						<td class="main_td1" align="center"><#if
+							obj.vip_status??&&obj.vip_status==1>Vip会员<#else>普通会员</#if></td>
+						<td class="main_td1" align="center"><#if obj.vip_verify_time??>${dateformat(obj.addtime)!"-"}</#if></td>
+						<td class="main_td1" align="center"><a
+							href="${request.getContextPath()}/admin/attestation/viewuserAttestation.html?user_id=${obj.user_id?c}"
+							class="viewuserallinfo">查看全部资料</a></td>
+					</tr>
+					</#list>
+
+					<tr>
+						<td colspan="10" class="action">
+							<div class="floatl"></div>
+							<div class="floatr">
+								<form action="${request.getContextPath()}/admin/attestation/userAttestation.html" method="post">
+									用户名：<input type="text" name="username" id="username" value="${params.username!}" /> 姓名：<input
+										type="text" name="realname" id="realname"  value="${params.realname!}"/> <input
+										type="submit" value="搜索"   />
+								</form>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="10" class="page">
+						<#import "../../common/page.html" as pager> <@pager.pagination page=page
+							url="/admin/attestation/userAttestation.html" map=params
+							style="style1" />
+						
+							
+							
+							</td>
+						<td class="page" colspan="11"></td>
+					</tr>
+				</table>
+				<#else> 暂无信息 </#if>
+			</div>
+		</div>
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

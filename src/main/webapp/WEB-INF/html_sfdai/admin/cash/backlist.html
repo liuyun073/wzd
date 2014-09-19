@@ -1,0 +1,178 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#include "banner.html">
+			<div class="main_content">  
+			  <!--模块列表 开始-->
+			<div class="module_add">	
+			  <form action="" method="post">
+			  <table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+				<tr >
+					<td width="" class="main_td">ID</td>
+		            <td width="*" class="main_td">流水号</td>
+					<td width="*" class="main_td">用户名称</td>
+					<td width="*" class="main_td">真实姓名</td>
+					<td width="" class="main_td">类型</td>
+					<td width="" class="main_td">所属银行</td>
+					<td width="" class="main_td">充值金额</td>
+					<td width="" class="main_td">费用</td>
+					<td width="" class="main_td">到账金额</td>
+					<td width="" class="main_td">充值时间</td>
+					<td width="" class="main_td">状态</td>
+					<td width="" class="main_td">操作</td>
+				</tr>
+				<#list list as item>
+				<tr>
+					<td>${(item.id!0)?c}</td>
+		            <td >${item.trade_no!"ERROR!"}</td>
+					<td><a href="${webroot}/user/show.html?user_id=${item.user_id?c}">${item.username!}</a></td>
+					<td>${item.realname!}</td>
+					<td><#if item.type=="1">网上充值<#else>系统扣款</#if></td>
+					<td>${item.paymentname!}</td>
+					<td>${item.money!}元</td>
+					<td>${item.fee!}元</td>
+					<td><font color="#FF0000">${item.total!}元</font></td>
+					<td>
+					提交时间：<font color="red">${dateformat(item.addtime!"")}</font><br>
+					完成时间：<font color="red">${dateformat(item.verify_time!"")}</font><br><br>
+					</td>
+					<td><font color="#6699CC"><#if item.status==1>成功<#elseif item.status==0>未审核<#else>审核失败</#if></font></td>
+					<td ><a href="<#if item.payment??&&item.payment=="50">viewBack.html<#else>viewRecharge.html</#if>?id=${item.id?c}">审核/查看</a></td>
+				</tr>
+				</#list>
+				<tr>
+				<td colspan="10" class="action">
+				<div class="floatl">
+			         <a href="#" onclick="exportxls()">导出当前报表</a>
+					</div>
+				<#if param?exists>
+					<#if param.get("dotime1")?exists><#assign dotime1=param.get("dotime1")></#if>
+					<#if param.get("dotime2")?exists><#assign dotime2=param.get("dotime2")></#if>
+					<#if param.get("succtime1")?exists><#assign succtime1=param.get("succtime1")></#if>
+					<#if param.get("succtime2")?exists><#assign succtime2=param.get("succtime2")></#if>
+					<#if param.get("username")?exists><#assign username=param.get("username")></#if>
+					<#if param.get("status")?exists><#assign status=param.get("status")></#if>
+					<#if param.get("trade_no")?exists><#assign trade_no=param.get("trade_no")></#if>
+				</#if>
+				<div class="floatr">
+			    提交时间：<input type="text" name="dotime1" id="dotime1" value="${dotime1!}" size="10" onclick="change_picktime()"/> 到 <input type="text"  name="dotime2" value="${dotime2!}" id="dotime2" size="10" onclick="change_picktime()"/>	
+			    完成时间：<input type="text" name="succtime1" id="succtime1" value="${succtime1!}" size="10" onclick="change_picktime()"/> 到 <input type="text"  name="succtime2" value="${succtime2!}" id="succtime2" size="10" onclick="change_picktime()"/>	
+		                 订单号：<input type="text" name="trade_no" id="trade_no" value="${trade_no!}" size="10" />               
+		                    用户名：<input type="text" name="username" id="username" value="${username!}" size="10" /> 
+		                    状态<select id="status" >
+		                    <option value="0" <#if status??&&status=="0">selected="selected"</#if>>未审核</option>
+		                    <option value="1" <#if status??&&status=="1">selected="selected"</#if>>审核成功</option>
+		                    <option value="2" <#if status??&&status=="2">selected="selected"</#if>>审核失败</option>
+		                </select> 
+		            <input type="button" value="搜索" / onclick="sousuo()">
+				</div>
+				</td>
+			</tr>
+				<tr>
+					<td colspan="11" class="page">
+						<#import "../../common/page.html" as pager>  
+			         	<@pager.pagination page=page url="/admin/cash/backlist.html" map=param style="style1"  /> 
+					</td>
+				</tr>
+			</table>
+		</form>	
+		<!--充值记录列表 结束-->
+		<!--提现审核 开始-->
+		<script>
+		var url = 'backlist.html?search=true';
+		var xlsurl = 'backlist.html?type=export';
+		
+		function sousuo(){
+			var sou = "";
+			var username = $("#username").val();
+			if (username!=""){
+				sou += "&username="+username;
+			}
+			var status = $("#status").val();
+			if (status!="" && status!=null){
+				sou += "&status="+status;
+			}
+			var dotime1 = $("#dotime1").val();
+			var dotime2 = $("#dotime2").val();
+			var type = $("#type").val();
+			if (dotime1!=null){
+				 sou += "&dotime1="+dotime1;
+			}
+			if (dotime2!=null){
+				 sou += "&dotime2="+dotime2;
+			}
+			var succtime1 = $("#succtime1").val();
+			var succtime2 = $("#succtime2").val();
+			var type = $("#type").val();
+			if (succtime1!=null){
+				 sou += "&succtime1="+succtime1;
+			}
+			if (succtime2!=null){
+				 sou += "&succtime2="+succtime2;
+			}
+			var trade_no = $("#trade_no").val();
+			if (trade_no!=""){
+				sou += "&trade_no="+trade_no;
+			}
+			if (sou!=""){
+			location.href=url+sou;
+			}
+			}
+		
+		function exportxls(){
+			var sou = "";
+			var username = $("#username").val();
+			if (username!=""){
+				sou += "&username="+username;
+			}
+			var status = $("#status").val();
+			if (status!="" && status!=null){
+				sou += "&status="+status;
+			}
+			var dotime1 = $("#dotime1").val();
+			var dotime2 = $("#dotime2").val();
+			var type = $("#type").val();
+			if (dotime1!=null){
+				 sou += "&dotime1="+dotime1;
+			}
+			if (dotime2!=null){
+				 sou += "&dotime2="+dotime2;
+			}
+			var succtime1 = $("#succtime1").val();
+			var succtime2 = $("#succtime2").val();
+			var type = $("#type").val();
+			if (succtime1!=null){
+				 sou += "&succtime1="+succtime1;
+			}
+			if (succtime2!=null){
+				 sou += "&succtime2="+succtime2;
+			}
+			var trade_no = $("#trade_no").val();
+			if (trade_no!=""){
+				sou += "&trade_no="+trade_no;
+			}
+			if (sou!=""){
+				location.href=xlsurl+sou;
+			}else{
+				location.href=xlsurl;
+			}
+		}
+		</script>
+			  
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

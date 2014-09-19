@@ -1,0 +1,8 @@
+<ul class="list-tab clearfix">
+	<li <#if invest_type?exists&&invest_type=="bid">class="cur"</#if>><a href="${request.getContextPath()}/member/invest/bid.html">正在投标的项目</a></li>
+	<li <#if invest_type?exists&&invest_type=="wait">class="cur"</#if>><a href="${request.getContextPath()}/member/invest/list.html?type=1">正在收款的项目</a></li>
+	<li <#if invest_type?exists&&invest_type=="notcollect">class="cur"</#if>><a href="${request.getContextPath()}/member/invest/collect.html?status=0">未收款明细账</a></li>
+	<li <#if invest_type?exists&&invest_type=="hascollect">class="cur"</#if> ><a href="${request.getContextPath()}/member/invest/collect.html?status=1">已收款明细账</a></li>
+	<li <#if invest_type?exists&&invest_type=="tender">class="cur"</#if> ><a href="${request.getContextPath()}/member/invest/tender.html">借出明细账</a></li>
+	<li <#if invest_type?exists&&invest_type=="yes">class="cur"</#if> ><a href="${request.getContextPath()}/member/invest/list.html?type=2">已还清的项目</a></li>
+</ul>

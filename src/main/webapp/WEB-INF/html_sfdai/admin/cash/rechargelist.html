@@ -1,0 +1,181 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#include "banner.html">
+			<div class="main_content">  
+			  <!--模块列表 开始-->
+			<div class="module_add">	
+			  <form action="" method="post">
+			  <table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+				<tr >
+					<td width="" class="main_td">ID</td>
+		            <td width="*" class="main_td">流水号</td>
+					<td width="*" class="main_td">用户名称</td>
+					<td width="*" class="main_td">真实姓名</td>
+					<td width="" class="main_td">类型</td>
+					<td width="" class="main_td">所属银行</td>
+					<td width="" class="main_td">充值金额</td>
+					<td width="" class="main_td">费用</td>
+					<td width="" class="main_td">到账金额</td>
+					<td width="" class="main_td">充值时间</td>
+					<td width="" class="main_td">状态</td>
+					<td width="" class="main_td">操作</td>
+				</tr>
+				<#list list as item>
+				<tr>
+					<td>${(item.id!0)?c}</td>
+		            <td >${item.trade_no!"ERROR!"}</td>
+					<td><a href="${webroot}/user/show.html?user_id=${item.user_id?c}">${item.username!}</a></td>
+					<td>${item.realname!}</td>
+					<td><#if item.type=="1">网上充值<#else>线下充值</#if></td>
+					<td>${item.paymentname!}</td>
+					<td>${item.money!}元</td>
+					<td>${item.fee!}元</td>
+					<td><font color="#FF0000">${item.total!}元</font></td>
+					<td>${dateformat(item.addtime!"")}</td>
+					<td><font color="#6699CC"><#if item.status==1>成功<#elseif item.status==0>未审核<#else>审核失败</#if></font></td>
+					<td ><a href="<#if item.payment??&&item.payment=="50">viewBack.html<#else>viewRecharge.html</#if>?id=${item.id?c}">审核/查看</a></td>
+				</tr>
+				</#list>
+				<tr>
+				<td colspan="10" class="action">
+				<div class="floatl">
+			         <a href="#" onclick="exportxls()">导出当前报表</a>
+					   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					   <#if sum??><font color="red"> 充值总额：${sum}元 </font></#if>
+					</div>
+				<#if param?exists>
+					<#if param.get("dotime1")?exists><#assign dotime1=param.get("dotime1")></#if>
+					<#if param.get("dotime2")?exists><#assign dotime2=param.get("dotime2")></#if>
+					<#if param.get("username")?exists><#assign username=param.get("username")></#if>
+					<#if param.get("status")?exists><#assign status=param.get("status")></#if>
+					<#if param.get("account_type")?exists><#assign account_type=param.get("account_type")></#if>
+					<#if param.get("paymentname")?exists><#assign paymentname=param.get("paymentname")></#if>
+				</#if>
+				<div class="floatr">
+				充值时间：<input type="text" name="dotime1" id="dotime1" value="${dotime1!}" size="15" onclick="change_picktime()"/> 到 <input type="text"  name="dotime2" value="${dotime2!}" id="dotime2" size="15" onclick="change_picktime()"/>	
+
+				充值类型：<select id="account_type" >
+							<option value="0" <#if account_type??&&account_type=="0">selected="selected"</#if>>全部</option>
+		                    <option value="1" <#if account_type??&&account_type=="1">selected="selected"</#if>>网上充值</option>
+		                    <option value="2" <#if account_type??&&account_type=="2">selected="selected"</#if>>线下充值</option>
+		                  </select> 
+
+		        所属银行：<select id="paymentname" >
+							<option value="0" <#if paymentname??&&paymentname=="0">selected="selected"</#if>>全部</option>
+		                    <option value="32" <#if paymentname??&&paymentname=="32">selected="selected"</#if>>国付宝</option>
+		                    <option value="10" <#if paymentname??&&paymentname=="10">selected="selected"</#if>>环讯</option>
+							<option value="12" <#if paymentname??&&paymentname=="12">selected="selected"</#if>>易宝支付</option>
+							<option value="13" <#if paymentname??&&paymentname=="13">selected="selected"</#if>>宝付支付</option>
+							<option value="48" <#if paymentname??&&paymentname=="48">selected="selected"</#if>>后台充值</option>
+		                 </select> 
+
+		                    用户名：<input type="text" name="username" id="username" value="${username!}"/> 
+		                    状态<select id="status" >
+		                    <option value="0" <#if status??&&status=="0">selected="selected"</#if>>未审核</option>
+		                    <option value="1" <#if status??&&status=="1">selected="selected"</#if>>审核成功</option>
+		                    <option value="2" <#if status??&&status=="2">selected="selected"</#if>>审核失败</option>
+		                </select> 
+		            <input type="button" value="搜索" / onclick="sousuo()">
+				</div>
+				</td>
+			</tr>
+				<tr>
+					<td colspan="11" class="page">
+						<#import "../../common/page.html" as pager>  
+			         	<@pager.pagination page=page url="/admin/cash/rechargelist.html" map=param style="style1"  /> 
+					</td>
+				</tr>
+			</table>
+		</form>	
+		<!--充值记录列表 结束-->
+		<!--提现审核 开始-->
+		<script>
+		var url = 'rechargelist.html?search=true';
+		var xlsurl = 'rechargelist.html?type=export';
+		
+		function sousuo(){
+			var sou = "";
+			var account_type=$("#account_type").val();
+			var paymentname=$("#paymentname").val();
+			var username = $("#username").val();
+			if (username!=""){
+				sou += "&username="+username;
+			}
+			var status = $("#status").val();
+			if (status!="" && status!=null){
+				sou += "&status="+status;
+			}
+			var dotime1 = $("#dotime1").val();
+			var dotime2 = $("#dotime2").val();
+			var type = $("#type").val();
+			if (dotime1!=null){
+				 sou += "&dotime1="+dotime1;
+			}
+			if (dotime2!=null){
+				 sou += "&dotime2="+dotime2;
+			}
+			if(account_type!=null){
+					
+				sou+="&account_type="+account_type;
+			}
+	        if(paymentname!=null){
+	            sou+="&paymentname="+paymentname;
+	        }
+				if (sou!=""){
+				location.href=url+sou;
+				}
+			}
+		function exportxls(){
+			var sou = "";
+			var account_type=$("#account_type").val();
+			var paymentname=$("#paymentname").val();
+			var username = $("#username").val();
+			if (username!=""){
+				sou += "&username="+username;
+			}
+			var status = $("#status").val();
+			if (status!="" && status!=null){
+				sou += "&status="+status;
+			}
+			var dotime1 = $("#dotime1").val();
+			var dotime2 = $("#dotime2").val();
+			var type = $("#type").val();
+			if (dotime1!=null){
+				 sou += "&dotime1="+dotime1;
+			}
+			if (dotime2!=null){
+				 sou += "&dotime2="+dotime2;
+			}
+			if(account_type!=null){
+					
+				sou+="&account_type="+account_type;
+			}
+	        if(paymentname!=null){
+	            sou+="&paymentname="+paymentname;
+	        }
+			if (sou!=""){
+				location.href=xlsurl+sou;
+			}else{
+				location.href=xlsurl;
+			}
+		}
+		</script>
+			  
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

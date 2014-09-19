@@ -1,0 +1,81 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "../attestation/left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<div class="main_site">
+				<ul>
+					<#include "bar.html">
+					<li class="title">证明材料 <span>/ 客户证明材料</span></li>
+				</ul>
+			</div>
+			<div class="main_content">
+				<#if userCertifyList??>
+
+				<table border="0" cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr>
+						<td width="" class="main_td">ID</td>
+						<td width="*" class="main_td">用户名</td>
+						<td width="*" class="main_td">真实姓名</td>
+						<th width="" class="main_td">认证类型</th>
+						<th width="" class="main_td">认证图片</th>
+						<th width="" class="main_td">认证状态</th>
+						<th width="" class="main_td">认证积分</th> 
+						<th width="" class="main_td">认证简介</th>
+						<td width="" class="main_td">操作</td>
+					</tr>
+					<#list userCertifyList as obj>
+					<tr>
+						
+						<td class="main_td1" align="center">${obj.id?c}</td>
+						<td class="main_td1" align="center">${obj.username!"-"}</td>
+						<td class="main_td1" align="center">${obj.realname!"-"}</td>
+						<td class="main_td1" align="center">${obj.type_name!"-"}</td>
+						<td class="main_td1" align="center"><a href="${webroot}/${obj.litpic}" target="_blank"><#if obj.litpic??><img src="${webroot}/${obj.litpic}" width="80px;" height="80px;"></#if></a></td>
+						<td class="main_td1" align="center"><#if obj.status==1>审核通过<#elseif obj.status==3>审核没有通过<#else>未审核</#if></td>
+				        <td class="main_td1" align="center">${obj.jifen!"-"}</td>  
+						<td class="main_td1" align="center">${obj.name!"-"}</td>
+						<td class="main_td1" align="center">
+						<#if obj.status!=1><a onclick='tipsWindown("客户证明资料审核","url:post?userCertifyAudit.html?jifen=${obj.jifen}&pid=${obj.id?c}&type=userCertify",500,230,"true","","true","text");'
+								href="javascript:void(0)">审核</a><#else>-</#if></td>
+					</tr>
+					</#list>
+					<tr>
+						<td colspan="10" class="action">
+							<div class="floatl"></div>
+							<div class="floatr">
+								<form action="${request.getContextPath()}/admin/attestation/userCertify.html" method="post">
+									用户名：<input type="text" name="username" id="username" value="${params.username!}" /> 姓名：<input
+										type="text" name="realname" id="realname"  value="${params.realname!}"/> <input
+										type="submit" value="搜索"   />
+								</form>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="10" class="page">
+						<#import "../../common/page.html" as pager> <@pager.pagination page=page
+							url="/admin/attestation/userCertify.html" map=params
+							style="style1" />
+						
+							
+							
+							</td>
+						<td class="page" colspan="11"></td>
+					</tr>
+				</table>
+				<#else> 暂无信息 </#if>
+			</div>
+		</div>
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<div class="main_content">
+			
+			<table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+				  <form action="batchOperateArticle.html" method="post">
+					<tr>
+						<td width="" class="main_td"><input type="checkbox" name="allcheck" onclick="checkFormAll(this.form)"/></td>
+						<td width="" class="main_td">ID</td>
+						<td width="*" class="main_td">标题</td>
+						<td width="" class="main_td">栏目类型</td>
+						<td width="" class="main_td">状态</td>
+						<td width="" class="main_td">排序</td>
+						<td width="" class="main_td">属性</td>
+						<td width="" class="main_td">操作</td>
+					</tr>
+					<#list list as item>
+					<#assign status=item.status!(1)>
+					<tr>
+						<td class="main_td1" align="center" ><input type="checkbox" name="bid" id="id[]" value="${item.id!0}"/></td>
+						<td class="main_td1" align="center" >${item.id!0}</td>
+						<td class="main_td1" align="center">${item.name!""}</td>
+						<td class="main_td1" align="center" >${item.sitename!""}</td>
+						<td class="main_td1" align="center" ><a href="modifyArticleStatus.html?id=${item.id!0}&status=${item.status!0}"><#if status== 1>显示<#else>隐藏</#if></a></td>
+						<td class="main_td1" align="center">
+							<input type="text" name="orders" value="${item.order?c}"></td>			
+						 
+						</td>
+						<td class="main_td1" align="center" >-</td>
+						<td class="main_td1" align="center" > 
+						<a href="modifyArticle.html?id=${item.id!0}">修改</a> 
+						<a href="#" onClick="javascript:if(confirm('确定要删除吗?删除后将不可恢复')) location.href='delArticle.html?id=${item.id!0}'">删除</a></td>
+					</tr>
+					</#list>
+					<tr>
+						<td colspan="8"  class="action" >
+						<div class="floatl"><select name="type">
+						<option value="1">排序</option>
+						<option value="2">显示</option>
+						<option value="3">隐藏</option>
+						<option value="6">删除</option>&nbsp;&nbsp;&nbsp;
+						</select> <input type="submit" value="确认操作" /> 排序不用全选
+						</div>
+						<div class="floatr">
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="8" class="page">
+							<#import "../../common/page.html" as pager>  
+			         	 	<@pager.pagination page=page url="/admin/article/showArticle.html" map=param style="style1" />
+						</td>
+					</tr>
+					</table>
+					
+				</form>	
+			
+			
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

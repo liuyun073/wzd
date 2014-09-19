@@ -1,0 +1,271 @@
+<script type="text/javascript">
+/* function changeUserMenu(id){
+    var mu = $("#user_title_"+id);
+    var qe = $("#user_menu_"+id);
+    if(qe.css('display')=='none'){
+        mu.removeClass('title1').addClass('title');
+        qe.css('display', 'block');
+    }else{
+        mu.removeClass('title').addClass('title1');
+        qe.css('display', 'none');
+    }
+}*/
+$(function(){
+
+	function showBox(obj){
+		var objects = $(obj);
+		objects.each(function(){
+			var i = objects.index(this);
+			zhShow(this,i);
+		});
+		
+		function zhShow(obj,num){
+			var box = $(obj);
+			var j = num;
+			menu(box,j);
+			function menu(JSbox,k){
+				var Tit = $("span:first",JSbox);
+				var oDiv = $("ul:first",JSbox);
+				for(var s = 0; s<=k; s++)
+				{
+					if($(Tit[s]).hasClass("hover"))
+					{
+						
+						$(oDiv[s]).css("display","block");	
+					}
+				}
+				Tit.toggle(function(){
+					oDiv.slideDown();
+					Tit.addClass("hover").siblings().removeClass("hover")
+					},function(){
+						oDiv.slideUp();
+						Tit.removeClass("hover")
+					})
+				}
+		}	
+	}
+	showBox(".zh-JS");	
+})	
+</script>
+
+<div class="clearfix">
+	<div class="user_menus">
+		<div class="zh-div zh-JS">
+			<span class="zh-div-title <#if mid??&&mid="m_invest">hover</#if>">我是投资者</span>
+			<ul>
+				<li>
+					<a href="${webroot}/member/invest/bid.html">正在投标的项目</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/invest/list.html?type=1">正在收款的项目</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/invest/collect.html?status=0">未收款明细帐</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/invest/collect.html?status=1">已收款明细帐</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/invest/tender.html">借出明细帐</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/invest/list.html?type=2">已还清项目</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/invest/auto.html">自动投标设置</a>
+				</li>
+			</ul>
+		</div>
+		<div class="zh-div zh-JS">
+			<span class="zh-div-title <#if mid??&&mid="m_borrow">hover</#if>">我是借款者</span>
+			<ul>
+				<li>
+					<a href="${webroot}/member/borrow/borrow.html">正在招标的项目</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/borrow/borrow.html?type=unpublish">尚未发布的项目</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/borrow/borrow.html?type=repayment">正在还款的项目</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/borrow/borrow.html?type=repaymentyes">已还款的项目</a>
+				</li>
+				<li>
+					<a href="${request.getContextPath()}/member/borrow/repaymentdetail.html">还款明细帐</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/borrow/limitapp.html">授信额度</a>
+				</li>
+			</ul>
+		</div>
+		<div class="zh-div zh-JS">
+			<span class="zh-div-title <#if mid??&&mid="m_account">hover</#if>">资金管理</span>
+			<ul>
+				<li>
+					<a href="${webroot}/member/account/newrecharge.html">帐户充值</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/account/bank.html">银行帐户</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/account/newcash.html">帐户提现</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/account/log.html">资金记录</a>
+				</li>
+			</ul>
+		</div>
+		<div class="zh-div zh-JS">
+			<span class="zh-div-title <#if mid??&&mid="m_info">hover</#if>">基本设置</span>
+			<ul>
+				<li>
+					<a href="${webroot}/member/userinfo/userinfo.html">填写资料</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/identify/avatar.html">更换头像</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/message/box.html">站内信箱</a>
+				</li>
+			</ul>
+		</div>
+		<div class="zh-div zh-JS">
+			<span class="zh-div-title <#if mid??&&mid="m_identify">hover</#if>">认证中心</span>
+			<ul>
+				<li>
+					<a href="${webroot}/member/identify/realname.html">实名认证</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/identify/email.html">邮箱认证</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/identify/phone.html">手机认证</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/identify/video.html">视频认证</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/identify/scene.html">现场认证</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/identify/attestation.html">资料证明</a>
+				</li>
+			</ul>
+		</div>
+		<div class="zh-div zh-JS ">
+			<span class="zh-div-title <#if mid??&&mid="m_friend">hover</#if> ">好友管理</span>
+			<ul>
+				<li>
+					<a href="${webroot}/member/friend/invite.html">邀请好友</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/friend/request.html">好友请求</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/friend/myfriend.html">我的好友</a>
+				</li>
+				<li>
+					<a href="${webroot}/member/friend/black.html">我的黑名单</a>
+				</li>
+			</ul>
+		</div>
+		<div class="zh-div zh-JS">
+			<span class="zh-div-title <#if mid??&&mid="m_security">hover</#if> ">安全中心</span>
+			<ul>
+				<li>
+					<a href="${webroot}/memberSecurity/userpwd.html">修改登录密码</a>
+				</li>
+				<li>
+					<a href="${webroot}/memberSecurity/paypwd.html">修改支付密码</a>
+				</li>
+				<!--<li><a href="${webroot}/memberSecurity/protection.html">密码保护</a></li>-->
+			</ul>
+		</div>
+	</div>
+</div>
+<!--<a href="#"><img src="${webroot}${theme_dir}/media/bg/zh-ad3.jpg" style="margin-top:10px;"></a>
+<a href="#"><img src="${webroot}${theme_dir}/media/bg/zh-ad2.jpg" style="margin-top:10px;"></a>-->
+<a href="#"><img src="${webroot}${theme_dir}/media/bg/zh-ad1.jpg" style="margin-top: 10px;"> </a>
+<!--
+<div class="user_menus">
+	<div class="title" id="user_title_touzi"><span onclick="changeUserMenu('touzi')">&nbsp;</span>我是投资者</div>
+	<div class="menu">
+		<ul id="user_menu_touzi" style="display:block">
+			<li><a href="${webroot}/invest/index.html" target="_blank">投资记录</a></li>
+			<li><a href="${webroot}/member/invest/list.html">正在投资</a></li>
+			<li><a href="${webroot}/member/invest/bid.html">投标中</a></li>
+			<li><a href="${webroot}/member/invest/auto.html">自动投标设置</a></li>
+		</ul>
+	</div>
+</div>
+<div class="user_menus">
+	<div class="title" id="user_title_jiekuan" ><span onclick="changeUserMenu('jiekuan')">&nbsp;</span>我是借款者</div>
+	<div class="menu">
+		<ul id="user_menu_jiekuan">
+			<li><a href="${webroot}/borrow/index.html" target="_blank">借款记录</a></li>
+			<li><a href="${webroot}/member/borrow/borrow.html">正在借款</a></li>
+			<li><a href="${webroot}/member/borrow/borrow.html?type=unpublish">正在审核</a></li>
+			<li><a href="${webroot}/member/borrow/borrow.html?type=repayment">正在招标</a></li>
+			<li><a href="${webroot}/member/borrow/limitapp.html">授信额度</a></li>
+		</ul>
+	</div>
+</div>
+<div class="user_menus">
+	<div class="title" id="user_title_zijin" ><span onclick="changeUserMenu('zijin')">&nbsp;</span>资金管理</div>
+	<div class="menu">
+		<ul id="user_menu_zijin">
+			<li><a href="${webroot}/member/account/newrecharge.html">帐户充值</a></li>
+			<li><a href="${webroot}/member/account/bank.html">银行帐户</a></li>
+			<li><a href="${webroot}/member/account/newcash.html">帐户提现</a></li>
+			<li><a href="${webroot}/member/account/log.html">资金记录</a></li>		
+		</ul>
+	</div>
+</div>
+<div class="user_menus">
+	<div class="title" id="user_title_shezhi" ><span onclick="changeUserMenu('shezhi')">&nbsp;</span>基本设置</div>
+	<div class="menu">
+		<ul id="user_menu_shezhi">
+			<li><a href="${webroot}/member/userinfo/userinfo.html">填写资料</a></li>
+			<li><a href="${webroot}/member/identify/avatar.html">更换头像</a></li>
+			<li><a href="${webroot}/member/identify/avatar.html">更换头像</a></li>
+			<li><a href="${webroot}/member/message/box.html">站内信箱</a></li>
+			<!-- <li><a href="/index.php?user&q=code/user/privacy">设置隐私</a></li>
+			<li><a href="/index.php?user&q=code/remind">提醒设置</a></li>-->
+<!--</ul>
+	</div>
+</div>
+<div class="user_menus">
+	<div class="title" id="user_title_renzheng" ><span onclick="changeUserMenu('renzheng')">&nbsp;</span>认证中心</div>
+	<div class="menu">
+		<ul id="user_menu_renzheng">
+			<li><a href="${webroot}/member/identify/realname.html">实名认证</a></li>
+			<li><a href="${webroot}/member/identify/email.html">邮箱认证</a></li>
+			<li><a href="${webroot}/member/identify/phone.html">手机认证</a></li>
+			<li><a href="${webroot}/member/identify/video.html">视频认证</a></li>
+			<li><a href="${webroot}/member/identify/scene.html">现场认证</a></li>
+			<li><a href="${webroot}/member/identify/attestation.html">资料证明</a></li>
+		</ul>
+	</div>
+</div>
+<div class="user_menus">
+	<div class="title" id="user_title_haoyou" ><span onclick="changeUserMenu('haoyou')">&nbsp;</span>好友管理</div>
+	<div class="menu">
+		<ul id="user_menu_haoyou">
+			<li><a href="${webroot}/member/friend/invite.html">邀请好友</a></li>
+			<li><a href="${webroot}/member/friend/request.html">好友请求</a></li>
+			<li><a href="${webroot}/member/friend/myfriend.html">我的好友</a></li>
+			<li><a href="${webroot}/member/friend/black.html">我的黑名单</a></li>
+		</ul>
+	</div>
+</div>
+<div class="user_menus">
+	<div class="title" id="user_title_safe" ><span onclick="changeUserMenu('safe')">&nbsp;</span>安全中心</div>
+	<div class="menu">
+		<ul id="user_menu_safe">
+			<li><a href="${webroot}/memberSecurity/userpwd.html">修改登录密码</a></li>
+			<li><a href="${webroot}/memberSecurity/paypwd.html">修改支付密码</a></li>
+			<li><a href="${webroot}/memberSecurity/protection.html">密码保护</a></li>
+		</ul>
+	</div>
+</div>-->

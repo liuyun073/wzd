@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#assign moduleName="投标列表" >
+			<#include "banner.html">
+			<div class="main_content">
+				<form action="" method="post">
+				<table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr>
+						<td width="" class="main_td">ID</td>
+						<td width="*" class="main_td" align="left">投标人</td>
+						<td width="*" class="main_td">投标金额</td>
+						<td width="" class="main_td">有效投标金额</td>
+						<td width="" class="main_td">奖励</td>
+						<td width="" class="main_td">投标时间</td>
+					</tr>
+					<#import "../../common/function.html" as func>  
+					<#list list as item>
+					<tr>
+						<td>${(page.currentPage-1)*page.pernum+item_index+1}</td>
+						<td class="main_td1" align="left">
+							${item.username}
+						</td>
+						<td align="left">￥${func.format2(item.money!"0")}</td>
+						<td align="left">
+							￥${func.format2(item.account!"0")}
+						</td>
+						<td align="left">
+							<#if award??&&award==0>	没有
+								<#elseif award??&&award==1>
+							 		${(borrow.part_account)!0}%奖励
+								<#elseif award??&&award==2>
+									￥${(borrow.funds)!0}元奖励
+								<#else>
+								</#if>
+						</td>
+						<td align="left">${dateformat(item.addtime)}</td>
+					</tr>
+					</#list>
+					<tr>
+					<td colspan="10" class="action">
+						<div class="floatl">
+							<input type="button" onclick="exportxls()" value="导出列表" />
+						</div>
+					</td>
+					</tr>
+					<tr>
+						<td colspan="14" class="action">
+							<#if param??&&param.status??>
+								<#assign status=(param.get("status"))?number >
+							<#else>
+								<#assign status=-1>
+							</#if>
+							<div class="floatr">
+								
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="14" class="page">
+							<#import "../../common/page.html" as pager>  
+			         	 	<@pager.pagination page=page url="/admin/borrow/tenderlist.html?borrow_id=${borrow.id?c}" map=param style="style1" /> 
+						</td>
+					</tr>
+				</table>
+				</form>	
+				<script>
+				var urls = '?borrow_id=${borrow.id?c}&search=true';
+				var xlsurl='?borrow_id=${borrow.id?c}&type=export';
+				function sousuo(){
+					var sou = "";
+					var username = $("#username").val();
+					if (username!=null&&username!=""&&username!="undefine"){
+						sou += "&username="+username;
+					}
+					var status = $("#status").val();
+					if (status!=null&&status!=""&&status!="undefine"){
+						sou += "&status="+status;
+					}
+					var url=urls+sou
+					location.href=url;
+				}
+				function exportxls(){
+					var sou = "";
+					var username = $("#username").val();
+					if (username!=null&&username!=""&&username!="undefine"){
+						sou += "&username="+username;
+					}
+					var status = $("#status").val();
+					if (status!=null&&status!=""&&status!="undefine"){
+						sou += "&status="+status;
+					}
+					var url=xlsurl+sou
+					location.href=url;
+				}
+				</script>
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

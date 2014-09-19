@@ -1,0 +1,189 @@
+<!DOCTYPE>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#include "banner.html">
+			<div class="main_content">
+			  <form action="" method="post">
+				<table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr >
+						<td width="" class="main_td">ID</td>
+						<td width="*" class="main_td">用户名称</td>
+						<td width="*" class="main_td">真实姓名</td>
+						<td width="" class="main_td">提现账号</td>
+						<td width="" class="main_td">提现银行</td>
+						<td width="" class="main_td">支行</td>
+						<td width="" class="main_td">提现总额</td>
+						<td width="" class="main_td">到账金额</td>
+						<td width="" class="main_td">手续费</td>
+						<td width="" class="main_td">红包抵扣</td>
+						<td width="" class="main_td">提现时间</td>
+						<td width="" class="main_td">状态</td>
+						<td width="" class="main_td">操作</td>
+					</tr>
+					<#include "../../common/function.html"> 
+					<#list list as item>
+					<tr>
+						<td>${(item.id!0)?c}</td>
+						<td><a onclick='tipsWindown("用户详细信息查看","url:get?/admin/attestation/viewUserInfo.html?username=${item.username!}",500,230,"true","","true","text");'
+								href="javascript:void(0)">${item.username!}</a></td>
+						<td>${item.realname!}</td>
+						<td>${item.account!}</td>
+						<td>${item.bankname!}</td>
+						<td>${item.branch!}</td>
+						<td>${format2((item.total!"0"))}</td>
+						<td>${format2((item.credited!"0"))}</td>
+						<td>${format2((item.fee!"0"))}</td>
+						<td>${item.hongbao!0}</td>	
+						<td>${dateformat(item.addtime)}</td>
+						<td><#if item.status==0>审核中<#elseif item.status==1>成功<#elseif item.status==4>用户取消<#elseif item.status==3>审核未通过</#if></td>
+						<td><#if item.status==0||item.status==2><a href="viewCash.html?id=${item.id?c}">审核/查看</a><#else>-</#if></td>
+					</tr>
+					</#list>
+					<tr>
+						<td colspan="11" class="action">
+							<div class="floatl">
+					         <a href="#" onclick="exportxls()">导出当前报表</a>
+							  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							  <font color="red"> 提现总额${((totalSum)!0)?string("##.##")}元 ，提现到账总额${((creditSum)!0)?string("##.##")}元 ，手续费总额${((feeSum)!0)?string("##.##")}元 </font><br/>
+							</div>
+							<#if param?exists>
+							<#if param.get("dotime1")?exists><#assign dotime1=param.get("dotime1")></#if>
+							<#if param.get("dotime2")?exists><#assign dotime2=param.get("dotime2")></#if>
+							</#if>
+
+							<#if param??&&param.status??>
+								<#assign status=(param.get("status"))?number >
+							<#else>
+								<#assign status=0>
+							</#if>
+							<div class="floatr">
+
+								时间：<input type="text" name="dotime1" id="dotime1" value="${dotime1!}" size="15" onclick="change_picktime()"/> 到 <input type="text"  name="dotime2" value="${dotime2!}" id="dotime2" size="15" onclick="change_picktime()"/>	
+
+								用户名：<input type="text" name="username" id="username" value="${param.username!}"/> 
+								状态<select id="status" >
+									<option value="0" <#if status==0 >selected="selected"</#if>>全部</option>
+									<option value="1" <#if status==1 >selected="selected"</#if> >已通过</option>
+									<option value="2" <#if status==2 >selected="selected"</#if> >审核中</option>
+									<option value="3" <#if status==3 >selected="selected"</#if> >未通过</option>
+									</select>
+								<input type="button" value="搜索"  onclick="sousuo()" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="11" class="page">
+						<#import "../../common/page.html" as pager>  
+			         	 	<@pager.pagination page=page url="/admin/cash/showCash.html" map=param style="style1" /> 
+						</td>
+					</tr>
+				</table>
+			</form>	
+			<!--提现记录列表 结束-->
+<!--	<script>
+				var url = 'showCash.html?search=true';
+				var xlsurl = 'showCash.html?type=export';
+				var sou="";
+				function sousuo(){
+					var username = $("#username").val();
+					if (username!=""){
+						sou += "&username="+username;
+					}
+					var status = $("#status").val();
+					if (status!=""){
+						sou += "&status="+status;
+					}
+					if (sou!=""){
+						location.href=url+sou;
+					}
+				}
+				function exportxls(){
+					var username = $("#username").val();
+					if (username!=""){
+						sou += "&username="+username;
+					}
+					var status = $("#status").val();
+					if (status!=""){
+						sou += "&status="+status;
+					}
+					if (sou!=""){
+						location.href=xlsurl+sou;
+					}else{
+						location.href=xlsurl;
+					}					
+				}
+		</script>	-->
+
+	<script>
+		var url = 'showCash.html?search=true';
+		var xlsurl = 'showCash.html?type=export';
+		
+		function sousuo(){
+			var sou = "";
+			var username = $("#username").val();
+			if (username!=""){
+				sou += "&username="+username;
+			}
+			var status = $("#status").val();
+			if (status!="" && status!=null){
+				sou += "&status="+status;
+			}
+			var dotime1 = $("#dotime1").val();
+			var dotime2 = $("#dotime2").val();
+			
+			if (dotime1!=null){
+				 sou += "&dotime1="+dotime1;
+			}
+			if (dotime2!=null){
+				 sou += "&dotime2="+dotime2;
+			}
+				if (sou!=""){
+				location.href=url+sou;
+				}
+			}
+		function exportxls(){
+			var sou = "";
+			var username = $("#username").val();
+			if (username!=""){
+				sou += "&username="+username;
+			}
+			var status = $("#status").val();
+			if (status!="" && status!=null){
+				sou += "&status="+status;
+			}
+			var dotime1 = $("#dotime1").val();
+			var dotime2 = $("#dotime2").val();
+			
+			if (dotime1!=null){
+				 sou += "&dotime1="+dotime1;
+			}
+			if (dotime2!=null){
+				 sou += "&dotime2="+dotime2;
+			}
+			if (sou!=""){
+				location.href=xlsurl+sou;
+			}else{
+				location.href=xlsurl;
+			}
+		}
+	</script>
+
+
+
+			</div>
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

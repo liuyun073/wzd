@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<#include "../head.html">
+<body>
+	<#include "../top.html">
+	<!-- div.main start  -->
+	<div class="main">
+		<!-- div.main_left start  -->
+		<div class="main_left"><#include "left.html"></div>
+		<!-- div.main_left end  -->
+		<!-- div.main_right start  -->
+		<div class="main_right">
+			<#assign moduleName="权限管理" >
+			<#include "banner.html">
+			<div class="main_content">
+				<form action="" method="post">
+				<table  border="0"  cellspacing="1" bgcolor="#CCCCCC" width="100%">
+					<tr>
+						<td width="" class="main_td">ID</td>
+						<td width="" class="main_td">权限名称</td>
+						<td width="" class="main_td">权限名字</td>
+						<td width="" class="main_td">路径</td>
+						<td width="" class="main_td">父编码</td>
+						<td width="" class="main_td">级别</td>
+						<td width="" class="main_td">备注</td>
+			            <td width="" class="main_td">操作</td>
+					</tr>
+					<#list list as item>
+					<tr>
+						<td>${item.id!0}</td>
+						<td><#if item.level??&&item.level lt 3><a href="allPurview.html?pid=${item.id!0}">${item.name!""}</a><#else>${item.name!""}</#if></td>
+						<td>${item.purview!0}</td>
+						<td>${item.url!0}</td>
+						<td>${item.pid!0}</td>
+						<td>${item.level!0}</td>
+						<td>${item.remark!0}</td>
+			            <td><a href="modifyPurview.html?id=${item.id!0}">修改</a>&nbsp;<a href="delPurview.html?id=${item.id!0}">删除</a></td>
+					</tr>
+					</#list>
+					<tr>
+						<td colspan="10" class="action">
+							<div class="floatr">
+								<a href="addPurview.html?pid=${pid}">新增权限</a> 
+							</div>
+						</td>
+					</tr>
+				</table>
+				
+		</div>
+		<!-- div.main_right end  -->
+	</div>
+	<!-- div.main end  -->
+	<#include "../foot.html">
+</body>
+</html>

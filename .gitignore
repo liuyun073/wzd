@@ -1,1 +1,9 @@
 /target
+/.settings
+.classpath
+.project
+/indexes
+*.class 
+*.jar
+*.war
+*.ear

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<#include "include/resource.html"> 
+<body>
+<#assign nid="member" >
+<#include "include/header.html"> 
+	<!--用户注册 开始-->
+<div id="main" class="clearfix">
+	<form action="" method="post" name="formUser" >
+		<div class="user_action_reg_form">
+			<div class="alert alert-info"> <a class="close" data-dismiss="alert">x</a>
+				<#if !errormsg?exists>
+					请重新设置你的密码
+				<#else>
+					<span style="color:red">${errormsg}</span>
+				</#if>
+			</div> 
+			<br/>
+				<p>
+				  <label for="email">用户名：</label>
+				  <strong style="font-size:16px;"><#if u?exists>${u.username?default("")}</#if></strong>
+				</p>
+				<br/>
+				<p>
+				  <label for="email">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+				  <input type="password" maxLength=15  class="user_aciton_input1" name="password" id="password" >
+				</p>
+				<br/>
+				<p>
+				  <label for="email">确认密码：</label>
+				  <input type="password"  maxLength=15  class="user_aciton_input1" name="confirm_password" id="confirm_password"  >
+				</p>
+				<br/>
+				<p align="left">
+					<span> 
+						<input type="submit" value="确认" class="btn-action"  /> 
+						<input type="hidden" name="type" value="setpwd" />
+						<input type="hidden" name="username" value="<#if u?exists>${u.username?default("")}</#if>" />
+					</span>
+				</p>	
+				</div>
+			</form>
+</div>
+<!--用户注册 结束-->
+<#include "include/footer.html"> 
+</body>
+</html>
