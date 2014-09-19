@@ -11,7 +11,7 @@
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
   <bean id="noticePayBorrowService"
-        class="com.rd.service.impl.NoticePayBorrowServiceImpl">
+        class="com.liuyun.site.service.impl.NoticePayBorrowServiceImpl">
         <property name="borrowDao">
             <ref bean="borrowDao" />
         </property>
@@ -54,7 +54,7 @@
     </bean>
 
    <bean id="noticeService"
-        class="com.rd.service.impl.NoticeServiceImpl">
+        class="com.liuyun.site.service.impl.NoticeServiceImpl">
         <property name="userDao">
             <ref bean="userDao" />
         </property>

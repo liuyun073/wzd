@@ -11,14 +11,14 @@
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<bean id="cooperationLoginDao"
-        class="com.rd.dao.jdbc.CooperationLoginDaoImpl">
+        class="com.liuyun.site.dao.jdbc.CooperationLoginDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
  
   <bean id="cooperationLoginService"
-        class="com.rd.service.impl.CooperationLoginServiceImpl">
+        class="com.liuyun.site.service.impl.CooperationLoginServiceImpl">
         <property name="cooperationLoginDao">
             <ref bean="cooperationLoginDao" />
         </property>

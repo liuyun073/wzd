@@ -10,38 +10,38 @@
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-	<bean id="systemDao" class="com.rd.dao.jdbc.SystemDaoImpl">
+	<bean id="systemDao" class="com.liuyun.site.dao.jdbc.SystemDaoImpl">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 	</bean>
 
-	<bean id="systemService" class="com.rd.service.impl.SystemServiceImpl">
+	<bean id="systemService" class="com.liuyun.site.service.impl.SystemServiceImpl">
 		<property name="systemDao">
 			<ref bean="systemDao" />
 		</property>
 	</bean>
 
 
-	<bean id="usercreditdao" class="com.rd.dao.jdbc.UserCreditDaoImpl">
+	<bean id="usercreditdao" class="com.liuyun.site.dao.jdbc.UserCreditDaoImpl">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 	</bean>
 
-	<bean id="adminuserinfoservice" class="com.rd.service.impl.AdminUserInfoSericeImpl">
+	<bean id="adminuserinfoservice" class="com.liuyun.site.service.impl.AdminUserInfoSericeImpl">
 		<property name="usercreditdao">
 			<ref bean="usercreditdao" />
 		</property>
 	</bean>
 
-	<bean id="attestationService" class="com.rd.service.impl.AttestationServiceImp">
+	<bean id="attestationService" class="com.liuyun.site.service.impl.AttestationServiceImp">
 		<property name="attestationDao">
 			<ref bean="attestationDao" />
 		</property>
 	</bean>
 	
-	<bean id="manageCashService" class="com.rd.service.impl.ManageCashServiceImpl">
+	<bean id="manageCashService" class="com.liuyun.site.service.impl.ManageCashServiceImpl">
 		<property name="accountDao">
 			<ref bean="accountDao" />
 		</property>
@@ -64,75 +64,75 @@
 			<ref bean="protocolDao" />
 		</property>
 	</bean>
-	<bean id="purviewDao" class="com.rd.dao.jdbc.PurviewDaoImpl">
+	<bean id="purviewDao" class="com.liuyun.site.dao.jdbc.PurviewDaoImpl">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 	</bean>
-	<bean id="manageAuthService" class="com.rd.service.impl.ManageAuthServiceImpl">
+	<bean id="manageAuthService" class="com.liuyun.site.service.impl.ManageAuthServiceImpl">
 		<property name="purviewDao">
 			<ref bean="purviewDao" />
 		</property>
 	</bean>
 	
 	 <bean id="creditCardDao"
-        class="com.rd.dao.jdbc.CreditCardDaoImpl">
+        class="com.liuyun.site.dao.jdbc.CreditCardDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
 	
 	<bean id="noticeConfigDao"
-        class="com.rd.dao.jdbc.NoticeConfigDaoImpl">
+        class="com.liuyun.site.dao.jdbc.NoticeConfigDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
     <bean id="linkageDao"
-        class="com.rd.dao.jdbc.LinkageDaoImpl">
+        class="com.liuyun.site.dao.jdbc.LinkageDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
 	 <bean id="noticeDao"
-        class="com.rd.dao.jdbc.NoticeDaoImpl">
+        class="com.liuyun.site.dao.jdbc.NoticeDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
-	<bean id="creditCardService" class="com.rd.service.impl.CreditCardServiceImpl">
+	<bean id="creditCardService" class="com.liuyun.site.service.impl.CreditCardServiceImpl">
 		<property name="creditCardDao">
 			<ref bean="creditCardDao" />
 		</property>
 	</bean>
 	
-	<bean id="quickenLoansDao" class="com.rd.dao.jdbc.QuickenLoansDaoImpl">
+	<bean id="quickenLoansDao" class="com.liuyun.site.dao.jdbc.QuickenLoansDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
-	<bean id="lotteryDao" class="com.rd.dao.jdbc.LotteryDaoImpl">
+	<bean id="lotteryDao" class="com.liuyun.site.dao.jdbc.LotteryDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
     
-	<bean id="quickenLoansService" class="com.rd.service.impl.QuickenLoansServiceImpl">
+	<bean id="quickenLoansService" class="com.liuyun.site.service.impl.QuickenLoansServiceImpl">
 		<property name="quickenLoansDao">
 			<ref bean="quickenLoansDao" />
 		</property>
 	</bean>
-	<bean id="noticeConfigService" class="com.rd.service.impl.NoticeConfigServiceImpl">
+	<bean id="noticeConfigService" class="com.liuyun.site.service.impl.NoticeConfigServiceImpl">
 		<property name="noticeConfigDao">
 			<ref bean="noticeConfigDao" />
 		</property>
 	</bean>
-     <bean id="linkageService" class="com.rd.service.impl.LinkageServiceImpl">
+     <bean id="linkageService" class="com.liuyun.site.service.impl.LinkageServiceImpl">
 		<property name="linkageDao">
 			<ref bean="linkageDao" />
 		</property>
 	</bean>
-	<bean id="lotteryService" class="com.rd.service.impl.LotteryServiceImpl">
+	<bean id="lotteryService" class="com.liuyun.site.service.impl.LotteryServiceImpl">
 		<property name="lotteryDao">
 			<ref bean="lotteryDao" />
 		</property>

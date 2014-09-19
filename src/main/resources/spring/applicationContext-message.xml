@@ -11,14 +11,14 @@
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<bean id="messageDao"
-        class="com.rd.dao.jdbc.MessageDaoImpl">
+        class="com.liuyun.site.dao.jdbc.MessageDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
     
     <bean id="messageService"
-        class="com.rd.service.impl.MessageServiceImpl">
+        class="com.liuyun.site.service.impl.MessageServiceImpl">
         <property name="messageDao">
             <ref bean="messageDao" />
         </property>

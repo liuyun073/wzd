@@ -11,13 +11,13 @@
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<bean id="articleDao"
-        class="com.rd.dao.jdbc.ArticleDaoImpl">
+        class="com.liuyun.site.dao.jdbc.ArticleDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
     <bean id="scrollPicDao"
-        class="com.rd.dao.jdbc.ScrollPicDaoImpl">
+        class="com.liuyun.site.dao.jdbc.ScrollPicDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
@@ -25,7 +25,7 @@
 
 
   <bean id="articleService"
-        class="com.rd.service.impl.ArticleServiceImpl">
+        class="com.liuyun.site.service.impl.ArticleServiceImpl">
         <property name="articleDao">
             <ref bean="articleDao" />
         </property>

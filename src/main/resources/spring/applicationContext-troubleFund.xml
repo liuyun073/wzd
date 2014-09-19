@@ -10,17 +10,17 @@
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-	<bean id="troubleFundDao" class="com.rd.dao.jdbc.TroubleFundDaoImpl">
+	<bean id="troubleFundDao" class="com.liuyun.site.dao.jdbc.TroubleFundDaoImpl">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 	</bean>
-	<bean id="userDao" class="com.rd.dao.jdbc.UserDaoImpl">
+	<bean id="userDao" class="com.liuyun.site.dao.jdbc.UserDaoImpl">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 	</bean>
-	<bean id="troubleFundService" class="com.rd.service.impl.TroubleFundServiceImpl">
+	<bean id="troubleFundService" class="com.liuyun.site.service.impl.TroubleFundServiceImpl">
 		<property name="troubleFundDao">
 			<ref bean="troubleFundDao" />
 		</property>

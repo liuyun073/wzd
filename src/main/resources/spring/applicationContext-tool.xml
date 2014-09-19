@@ -11,7 +11,7 @@
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<bean id="linkageDao"
-        class="com.rd.dao.jdbc.LinkageDaoImpl">
+        class="com.liuyun.site.dao.jdbc.LinkageDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>

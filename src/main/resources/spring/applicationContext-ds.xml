@@ -11,7 +11,7 @@
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 	
 	<!--  
-	<bean id="propertyConfigurer" class="com.rd.tool.des.DecryptPropertyPlaceholderConfigurer">
+	<bean id="propertyConfigurer" class="com.liuyun.site.tool.des.DecryptPropertyPlaceholderConfigurer">
         <property name="locations">
             <list>      
                 <value>classpath:desdb.properties</value>
@@ -65,7 +65,7 @@
 	
 	<aop:config>
 		<aop:pointcut id="allManagerMethod"
-			expression="execution(* com.rd.service.*.*(..))" />
+			expression="execution(* com.liuyun.site.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="allManagerMethod" />
 	</aop:config>
 </beans>

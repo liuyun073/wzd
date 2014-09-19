@@ -10,12 +10,12 @@
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-	<bean id="commentDao" class="com.rd.dao.jdbc.CommentDaoImp">
+	<bean id="commentDao" class="com.liuyun.site.dao.jdbc.CommentDaoImp">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 	</bean>
-	<bean id="commentService" class="com.rd.service.impl.CommentServiceImp">
+	<bean id="commentService" class="com.liuyun.site.service.impl.CommentServiceImp">
 		<property name="commentDao">
 			<ref bean="commentDao"></ref>
 		</property>

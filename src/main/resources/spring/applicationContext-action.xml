@@ -11,7 +11,7 @@
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<!-- 首页 -->
-	<bean id="indexAction" class="com.rd.web.action.IndexAction"
+	<bean id="indexAction" class="com.liuyun.site.web.action.IndexAction"
 		scope="prototype">
 		<property name="articleService">
 			<ref bean="articleService" />
@@ -37,7 +37,7 @@
 	</bean>
 
 	<!-- 文章管理 -->
-	<bean id="articleAction" class="com.rd.web.action.ArticleAction"
+	<bean id="articleAction" class="com.liuyun.site.web.action.ArticleAction"
 		scope="prototype">
 		<property name="articleService">
 			<ref bean="articleService" />
@@ -48,11 +48,11 @@
 	</bean>
 
 	<!-- 图片输出Action -->
-	<bean id="imageAction" class="com.rd.web.action.ToolAction" scope="prototype">
+	<bean id="imageAction" class="com.liuyun.site.web.action.ToolAction" scope="prototype">
 	</bean>
 
 	<!-- 评论Action -->
-	<bean id="commentAction" class="com.rd.web.action.CommentAction"
+	<bean id="commentAction" class="com.liuyun.site.web.action.CommentAction"
 		scope="prototype">
 		<property name="commentservice">
 			<ref bean="commentService" />
@@ -62,7 +62,7 @@
 		</property>
 	</bean>
 	<!--用户注册登录模块Action -->
-	<bean id="userAction" class="com.rd.web.action.UserAction" scope="prototype">
+	<bean id="userAction" class="com.liuyun.site.web.action.UserAction" scope="prototype">
 		<property name="userService">
 			<ref bean="userService" />
 		</property>
@@ -97,7 +97,7 @@
 
 
 	<!--投资模块Action -->
-	<bean id="investAction" class="com.rd.web.action.InvestAction"
+	<bean id="investAction" class="com.liuyun.site.web.action.InvestAction"
 		scope="prototype">
 		<property name="borrowService">
 			<ref bean="borrowService" />
@@ -122,7 +122,7 @@
 		</property>
 	</bean>
 	<!--贷款模块Action -->
-	<bean id="borrowAction" class="com.rd.web.action.BorrowAction"
+	<bean id="borrowAction" class="com.liuyun.site.web.action.BorrowAction"
 		scope="prototype">
 		<property name="borrowService">
 			<ref bean="borrowService" />
@@ -142,7 +142,7 @@
 	</bean>
 
 	<!-- 用户管理模块 -->
-	<bean id="memberAction" class="com.rd.web.action.MemberAction"
+	<bean id="memberAction" class="com.liuyun.site.web.action.MemberAction"
 		scope="prototype">
 		<property name="userService">
 			<ref bean="userService" />
@@ -172,7 +172,7 @@
 			<ref bean="userCreditService"/>
 		</property>
 	</bean>
-	<bean id="memberFriendAction" class="com.rd.web.action.member.FriendAction"
+	<bean id="memberFriendAction" class="com.liuyun.site.web.action.member.FriendAction"
 		scope="prototype">
 		<property name="userService">
 			<ref bean="userService" />
@@ -181,7 +181,7 @@
 			<ref bean="friendService" />
 		</property>
 	</bean>
-	<bean id="memberSecurityAction" class="com.rd.web.action.member.SecurityAction"
+	<bean id="memberSecurityAction" class="com.liuyun.site.web.action.member.SecurityAction"
 		scope="prototype">
 		<property name="userinfoService">
 			<ref bean="userinfoService" />
@@ -193,7 +193,7 @@
 			<ref bean="friendService" />
 		</property>
 	</bean>
-	<bean id="memberIdentifyAction" class="com.rd.web.action.member.IdentifyAction"
+	<bean id="memberIdentifyAction" class="com.liuyun.site.web.action.member.IdentifyAction"
 		scope="prototype">
 		<property name="userinfoService">
 			<ref bean="userinfoService" />
@@ -203,7 +203,7 @@
 		</property>
 	</bean>
 	<!-- 用户管理-我的借款 -->
-	<bean id="memberBorrowAction" class="com.rd.web.action.member.MemberBorrowAction"
+	<bean id="memberBorrowAction" class="com.liuyun.site.web.action.member.MemberBorrowAction"
 		scope="prototype">
 		<property name="memberBorrowService">
 			<ref bean="memberBorrowService" />
@@ -222,7 +222,7 @@
 		</property>
 	</bean>
 	<!-- 用户管理-我的投资 -->
-	<bean id="memberInvestAction" class="com.rd.web.action.member.MemberInvestAction"
+	<bean id="memberInvestAction" class="com.liuyun.site.web.action.member.MemberInvestAction"
 		scope="prototype">
 		<property name="userService">
 			<ref bean="userService" />
@@ -231,13 +231,13 @@
 			<ref bean="borrowService" />
 		</property>
 	</bean>
-	<bean id="borrowAutoAction" class="com.rd.web.action.member.BorrowAutoAction"
+	<bean id="borrowAutoAction" class="com.liuyun.site.web.action.member.BorrowAutoAction"
 		scope="prototype">
 		<property name="borrowService">
 			<ref bean="borrowService" />
 		</property>
 	</bean>
-	<bean id="memberAccountAction" class="com.rd.web.action.member.AccountAction"
+	<bean id="memberAccountAction" class="com.liuyun.site.web.action.member.AccountAction"
 		scope="prototype">
 		<property name="accountService">
 			<ref bean="accountService" />
@@ -246,7 +246,7 @@
 			<ref bean="userService" />
 		</property>
 	</bean>
-	<bean id="memberMessageAction" class="com.rd.web.action.member.MessageAction"
+	<bean id="memberMessageAction" class="com.liuyun.site.web.action.member.MessageAction"
 		scope="prototype">
 		<property name="messageService">
 			<ref bean="messageService" />
@@ -257,15 +257,15 @@
 	</bean>
 
 	<!-- Tool模块 -->
-	<bean id="interestAction" class="com.rd.web.action.ToolAction"
+	<bean id="interestAction" class="com.liuyun.site.web.action.ToolAction"
 		scope="prototype">
 	</bean>
-	<bean id="pluginAction" class="com.rd.web.action.ToolAction"
+	<bean id="pluginAction" class="com.liuyun.site.web.action.ToolAction"
 		scope="prototype">
 	</bean>
 
 	<!-- 对外公开模块，主要支付回调 -->
-	<bean id="publicAction" class="com.rd.web.action.PublicAction"
+	<bean id="publicAction" class="com.liuyun.site.web.action.PublicAction"
 		scope="prototype">
 		<property name="accountService">
 			<ref bean="accountService" />
@@ -273,7 +273,7 @@
 	</bean>
 
 	<!-- 管理后台部分 -->
-	<bean id="adminAuthAction" class="com.rd.web.action.admin.AuthAction"
+	<bean id="adminAuthAction" class="com.liuyun.site.web.action.admin.AuthAction"
 		scope="prototype">
 		<property name="userService">
 			<ref bean="userService" />
@@ -284,7 +284,7 @@
 	</bean>
 	
 	<!-- 后台客户管理 -->
-	<bean id="adminUserInfoAction" class="com.rd.web.action.admin.UserInfoAction"
+	<bean id="adminUserInfoAction" class="com.liuyun.site.web.action.admin.UserInfoAction"
 		scope="prototype">
 		<property name="userService">
 			<ref bean="userService" />
@@ -301,7 +301,7 @@
 	</bean>
 	
 	<!-- 系统设置 -->
-	<bean id="SystemConfigAction" class="com.rd.web.action.admin.SystemConfigAction"
+	<bean id="SystemConfigAction" class="com.liuyun.site.web.action.admin.SystemConfigAction"
 		scope="prototype">
 		<property name="systemService">
 			<ref bean="systemService" />
@@ -309,7 +309,7 @@
 	</bean>
 	
 	<!-- 证件管理 -->
-	<bean id="attestationAction" class="com.rd.web.action.admin.AttestationAction"
+	<bean id="attestationAction" class="com.liuyun.site.web.action.admin.AttestationAction"
 		scope="prototype">
 		<property name="userService">
 			<ref bean="userService" />
@@ -334,7 +334,7 @@
 		</property>
 	</bean>
 	
-	<bean id="manageBorrowAction" class="com.rd.web.action.admin.ManageBorrowAction"
+	<bean id="manageBorrowAction" class="com.liuyun.site.web.action.admin.ManageBorrowAction"
 		scope="prototype">
 		<property name="borrowService">
 			<ref bean="borrowService" />
@@ -355,7 +355,7 @@
 			<ref bean="quickenLoansService" />
 		</property>
 	</bean>
-	<bean id="manageCashAction" class="com.rd.web.action.admin.ManageCashAction"
+	<bean id="manageCashAction" class="com.liuyun.site.web.action.admin.ManageCashAction"
 		scope="prototype">
 		<property name="manageCashService">
 			<ref bean="manageCashService" />
@@ -380,21 +380,21 @@
 		</property>
 	</bean>
 	
-	<bean id="manageSiteAction" class="com.rd.web.action.admin.ManageSiteAction"
+	<bean id="manageSiteAction" class="com.liuyun.site.web.action.admin.ManageSiteAction"
 		scope="prototype">
 		<property name="articleService">
 			<ref bean="articleService" />
 		</property>
 	</bean>
 	
-	<bean id="manageArticleAction" class="com.rd.web.action.admin.ManageArticleAction"
+	<bean id="manageArticleAction" class="com.liuyun.site.web.action.admin.ManageArticleAction"
 		scope="prototype">
 		<property name="articleService">
 			<ref bean="articleService" />
 		</property>
 	</bean>
 	
-	<bean id="managePurviewAction" class="com.rd.web.action.admin.ManagePurviewAction"
+	<bean id="managePurviewAction" class="com.liuyun.site.web.action.admin.ManagePurviewAction"
 		scope="prototype">
 		<property name="manageAuthService">
 			<ref bean="manageAuthService" />
@@ -406,14 +406,14 @@
 			<ref bean="userinfoService" />
 		</property>
 	</bean>
-<bean id="manageCommentAction" class="com.rd.web.action.admin.ManageCommentAction" scope="prototype">
+<bean id="manageCommentAction" class="com.liuyun.site.web.action.admin.ManageCommentAction" scope="prototype">
 			<property name="commentService" >
 				<ref bean="commentService"/>
 			</property>
 	</bean>
 	
 	<!--积分模块Action -->
-	<bean id="pointsAction" class="com.rd.web.action.PointsAction"
+	<bean id="pointsAction" class="com.liuyun.site.web.action.PointsAction"
 		scope="prototype">
 		<property name="borrowService">
 			<ref bean="borrowService" />
@@ -439,7 +439,7 @@
 	</bean>
 	
 	<!--爱心捐助模块Action -->
-	<bean id="donationAction" class="com.rd.web.action.DonationAction"
+	<bean id="donationAction" class="com.liuyun.site.web.action.DonationAction"
 		scope="prototype">
 		<property name="borrowService">
 			<ref bean="borrowService" />
@@ -464,7 +464,7 @@
 		</property>
 	</bean>
 	<!-- 及时雨协议 -->
-	<bean id="protocolAction" class="com.rd.web.action.member.ProtocolAction"
+	<bean id="protocolAction" class="com.liuyun.site.web.action.member.ProtocolAction"
 		scope="prototype">
 	<property name="borrowService">
 			<ref bean="borrowService" />
@@ -476,7 +476,7 @@
 			<ref bean="accountService" />
 		</property>
 	</bean>
-	<bean id="managerProtocolAction" class="com.rd.web.action.admin.ManagerProtocolAction"
+	<bean id="managerProtocolAction" class="com.liuyun.site.web.action.admin.ManagerProtocolAction"
 		scope="prototype">
 	<property name="borrowService">
 			<ref bean="borrowService" />
@@ -488,7 +488,7 @@
 			<ref bean="accountService" />
 		</property>
 	</bean>
-	<bean id="noticeConfigAction" class="com.rd.web.action.admin.NoticeConfigAction"
+	<bean id="noticeConfigAction" class="com.liuyun.site.web.action.admin.NoticeConfigAction"
 		scope="prototype">
 	    <property name="noticeConfigService">
 			<ref bean="noticeConfigService" />
@@ -498,7 +498,7 @@
 		</property>
 	</bean>
 	<!-- 密保设置 -->
-	<bean id="passwordTokenAction" class="com.rd.web.action.PasswordTokenAction"
+	<bean id="passwordTokenAction" class="com.liuyun.site.web.action.PasswordTokenAction"
 		scope="prototype">
 		<property name="passwordTokenService">
 			<ref bean="passwordTokenService" />
@@ -506,7 +506,7 @@
 	</bean>
 
 	<!-- 抽奖规则配置 -->
-	<bean id="manageLotteryAction" class="com.rd.web.action.admin.ManageLotteryAction"
+	<bean id="manageLotteryAction" class="com.liuyun.site.web.action.admin.ManageLotteryAction"
 			scope="prototype">
 			
 			<property name="lotteryService">
@@ -514,13 +514,13 @@
 		</property>
    </bean>
 
-	<bean id="cooperationQQLoginAction" class="com.rd.web.action.cooperation.CooperationQQLoginAction" scope="prototype">
+	<bean id="cooperationQQLoginAction" class="com.liuyun.site.web.action.cooperation.CooperationQQLoginAction" scope="prototype">
 		<property name="cooperationLoginService"><ref bean="cooperationLoginService" /></property>
 		<property name="userService"><ref bean="userService" /></property>
 	</bean>
 	
 	<!-- 奖励统计 -->
-	<bean id="manageRewardAction" class="com.rd.web.action.admin.ManageRewardAction"
+	<bean id="manageRewardAction" class="com.liuyun.site.web.action.admin.ManageRewardAction"
 		scope="prototype">
 		<property name="rewardStatisticsService">
 			<ref bean="rewardStatisticsService" />
@@ -533,7 +533,7 @@
 		</property>
    </bean>
    <!-- 急难基金 -->
-  <bean id="manageTroubleFundAction" class="com.rd.web.action.admin.ManageTroubleFundAction"
+  <bean id="manageTroubleFundAction" class="com.liuyun.site.web.action.admin.ManageTroubleFundAction"
 		scope="prototype">
 	 <property name="articleService">
 			<ref bean="articleService" />
@@ -543,7 +543,7 @@
 		</property>
  
    </bean>
-   <bean id="troubleFundAction" class="com.rd.web.action.member.TroubleFundAction"
+   <bean id="troubleFundAction" class="com.liuyun.site.web.action.member.TroubleFundAction"
 		scope="prototype">
 	 <property name="troubleFundService">
 			<ref bean="troubleFundService" />
@@ -554,7 +554,7 @@
  
    </bean>
   <!-- 抽奖 -->
-   <bean id="AwardAction" class="com.rd.web.action.award.AwardAction"
+   <bean id="AwardAction" class="com.liuyun.site.web.action.award.AwardAction"
 		scope="prototype">
 		<property name="awardService">
 			<ref bean="awardService" />
@@ -563,7 +563,7 @@
 			<ref bean="userCreditService" />
 		</property>
    </bean>
-   	<bean id="ManageAwardAction" class="com.rd.web.action.admin.ManageAwardAction"
+   	<bean id="ManageAwardAction" class="com.liuyun.site.web.action.admin.ManageAwardAction"
 			scope="prototype">
 			
 			<property name="awardService">
@@ -572,13 +572,13 @@
    </bean>
    
    <!-- 奖励统计 -->
-	<bean id="userCreditAction" class="com.rd.web.action.UserCreditAction" scope="prototype">
+	<bean id="userCreditAction" class="com.liuyun.site.web.action.UserCreditAction" scope="prototype">
 		<property name="userCreditService">
 			<ref bean="userCreditService" />
 		</property>
    </bean>
    
-   <bean id="manageUserCreditAction" class="com.rd.web.action.admin.ManageUserCreditAction" scope="prototype">
+   <bean id="manageUserCreditAction" class="com.liuyun.site.web.action.admin.ManageUserCreditAction" scope="prototype">
 		<property name="userCreditService">
 			<ref bean="userCreditService" />
 		</property>

@@ -10,17 +10,17 @@
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-	<bean id="lotteryDao" class="com.rd.dao.jdbc.LotteryDaoImpl">
+	<bean id="lotteryDao" class="com.liuyun.site.dao.jdbc.LotteryDaoImpl">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 	</bean>
-	<bean id="tenderDao" class="com.rd.dao.jdbc.TenderDaoImpl">
+	<bean id="tenderDao" class="com.liuyun.site.dao.jdbc.TenderDaoImpl">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 	</bean>
-	<bean id="lotteryService" class="com.rd.service.impl.LotteryServiceImpl">
+	<bean id="lotteryService" class="com.liuyun.site.service.impl.LotteryServiceImpl">
 		<property name="lotteryDao">
 			<ref bean="lotteryDao" />
 		</property>

@@ -9,7 +9,7 @@
 	<!-- 全局过滤器 -->
 	<filter>
 		<filter-name>GlobalFilter</filter-name>
-		<filter-class>com.rd.web.filter.GlobalFilter</filter-class>
+		<filter-class>com.liuyun.site.web.filter.GlobalFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>GlobalFilter</filter-name>
@@ -18,7 +18,7 @@
 
 	<filter>
 		<filter-name>AdminFilter</filter-name>
-		<filter-class>com.rd.web.filter.AdminFilter</filter-class>
+		<filter-class>com.liuyun.site.web.filter.AdminFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>AdminFilter</filter-name>
@@ -27,7 +27,7 @@
 	<!-- 配置Session 过滤器 -->
 	<filter>
 		<filter-name>SessionFilter</filter-name>
-		<filter-class>com.rd.web.filter.SessionFilter</filter-class>
+		<filter-class>com.liuyun.site.web.filter.SessionFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>SessionFilter</filter-name>
@@ -75,7 +75,7 @@
 	<!-- 配置Struts配置器 -->
 	<filter>
 		<filter-name>struts2</filter-name>
-		<filter-class>com.rd.web.filter.RdStrutsFilter</filter-class>
+		<filter-class>com.liuyun.site.web.filter.RdStrutsFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
@@ -99,7 +99,7 @@
 	<!-- 配置网站配置监听器 -->
 	<listener>
 		<listener-class>
-			com.rd.web.listener.WebConfigContextListener
+			com.liuyun.site.web.listener.WebConfigContextListener
 		</listener-class>
 	</listener>
 

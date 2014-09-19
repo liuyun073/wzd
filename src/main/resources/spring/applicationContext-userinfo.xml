@@ -10,14 +10,14 @@
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-	<bean id="userinfoDao" class="com.rd.dao.jdbc.UserinfoDaoImpl">
+	<bean id="userinfoDao" class="com.liuyun.site.dao.jdbc.UserinfoDaoImpl">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 	</bean>
 
 
-	<bean id="userinfoService" class="com.rd.service.impl.UserinfoServiceImpl">
+	<bean id="userinfoService" class="com.liuyun.site.service.impl.UserinfoServiceImpl">
 		<property name="userinfoDao">
 			<ref bean="userinfoDao" />
 		</property>
@@ -44,7 +44,7 @@
 		</property>
 	</bean>
 
-	<bean id="attestationDao" class="com.rd.dao.jdbc.AttestationDaoImpl">
+	<bean id="attestationDao" class="com.liuyun.site.dao.jdbc.AttestationDaoImpl">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>

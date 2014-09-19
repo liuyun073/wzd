@@ -6,14 +6,14 @@
 
     <package name="wzd-default" extends="struts-default" abstract="true">
     	<result-types>  
-            <result-type name="ftl" class="com.rd.freemarker.CustomFreemarkerResult" default="false"/>  
+            <result-type name="ftl" class="com.liuyun.site.freemarker.CustomFreemarkerResult" default="false"/>  
         </result-types> 
         <interceptors>
-           <interceptor name="sessiontimeout" class="com.rd.web.interceptor.SessionInterceptor"></interceptor>
-           <interceptor name="manageAuth" class="com.rd.web.interceptor.ManageAuthInterceptor"></interceptor>
-           <interceptor name="userLog" class="com.rd.web.interceptor.UserLogInterceptor"></interceptor>
-           <interceptor name="paramFilter" class="com.rd.web.interceptor.ParamFilterInterceptor"></interceptor>
-           <interceptor name="action" class="com.rd.web.interceptor.ActionInterceptor"></interceptor>
+           <interceptor name="sessiontimeout" class="com.liuyun.site.web.interceptor.SessionInterceptor"></interceptor>
+           <interceptor name="manageAuth" class="com.liuyun.site.web.interceptor.ManageAuthInterceptor"></interceptor>
+           <interceptor name="userLog" class="com.liuyun.site.web.interceptor.UserLogInterceptor"></interceptor>
+           <interceptor name="paramFilter" class="com.liuyun.site.web.interceptor.ParamFilterInterceptor"></interceptor>
+           <interceptor name="action" class="com.liuyun.site.web.interceptor.ActionInterceptor"></interceptor>
            
             <!-- 拦截器栈 -->
             <interceptor-stack name="mydefault">
@@ -56,14 +56,14 @@
     
     <package name="wzd-admin" extends="struts-default" abstract="true">
     	<result-types>  
-            <result-type name="ftl" class="com.rd.freemarker.CustomFreemarkerResult" default="false"/>  
+            <result-type name="ftl" class="com.liuyun.site.freemarker.CustomFreemarkerResult" default="false"/>  
         </result-types> 
         <interceptors>
-           <interceptor name="sessiontimeout" class="com.rd.web.interceptor.SessionInterceptor"></interceptor>
-           <interceptor name="manageAuth" class="com.rd.web.interceptor.ManageAuthInterceptor"></interceptor>
-           <interceptor name="userLog" class="com.rd.web.interceptor.UserLogInterceptor"></interceptor>
-           <interceptor name="paramFilter" class="com.rd.web.interceptor.ParamFilterInterceptor"></interceptor>
-          <interceptor name="action" class="com.rd.web.interceptor.ActionInterceptor"></interceptor>
+           <interceptor name="sessiontimeout" class="com.liuyun.site.web.interceptor.SessionInterceptor"></interceptor>
+           <interceptor name="manageAuth" class="com.liuyun.site.web.interceptor.ManageAuthInterceptor"></interceptor>
+           <interceptor name="userLog" class="com.liuyun.site.web.interceptor.UserLogInterceptor"></interceptor>
+           <interceptor name="paramFilter" class="com.liuyun.site.web.interceptor.ParamFilterInterceptor"></interceptor>
+          <interceptor name="action" class="com.liuyun.site.web.interceptor.ActionInterceptor"></interceptor>
             <!-- 拦截器栈 -->
             <interceptor-stack name="mydefault">
                 <interceptor-ref name="defaultStack"/>

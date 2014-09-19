@@ -11,14 +11,14 @@
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<bean id="friendDao"
-        class="com.rd.dao.jdbc.FriendDaoImpl">
+        class="com.liuyun.site.dao.jdbc.FriendDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
 
   <bean id="friendService"
-        class="com.rd.service.impl.FriendServiceImpl">
+        class="com.liuyun.site.service.impl.FriendServiceImpl">
         <property name="friendDao">
             <ref bean="friendDao" />
         </property>

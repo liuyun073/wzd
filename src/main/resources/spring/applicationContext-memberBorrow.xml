@@ -11,7 +11,7 @@
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<bean id="memberBorrowDao"
-        class="com.rd.dao.jdbc.MemberBorrowDaoImpl">
+        class="com.liuyun.site.dao.jdbc.MemberBorrowDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
@@ -19,13 +19,13 @@
  
     
     <bean id="repaymentDao"
-        class="com.rd.dao.jdbc.RepaymentDaoImpl">
+        class="com.liuyun.site.dao.jdbc.RepaymentDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
      <bean id="collectionDao"
-        class="com.rd.dao.jdbc.CollectionDaoImpl">
+        class="com.liuyun.site.dao.jdbc.CollectionDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
@@ -33,7 +33,7 @@
 
 
   <bean id="memberBorrowService"
-        class="com.rd.service.impl.MemberBorrowServiceImpl">
+        class="com.liuyun.site.service.impl.MemberBorrowServiceImpl">
         <property name="memberBorrowDao">
             <ref bean="memberBorrowDao" />
         </property>

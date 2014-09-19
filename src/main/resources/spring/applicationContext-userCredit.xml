@@ -11,11 +11,11 @@
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<!-- 用户积分DAO -->
-	<bean id="userCreditDao" class="com.rd.dao.jdbc.UserCreditDaoImpl">
+	<bean id="userCreditDao" class="com.liuyun.site.dao.jdbc.UserCreditDaoImpl">
         <property name="dataSource"><ref bean="dataSource"/></property>
     </bean>
     
-    <bean id="userCreditService" class="com.rd.service.impl.UserCreditServiceImpl">
+    <bean id="userCreditService" class="com.liuyun.site.service.impl.UserCreditServiceImpl">
         <property name="userCreditDao"><ref bean="userCreditDao" /></property>
     </bean>
     

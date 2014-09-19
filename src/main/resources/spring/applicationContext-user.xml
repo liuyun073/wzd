@@ -11,28 +11,28 @@
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<bean id="userDao"
-        class="com.rd.dao.jdbc.UserDaoImpl">
+        class="com.liuyun.site.dao.jdbc.UserDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
     
     <bean id="userTrackDao"
-        class="com.rd.dao.jdbc.UserTrackDaoImpl">
+        class="com.liuyun.site.dao.jdbc.UserTrackDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
     
     <bean id="userCacheDao"
-        class="com.rd.dao.jdbc.UserCacheDaoImpl">
+        class="com.liuyun.site.dao.jdbc.UserCacheDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
     
   <bean id="userService"
-        class="com.rd.service.impl.UserServiceImpl">
+        class="com.liuyun.site.service.impl.UserServiceImpl">
         <property name="userDao">
             <ref bean="userDao" />
         </property>
@@ -57,14 +57,14 @@
     </bean>
   	
 	 <bean id="userLogDao"
-        class="com.rd.dao.jdbc.UserLogDaoImpl">
+        class="com.liuyun.site.dao.jdbc.UserLogDaoImpl">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
     </bean>
     
     <bean id="userLogService"
-        class="com.rd.service.impl.UserLogServiceImpl">
+        class="com.liuyun.site.service.impl.UserLogServiceImpl">
         <property name="userLogDao">
             <ref bean="userLogDao" />
         </property>

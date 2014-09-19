@@ -11,7 +11,7 @@
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-	<bean id="quartzJob" class="com.rd.quartz.QuartzJob">
+	<bean id="quartzJob" class="com.liuyun.site.quartz.QuartzJob">
 		<property name="borrowService">
 			<ref bean="borrowService" />
 		</property>
@@ -29,7 +29,7 @@
 		</property>
 	</bean>
 	<bean id="noticeQuartzJob"
-		class="com.rd.quartz.notice.NoticeQuartzJob">
+		class="com.liuyun.site.quartz.notice.NoticeQuartzJob">
 		<property name="noticeService">
 			<ref bean="noticeService" />
 		</property>
